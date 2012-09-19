@@ -1,0 +1,65 @@
+﻿DataSet AccountingTableDataSet:																		//Column : 0 Petunia_Date                      	 
+Row 0:balance_sheet																					//Column : 1 Description	 
+Row 1:bank_account																					//Column : 2 Transaction="";\\Should be Remove	 
+Row 2:cash_ledger																					//Column : 2 Quantity	 
+Row 3:company_and_personal_account																	//Column : 3 Rate	 
+Row 4:comapny_and_personal_information																//Column : 4 Average_Rate                      	 
+Row 5:creditors_ledger																				//Column : 5 Invoice_Number                    	 
+Row 6:daily_cash																					//Column : 6 Debt_Tk or Credit_Tk              	 
+Row 7:debtors_ledger																				//Column : 7 User_ID                           	 
+Row 8:depreciation_ledger																			//Column : 8 ProductID	 
+Row 9:expense_ledger																				//Column :10 Credit Balance	 
+Row 10:furnture_ledger																				//Column :11 Payment Balance	 
+Row 11:income_statement																					 
+Row 12:lone_account																						 
+Row 13:office_expanse_ledger																			 
+Row 14:office_instrument_ledger																			   	
+Row 15:product_information																				   
+Row 16:profit_and_lose_account																			   
+Row 17:purchase_ledger																					   
+Row 18:rent_ledger																						   
+Row 19:salary_ledger																					   
+Row 20:sales_ledger																						   
+Row 21:stationary_leder																				   
+Row 22:stock																							   
+Row 23:stock_ledger																						   
+Row 24:company_And_person_History
+Row 25:trading_accounting																		   
+																										   
+DataSet AccountingColumnDataSet:																		   
+Row 0:Petunia_Date																						   
+Row 1:Description																						   
+Row 2:Quantity																							   
+Row 3:Rate																								   
+Row 4:Average_Rate																						   
+Row 5:Invoice_Number																					   
+Row 6:Debt_Tk																							   
+Row 7:Credit_Tk																							   
+Row 8:Debt_Balance_Tk																					   
+Row 9:Credit_Balance_Tk																					   
+Row 10:Product_ID																						   
+Row 11:Amount																							   
+Row 12:User_ID																							   
+Row 13:																									   
+Row 14:																									   
+Row 15:																									   
+Row 16:																									   
+Row 17:																									   
+Row 18:																									   
+Row 19:				
+
+
+
+
+   //Column :0 Petunia_Date
+r), new MysqlRowCounter(TableRowCounter))));//Column :1 Description
+                 //Column :2 Particulars
+   //Column :3 Quantity
+   //Column :4 Rate//Amount
+   //Column :5 AVERAGE_RATE
+der), new MysqlRowCounter(TableRowCounter))));//Column :6 INVOICE_NUMBER
+ //Column :7 Debt_Tk or Credit_tk
+ //Column :8 Product_ID
+   
+
+																					   

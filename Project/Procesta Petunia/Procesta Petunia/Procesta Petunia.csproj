@@ -1,0 +1,329 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0AEA82FC-1552-4E36-BF35-1C5D7FFAB407}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Procesta_Petunia</RootNamespace>
+    <AssemblyName>Procesta Petunia</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile />
+    <Utf8Output>true</Utf8Output>
+    <ExpressionBlendVersion>4.0.20525.0</ExpressionBlendVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Icon\petunai 2.0.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ApplicationMenu, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\Dll\ApplicationMenu.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Data.v10.1, Version=10.1.5.0, Culture=neutral, PublicKeyToken=940cfcde86f32efd" />
+    <Reference Include="DevExpress.Xpf.Core.v10.1, Version=10.1.5.0, Culture=neutral, PublicKeyToken=940cfcde86f32efd" />
+    <Reference Include="DevExpress.Xpf.Grid.v10.1, Version=10.1.5.0, Culture=neutral, PublicKeyToken=940cfcde86f32efd" />
+    <Reference Include="DevExpress.Xpf.Printing.v10.1, Version=10.1.5.0, Culture=neutral, PublicKeyToken=940cfcde86f32efd" />
+    <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="Fluent, Version=2.0.0.0, Culture=neutral, PublicKeyToken=3e436e32a8c5546f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Fluent.dll</HintPath>
+    </Reference>
+    <Reference Include="InfragisticsWPF4.Controls.Editors.XamSlider.v10.3" />
+    <Reference Include="InfragisticsWPF4.DataPresenter.v10.3" />
+    <Reference Include="InfragisticsWPF4.Editors.v10.3, Version=10.3.20103.1003, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" />
+    <Reference Include="InfragisticsWPF4.v10.3, Version=10.3.20103.1003, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="SAPBusinessObjects.WPF.Viewer, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="SAPBusinessObjects.WPF.ViewerShared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="Syncfusion.Core, Version=8.404.0.10, Culture=neutral, PublicKeyToken=632609b4d040f6b4" />
+    <Reference Include="Syncfusion.Shared.Wpf, Version=8.404.0.10, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Telerik.Windows.Controls, Version=2010.1.422.35, Culture=neutral, PublicKeyToken=5803cfa389c90ce7" />
+    <Reference Include="Telerik.Windows.Controls.GridView, Version=2010.1.422.35, Culture=neutral, PublicKeyToken=5803cfa389c90ce7" />
+    <Reference Include="Telerik.Windows.Controls.Input, Version=2010.1.422.35, Culture=neutral, PublicKeyToken=5803cfa389c90ce7" />
+    <Reference Include="Telerik.Windows.Controls.Navigation, Version=2010.1.422.35, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Data, Version=2010.1.422.35, Culture=neutral, PublicKeyToken=5803cfa389c90ce7" />
+    <Reference Include="testCrystalReport01">
+      <HintPath>..\..\..\..\..\..\C# help\testCrystalReport01\testCrystalReport01\bin\Debug\testCrystalReport01.exe</HintPath>
+    </Reference>
+    <Reference Include="TitelBar, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\..\..\..\MyC#Controls\ProcestaCustromControl\TitelBar\bin\Debug\TitelBar.dll</HintPath>
+    </Reference>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WPFToolkit.Extended, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\WPFToolkit.Extended.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Class\AmountCalculate.cs" />
+    <Compile Include="Class\GridViewModify.cs" />
+    <Compile Include="Class\PetuniaException.cs" />
+    <Compile Include="Class\PetuniaNecessaryFunction.cs" />
+    <Compile Include="Class\ProductInformation.cs" />
+    <Compile Include="Class\SuccessfullException.cs" />
+    <Compile Include="Class\Summary.cs" />
+    <Compile Include="Class\tempDataContex.cs" />
+    <Compile Include="Class\TextBlockDataLoader.cs" />
+    <Compile Include="DataSet\DataSetPetunia.cs">
+      <DependentUpon>DataSetPetunia.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DataSet\DataSetPetunia.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetPetunia.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\InvoiceMakerCrystalReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InvoiceMakerCrystalReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\InvPurDebCreCrystalReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InvPurDebCreCrystalReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportViewer.xaml.cs">
+      <DependentUpon>ReportViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindowDataBaseSetting.xaml.cs">
+      <DependentUpon>WindowDataBaseSetting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindowLogin.xaml.cs">
+      <DependentUpon>WindowLogin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindowStartUp.xaml.cs">
+      <DependentUpon>WindowStartUp.xaml</DependentUpon>
+    </Compile>
+    <Page Include="ReportViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowDataBaseSetting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowLogin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="WindowStartUp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\InvoiceMakerCrystalReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>InvoiceMakerCrystalReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\InvPurDebCreCrystalReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>InvPurDebCreCrystalReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="DataSet\DataSetPetunia.xsc">
+      <DependentUpon>DataSetPetunia.xsd</DependentUpon>
+    </None>
+    <None Include="DataSet\DataSetPetunia.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetPetunia.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSet\DataSetPetunia.xss">
+      <DependentUpon>DataSetPetunia.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ButtonImages\Add.png" />
+    <Resource Include="ButtonImages\Clear.png" />
+    <Resource Include="ButtonImages\Delete.png" />
+    <Resource Include="ButtonImages\Login.png" />
+    <Resource Include="ButtonImages\Logout.png" />
+    <Resource Include="ButtonImages\New.png" />
+    <Resource Include="ButtonImages\Payment.png" />
+    <Resource Include="ButtonImages\PreView.png" />
+    <Resource Include="ButtonImages\Search.png" />
+    <Resource Include="ButtonImages\Update.png" />
+    <Resource Include="ButtonImages\Close.png" />
+    <Resource Include="ButtonImages\DatabaseConnection.png" />
+    <Resource Include="ButtonImages\DatabaseSetting.png" />
+    <Resource Include="ButtonImages\GeneralSetting.png" />
+    <Resource Include="ButtonImages\Password.png" />
+    <Resource Include="ButtonImages\Save.png" />
+    <Resource Include="Icon\Login.png" />
+    <Resource Include="Icon\PetuniaIcon2.0.png" />
+    <Resource Include="Icon\petunai 2.0.ico" />
+    <Resource Include="Images\AddStock.png" />
+    <Resource Include="Images\Cashpayment.png" />
+    <Resource Include="Images\CashRecive.png" />
+    <Resource Include="Images\Creditors.png" />
+    <Resource Include="Images\CreditorsPamentHistory.png" />
+    <Resource Include="Images\Debetors.png" />
+    <Resource Include="Images\DebetorsPaymentHistory.png" />
+    <Resource Include="Images\EditParty.png" />
+    <Resource Include="Images\Exit.png" />
+    <Resource Include="Images\Expance.png" />
+    <Resource Include="Images\ExpanceView.png" />
+    <Resource Include="Images\Home.png" />
+    <Resource Include="Images\Invoice.png" />
+    <Resource Include="Images\InvoiceSearch.png" />
+    <Resource Include="Images\ComopanyLogo.png" />
+    <Resource Include="Images\Recharge.png" />
+    <Resource Include="Images\shopLogo.png" />
+    <Resource Include="Images\NewParty.png" />
+    <Resource Include="Images\NewProduct.png" />
+    <Resource Include="Images\NewProductEdit.png" />
+    <Resource Include="Images\ProcestaLogo.png" />
+    <Resource Include="Images\ProductReturn.png" />
+    <Resource Include="Images\ProductReturnView.png" />
+    <Resource Include="Images\PurchaseView.png" />
+    <Resource Include="Images\Salary.png" />
+    <Resource Include="Images\SealsReturn.png" />
+    <Resource Include="Images\SelaseReturnView.png" />
+    <Resource Include="Images\StockEdit.png" />
+    <Resource Include="Images\Stocks.png" />
+    <Resource Include="Images\Summary.png" />
+    <Resource Include="PetuniaIcons_Files\**\*.jpg;PetuniaIcons_Files\**\*.jpeg;PetuniaIcons_Files\**\*.png;PetuniaIcons_Files\**\*.bmp;PetuniaIcons_Files\**\*.gif;PetuniaIcons_Files\**\*.tif;PetuniaIcons_Files\**\*.tiff" />
+    <Resource Include="PetuniaIcons_Files\**\*.jpg;PetuniaIcons_Files\**\*.jpeg;PetuniaIcons_Files\**\*.png;PetuniaIcons_Files\**\*.bmp;PetuniaIcons_Files\**\*.gif;PetuniaIcons_Files\**\*.tif;PetuniaIcons_Files\**\*.tiff" />
+    <Resource Include="SplashScreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\..\MyC#Class`s\MysqlClass\MysqlClass.csproj">
+      <Project>{8844A727-B6AA-4DE3-940B-944B4CC4C76A}</Project>
+      <Name>MysqlClass</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\..\MyC#Class`s\MysqlDataBackup\MysqlDataBackup\MysqlDataBaseBackupAndRestore.csproj">
+      <Project>{DD5A89E9-12AE-4525-A3B8-DFA5A4013DFC}</Project>
+      <Name>MysqlDataBaseBackupAndRestore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\..\MyC#Class`s\ProcestaAccountingFunction\ProcestaAccountingFunction\ProcestaAccountingFunction.csproj">
+      <Project>{7CE7AAAF-DF81-456E-AC88-55BF7C53C123}</Project>
+      <Name>ProcestaAccountingFunction</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\..\MyC#Class`s\ProcestaNecessaryFunction\ProcestaNecessaryFunction\ProcestaNecessaryFunction.csproj">
+      <Project>{2EA8502B-BD12-4F2F-BC33-CC17D0ADD993}</Project>
+      <Name>ProcestaNecessaryFunction</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\..\MyC#Class`s\ValueConverter\ValueConverter\ValueConverter.csproj">
+      <Project>{6620F7D9-426C-445E-B10D-D9175AA28E99}</Project>
+      <Name>ValueConverter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OtherClasses\PetunicaControls\PetunicaControls\PetunicaControls.csproj">
+      <Project>{EF00330F-A72F-4063-8C31-F18EDEE1E5C9}</Project>
+      <Name>PetunicaControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OtherClasses\ProcestaVariables\ProcestaVariables\ProcestaVariables.csproj">
+      <Project>{B70620B2-400B-4605-A6A4-7EA495550874}</Project>
+      <Name>ProcestaVariables</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PetuniaElements\PetuniaElements.csproj">
+      <Project>{224EAFA8-3103-4682-95FF-90DA2D9DEBAD}</Project>
+      <Name>PetuniaElements</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Comments\ReleaseNote.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Comments\Gideline.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

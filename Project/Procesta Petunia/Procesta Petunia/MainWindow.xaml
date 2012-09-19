@@ -1,0 +1,1872 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:telerikInput="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Input"
+	    xmlns:telerikNavigation="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Navigation"
+		xmlns:telerikGrid="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.GridView"
+		xmlns:data="clr-namespace:Telerik.Windows.Data;assembly=Telerik.Windows.Data"
+        xmlns:Fluent="clr-namespace:Fluent;assembly=Fluent" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:extToolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit/extended" xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" xmlns:igEditors="http://infragistics.com/Editors" xmlns:syncfusion="http://schemas.syncfusion.com/wpf" xmlns:Telerik_Windows_Controls_Chromes="clr-namespace:Telerik.Windows.Controls.Chromes;assembly=Telerik.Windows.Controls" xmlns:PetunicaControls="clr-namespace:PetunicaControls;assembly=PetunicaControls" xmlns:TitelBar="clr-namespace:TitelBar;assembly=TitelBar" xmlns:Procesta_Petunia_Class="clr-namespace:Procesta_Petunia.Class" x:Name="window" mc:Ignorable="d" 
+        xmlns:converters="clr-namespace:ValueConverter;assembly=ValueConverter"
+		xmlns:PetuniaNameSpace="clr-namespace:Procesta_Petunia.Class"
+		xmlns:sys="clr-namespace:System;assembly=mscorlib"
+	    x:Class="Procesta_Petunia.MainWindow"
+        Title="Petunia" Height="800" Width="1000" WindowStartupLocation="CenterScreen" WindowState="Maximized" WindowStyle="None" Icon="Icon/petunai 2.0.ico">
+	<Window.Resources>
+		<sys:DateTime x:Key="DateTimeDataSource" d:IsDataSource="True"/>
+		<PetuniaNameSpace:ProductInformation x:Key="ProductInformationDataSource" d:IsDataSource="True"/>
+        <converters:StringToDobleConverter x:Key="StringToDuble"/>
+		<ObjectDataProvider ObjectType="{x:Type PetuniaNameSpace:AmountCalculate}" x:Key="totalAmountIs">
+			<ObjectDataProvider.ConstructorParameters>
+				<sys:String>0</sys:String>
+				<sys:String>0</sys:String>
+			</ObjectDataProvider.ConstructorParameters>
+		</ObjectDataProvider>
+		<Style x:Key="LogoutButton" TargetType="{x:Type Button}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type Button}">
+						<Grid>
+							<Rectangle RadiusY="3.667" RadiusX="3.667" Stroke="{x:Null}" StrokeThickness="0.5">
+								<Rectangle.Fill>
+									<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+										<GradientStop Color="#FF20AD6E" Offset="0"/>
+										<GradientStop Color="#FF30B461" Offset="0.139"/>
+										<GradientStop Color="#FF489D32" Offset="0.437"/>
+										<GradientStop Color="#FF2D7614" Offset="0.493"/>
+										<GradientStop Color="#FF7ADE00" Offset="0.889"/>
+										<GradientStop Color="#FF91FF00" Offset="1"/>
+									</LinearGradientBrush>
+								</Rectangle.Fill>
+							</Rectangle>
+							<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsFocused" Value="True"/>
+							<Trigger Property="IsDefaulted" Value="True"/>
+							<Trigger Property="IsMouseOver" Value="True"/>
+							<Trigger Property="IsPressed" Value="True"/>
+							<Trigger Property="IsEnabled" Value="False"/>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	</Window.Resources>
+	<Window.Triggers>
+		<EventTrigger RoutedEvent="FrameworkElement.Loaded"/>
+	</Window.Triggers>
+	<Window.Background>
+		<LinearGradientBrush EndPoint="0.5,0" MappingMode="RelativeToBoundingBox" StartPoint="0.5,1">
+			<GradientStop Color="#FF545454"/>
+			<GradientStop Color="White" Offset="1"/>
+			<GradientStop Color="#FF6E6E6E" Offset="0.858"/>
+			<GradientStop Color="White" Offset="0.867"/>
+		</LinearGradientBrush>
+	</Window.Background>
+	<Grid DataContext="{Binding Source={StaticResource ProductInformationDataSource}}">
+		<Grid.RowDefinitions>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
+        
+		<Fluent:Ribbon x:Name="RibbonMenuBar" d:LayoutOverrides="Width" FontSize="14.667" CanQuickAccessLocationChanging="False" IsQuickAccessToolBarVisible="False" ShowQuickAccessToolBarAboveRibbon="False" Title="{Binding ProductName}">
+			<Fluent:Ribbon.SelectedTabItem>
+				<Fluent:RibbonTabItem/>
+			</Fluent:Ribbon.SelectedTabItem>
+		
+			<!--Backstage-->
+			<Fluent:Ribbon.Menu>
+				<Fluent:Backstage Background="DarkGreen">
+					<Fluent:BackstageTabControl>
+						<Fluent:BackstageTabItem Fluent:KeyTip.Keys="S" Header="Setting" x:Name="BackTagSetting">
+							<DockPanel LastChildFill="False" Margin="196.834,185.746,136.493,88.542">
+								<Grid Margin="0,0,48.795,0" Height="264.336" Width="378" HorizontalAlignment="Center" VerticalAlignment="Center">
+									<telerik:RadTreeView x:Name="SettinsTreeView" HorizontalAlignment="Left" Width="100" Selected="SettingTreeViewSelect" d:IsLocked="True">
+										<telerik:RadTreeViewItem Header="General" x:Name="SettingTreeViewItemGeneral" FontSize="14.667" DefaultImageSrc="ButtonImages/GeneralSetting.png"/>
+										<telerik:RadTreeViewItem Header="Database" x:Name="SettingTreeViewItemDatabase" FontSize="14.667" DefaultImageSrc="ButtonImahes/DatabaseSetting.png"/>
+										<telerik:RadTreeViewItem Header="Password" x:Name="SettingTreeViewItemPassword" FontSize="14.667" DefaultImageSrc="ButtonImages/Password.png"/>		
+									</telerik:RadTreeView>
+									<Grid x:Name="SettingPanelGeneral" Margin="104,8,8,108.336" Width="266" Height="148" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+										<dxe:CheckEdit x:Name="GeneralCheckBoxLoginEnable" Margin="57.762,14.611,105.238,0" VerticalAlignment="Top" FontSize="14.667" Content="Enable Login" Height="21" Width="103" d:LayoutOverrides="VerticalAlignment" Checked="GeneralCheckBoxLoginEnableCheckeed" Unchecked="GeneralCheckBoxLoginEnableUnchecked"/>
+										<dxe:CheckEdit x:Name="GeneralCheckboxShowOrder" Margin="57.762,43.611,21.238,0" FontSize="14.667" Content="Show Order And Delevery" Height="19" VerticalAlignment="Top" Width="187" Checked="GeneralCheckboxShowOrderChecked" Unchecked="GeneralCheckboxShowOrderUnchecked" d:LayoutOverrides="VerticalAlignment"/>
+									</Grid>
+									<Grid x:Name="SettingPanelDatabaseSetting" Margin="104,0,0,0" d:IsHidden="True" Visibility="Hidden" d:IsLocked="True">
+										<TextBlock Height="20" Margin="8,3.987,0,0" TextWrapping="Wrap" Text="Username :" VerticalAlignment="Top" FontSize="14.667" HorizontalAlignment="Left" Width="72.5"/>
+										<dxe:TextEdit x:Name="SettingTextboxDatabaseUserName" Margin="89.929,3.966,34.071,0" VerticalAlignment="Top" FontSize="14.667" KeyDown="SettingTextboxDatabaseUserNameKeyDown"/>
+										<PasswordBox x:Name="SettingPasswordBoxDatabasePassword" Margin="89.929,35.964,34.071,0" VerticalAlignment="Top" FontSize="14.667" KeyDown="SettingPasswordBoxDatabasePasswordKeyDown">
+											<PasswordBox.BorderBrush>
+												<LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
+													<GradientStop Color="#FF2A4376"/>
+													<GradientStop Color="#FF5C84C1" Offset="1"/>
+												</LinearGradientBrush>
+											</PasswordBox.BorderBrush>
+											<PasswordBox.Background>
+												<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+													<GradientStop Color="#FFD2D9E8" Offset="0.007"/>
+													<GradientStop Color="#FFE6EAF2" Offset="0.195"/>
+													<GradientStop Color="#FFFEFEFE" Offset="0.979"/>
+												</LinearGradientBrush>
+											</PasswordBox.Background>
+										</PasswordBox>
+										<TextBlock HorizontalAlignment="Left" Margin="16.5,64.986,0,0" TextWrapping="Wrap" Text="Server IP :" Width="64" FontSize="14.667" Height="20" VerticalAlignment="Top"/>
+										<TextBlock HorizontalAlignment="Left" Margin="11.5,35.985,0,0" TextWrapping="Wrap" Text="Password :" Width="69" FontSize="14.667" Height="20" VerticalAlignment="Top"/>
+										<TextBlock Margin="12.5,124.987,0,119.349" TextWrapping="Wrap" Text="Database :" FontSize="14.667" HorizontalAlignment="Left" Width="68"/>
+										<TextBlock Margin="46,95.325,0,0" TextWrapping="Wrap" Text="Port :" FontSize="14.667" HorizontalAlignment="Left" Width="34.5" Height="20" VerticalAlignment="Top"/>
+										<dxe:TextEdit x:Name="SettingTextboxDatabaseDatabaseName" Margin="89.929,123.992,34.071,114.289" FontSize="14.667" KeyDown="SettingTextboxDatabaseDatabaseNameKeyDown" d:LayoutOverrides="Height"/>
+										<dxe:TextEdit x:Name="SettingTextBoxDatabaseHostIp" Margin="89.929,63.966,34.071,0" VerticalAlignment="Top" FontSize="14.667"/>
+										<dxe:TextEdit x:Name="SettingTextBoxDatabasePortnumber" Margin="89.929,93.966,34.071,0" FontSize="14.667" VerticalAlignment="Top"/>
+										<telerik:RadButton x:Name="SettingButtonSave" Margin="88.429,0,108.597,74.778" VerticalAlignment="Bottom" Height="24" Click="SettingButtonSaveClick">
+											<StackPanel Orientation="Horizontal" Height="17.571" Width="67.474">
+												<Image Source="ButtonImages/DatabaseConnection.png" Margin="0,-5.5,0,-2.667" Width="19.911"/>
+												<TextBlock Text="Connect" Margin="1,0,2,0"/>			
+											</StackPanel>					
+										</telerik:RadButton>
+										<telerik:RadButton x:Name="SettingButtonDatabaseClear" Margin="0,0,34.071,74.778" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="24" Width="60.767" Click="SettingButtonDatabaseClearClick">
+											<StackPanel Orientation="Horizontal">
+												<Image Source="ButtonImages/Clear.png" Height="17.571" Width="16.749"/>
+												<TextBlock Text="Clear" Margin="3,0,0,0"/>			
+											</StackPanel>			
+										</telerik:RadButton>
+									</Grid>
+									<Grid x:Name="SettingPanelPasswordChange" Margin="104,0,0,89.507">
+										<PasswordBox x:Name="PasswordBoxOldPassword" HorizontalAlignment="Left" Margin="123.128,8,0,0" VerticalAlignment="Top" FontSize="14.667" Height="24" Width="130">
+											<PasswordBox.BorderBrush>
+												<LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
+													<GradientStop Color="#FF2B4477"/>
+													<GradientStop Color="#FF5C84C1" Offset="1"/>
+												</LinearGradientBrush>
+											</PasswordBox.BorderBrush>
+											<PasswordBox.Background>
+												<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+													<GradientStop Color="#FFCFD7E7" Offset="0"/>
+													<GradientStop Color="#FFE7EBF2" Offset="0.267"/>
+													<GradientStop Color="White" Offset="0.983"/>
+													<GradientStop Color="#FF5C83C0" Offset="1"/>
+												</LinearGradientBrush>
+											</PasswordBox.Background>
+										</PasswordBox>
+										<TextBlock TextWrapping="Wrap" Text="Old Password :" FontSize="14.667" HorizontalAlignment="Left" Height="18.627" VerticalAlignment="Top" Width="106.3" Margin="12.828,11.373,0,0"/>
+										<TextBlock Margin="8,42.247,0,0" TextWrapping="Wrap" Text="New Password :" FontSize="14.667" Height="18.627" VerticalAlignment="Top" HorizontalAlignment="Left" Width="111.128"/>
+										<TextBlock Margin="8,74.331,0,81.871" TextWrapping="Wrap" Text="Conf Password :" FontSize="14.667" HorizontalAlignment="Left" Width="111.128"/>
+										<PasswordBox x:Name="PasswordBoxNewPassword" HorizontalAlignment="Left" Margin="123.128,38.958,0,0" VerticalAlignment="Top" FontSize="14.667" Height="24" Width="130">
+											<PasswordBox.BorderBrush>
+												<LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
+													<GradientStop Color="#FF2B4477"/>
+													<GradientStop Color="#FF5C84C1" Offset="1"/>
+												</LinearGradientBrush>
+											</PasswordBox.BorderBrush>
+											<PasswordBox.Background>
+												<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+													<GradientStop Color="#FFD2DAE9" Offset="0"/>
+													<GradientStop Color="#FFFCFDFE" Offset="0.964"/>
+												</LinearGradientBrush>
+											</PasswordBox.Background>
+										</PasswordBox>
+										<PasswordBox x:Name="PasswordConformPassword" HorizontalAlignment="Left" Margin="123.128,68.958,0,81.871" FontSize="14.667" Width="130" KeyDown="PasswordConformPasswordKeyDown">
+											<PasswordBox.BorderBrush>
+												<LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
+													<GradientStop Color="#FF2B4477"/>
+													<GradientStop Color="#FF5C84C1" Offset="1"/>
+												</LinearGradientBrush>
+											</PasswordBox.BorderBrush>
+											<PasswordBox.Background>
+												<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+													<GradientStop Color="#FFD2DAE9" Offset="0"/>
+													<GradientStop Color="White" Offset="1"/>
+												</LinearGradientBrush>
+											</PasswordBox.Background>
+										</PasswordBox>
+										<telerik:RadButton x:Name="PasswordButtonSave"  Margin="0,0,53.764,39.758" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="82.473" Height="24" Click="PasswordButtonSaveClick">
+											<StackPanel Orientation="Horizontal">
+												<Image Source="ButtonImages/Update.png" Height="18.917" Width="19.023" Margin="0,-1,0,0"/>
+												<TextBlock Text="Update" FontSize="14.667" Margin="3,-2,0,0" Height="19"/>			
+											</StackPanel>			
+										</telerik:RadButton>
+									</Grid>
+								</Grid>
+							</DockPanel>	
+						</Fluent:BackstageTabItem>
+						<Fluent:BackstageTabItem Fluent:KeyTip.Keys="I" Header="Initial Balance" x:Name="BackTagInitialBalance" Loaded="BackTagInitialBalanceLoad">
+							<DockPanel LastChildFill="False" Margin="342.96,184.619,320.762,313.955">
+								<Grid x:Name="PanelInitalBalance" Margin="0,0,116.278,0" Height="103" Width="204" HorizontalAlignment="Center" VerticalAlignment="Center">
+									<igEditors:XamNumericEditor x:Name="InitalBalanceNumberBoxAmount" Margin="75.632,44.276,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="127.534" FontSize="14.667" Height="23" KeyDown="InitalBalanceNumberBoxAmountKeyDown"/>
+									<telerik:RadButton x:Name="InitalBalanceButtonUpdate" HorizontalAlignment="Left" Margin="94.132,75.284,0,0" VerticalAlignment="Top" Width="87.868" FontSize="14.667" Click="InitalBalanceButtonUpdateClick" Height="24">
+										<StackPanel Orientation="Horizontal">
+											<Image Source="ButtonImages/Update.png"/>
+											<TextBlock Text="Update" Height="20.224" Margin="5,-3,1,0"/>
+										</StackPanel>
+									</telerik:RadButton>
+									<TextBlock Height="20" Margin="8,44.276,0,0" TextWrapping="Wrap" Text="Amount :" VerticalAlignment="Top" FontSize="14.667" HorizontalAlignment="Left" Width="63.632"/>
+									<Fluent:RadioButton x:Name="InitalBalanceRadioButtonCash" Content="RadioButton" HorizontalAlignment="Left" Margin="8,8,0,0" VerticalAlignment="Top" Width="60" Header="Cash" Foreground="Black" FontSize="14.667"/>
+									<Fluent:RadioButton x:Name="InitalBalanceRadioButtonBank" Content="RadioButton" HorizontalAlignment="Left" Margin="68,8,0,0" VerticalAlignment="Top" Width="60" FontSize="14.667" Foreground="Black" Header="Bank"/>
+								</Grid>
+							</DockPanel>
+						</Fluent:BackstageTabItem>
+						<Fluent:BackstageTabItem Fluent:KeyTip.Keys="A" Header="About Petunia">
+							<DockPanel LastChildFill="False" Margin="28,178,376,188.244">
+								<Grid Margin="0,0,0,-4.5" RenderTransformOrigin="0.467,0.963" DockPanel.Dock="Left" Width="436.122" HorizontalAlignment="Center" VerticalAlignment="Center" Height="246.561">
+									<TextBlock Margin="0,0,192.692,142.987" TextWrapping="Wrap" Text="Company Name : " FontSize="14.667" HorizontalAlignment="Right" Height="19.5" VerticalAlignment="Bottom"/>
+									<Image HorizontalAlignment="Left" Margin="8,0,0,0" Source="Icon/petunai 2.0.ico" Stretch="Fill" Width="96.906" Height="103" VerticalAlignment="Top"/>
+									<Image Source="Images/ComopanyLogo.png" Stretch="Fill" Height="109" VerticalAlignment="Top" HorizontalAlignment="Right" Width="111"/>
+									<TextBlock Margin="0,59.392,213.809,0" TextWrapping="Wrap" Text="Release Date : " HorizontalAlignment="Right" FontSize="14.667" Height="20.682" VerticalAlignment="Top"/>
+									<TextBlock Margin="0,0,81.125,20.528" TextWrapping="Wrap" FontSize="14.667" HorizontalAlignment="Right" Height="57.413" VerticalAlignment="Bottom"><Run Text="Developer:"/><LineBreak/><Run Text="                 Md.Hasanuzzaman"/><LineBreak/><Run Text="&#x9;  shuvo009@procesta.com"/></TextBlock>
+									<TextBlock Margin="0,0,203.897,218.061" TextWrapping="Wrap" HorizontalAlignment="Right" Height="20.5" VerticalAlignment="Bottom" FontSize="14.667"><Run Text="Product Name :"/><Run Text=" "/></TextBlock>
+									<TextBlock Margin="0,35.15,252.703,0" TextWrapping="Wrap" HorizontalAlignment="Right" Height="20.5" VerticalAlignment="Top" FontSize="14.667" Text="Version :"/>
+									<TextBlock Margin="0,0,117,114.485" TextWrapping="Wrap" Text="E-Mail : admin@procesta.com" FontSize="14.667" HorizontalAlignment="Right" Height="20.5" VerticalAlignment="Bottom"/>
+									<TextBlock Margin="0,0,145.667,77.441" TextWrapping="Wrap" Text="Web : www.procesta.com" FontSize="14.667" HorizontalAlignment="Right" Height="27.877" VerticalAlignment="Bottom"/>
+									<TextBlock Margin="0,0,99.343,218.061" TextWrapping="Wrap" HorizontalAlignment="Right" Height="20.5" VerticalAlignment="Bottom" FontSize="14.667" d:LayoutOverrides="HorizontalAlignment" Text="{Binding ProductName}" Width="104.554"/>
+									<TextBlock Margin="0,35.15,207.536,0" TextWrapping="Wrap" HorizontalAlignment="Right" Height="20.5" VerticalAlignment="Top" FontSize="14.667" Text="{Binding ProductVersion}"/>
+									<TextBlock Margin="0,59.65,135.129,0" TextWrapping="Wrap" Text="{Binding ReleaseDate}" HorizontalAlignment="Right" FontSize="14.667" Height="20.682" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment"/>
+									<TextBlock Margin="0,0,99.343,140.319" TextWrapping="Wrap" Text="{Binding CompanyName}" FontSize="14.667" HorizontalAlignment="Right" Height="19.5" VerticalAlignment="Bottom" d:LayoutOverrides="HorizontalAlignment" Width="89.349"/>
+								</Grid>
+						</DockPanel>
+						</Fluent:BackstageTabItem>
+						<Fluent:Button Fluent:KeyTip.Keys="E" x:Name="MenuExit" Header="Exit" Icon="images\Exit.png" Click="MenuExitClick"/>
+					</Fluent:BackstageTabControl>
+				</Fluent:Backstage>
+			</Fluent:Ribbon.Menu>
+		
+			<!--Tabs Home-->
+			<Fluent:RibbonTabItem Fluent:KeyTip.Keys="H" x:Name="RibbonTabHome" Header="Home">
+				<Fluent:RibbonGroupBox x:Name="RibbonHomeGroupHome" Header="">
+					<Fluent:Button Fluent:KeyTip.Keys="H" x:Name="RibbonButtonHome" Header="Home" LargeIcon="Images\Home.png" Click="RibbonButtonHomeClick"/>
+				</Fluent:RibbonGroupBox>
+				<Fluent:RibbonGroupBox  x:Name="RibbonHomeGroupAddStock" Header="">
+					<Fluent:Button Fluent:KeyTip.Keys="P" x:Name="RibbonButtonAddStock" Header="Purchase" LargeIcon="Images\AddStock.png" Click="RibbonAddStock"/>
+				</Fluent:RibbonGroupBox>
+				<Fluent:RibbonGroupBox x:Name="RibbonHomeGroupInvoice" Header="">
+					<Fluent:Button Fluent:KeyTip.Keys="I" x:Name="RibbonHomeButtonInvoice" Header="Invoice" LargeIcon="Images\Invoice.png" Click="RibbonInvoice"/>
+				</Fluent:RibbonGroupBox>
+				<Fluent:RibbonGroupBox x:Name="RibbonHomeGroupRecharge" Header="">
+					<Fluent:Button Fluent:KeyTip.Keys="G" x:Name="RibbonHomeButtonRecharge" Header="Recharges" LargeIcon="Images\Recharge.png" Click="RibbonHomeButtonRechargeClick"/>
+				</Fluent:RibbonGroupBox>
+				<Fluent:RibbonGroupBox x:Name="RibbonHomeGroupDebtorsPayment" Header="">
+					<Fluent:Button Fluent:KeyTip.Keys="D" x:Name="RibbonHomeButtonDebtorsPayment" Header="Payee" LargeIcon="Images\Debetors.png" Click="RibbonDebtorsPayment"/>
+				</Fluent:RibbonGroupBox>
+				<Fluent:RibbonGroupBox x:Name="RibbonHomeGroupCreditorsPayment" Header="">
+					<Fluent:Button Fluent:KeyTip.Keys="C" x:Name="RibbonHomeButtonCreditorsPayment" Header="Receiver" LargeIcon="Images\Creditors.png" Click="RibbonCreditorsPayment"/>
+				</Fluent:RibbonGroupBox>
+				<Fluent:RibbonGroupBox x:Name="RibbonHomeGroupPurchaseReturn" Header="">
+					<Fluent:Button Fluent:KeyTip.Keys="R" x:Name="RibbonHomeButtonPurchaseReturan" Header="Purchase Return" LargeIcon="Images\ProductReturn.png" Click="RinnonProductReturn"/>
+				</Fluent:RibbonGroupBox>
+				<Fluent:RibbonGroupBox x:Name="RibbonHomeGroupSalsRreturn" Header="">
+					<Fluent:Button Fluent:KeyTip.Keys="S" x:Name="RibbonHomeButtonSalesReturn" Header="Sales Return" LargeIcon="Images\SealsReturn.png" Click="RibbonSalesReturn"/>
+				</Fluent:RibbonGroupBox>
+				<Fluent:RibbonGroupBox x:Name="RibbonHomeGroupSummary" Header="">
+					<Fluent:Button Fluent:KeyTip.Keys="U" x:Name="RibbonHomeButtonSummary" Header="Summary" LargeIcon="Images\Summary.png" Click="RibbonSummary"/>
+				</Fluent:RibbonGroupBox>
+			</Fluent:RibbonTabItem>
+			<Fluent:RibbonTabItem Fluent:KeyTip.Keys="N" x:Name="RibbonTabNew" Header="New">
+				<Fluent:RibbonGroupBox x:Name="RibbonTransportGroupNewProduct" Header="">
+					<Fluent:Button Fluent:KeyTip.Keys="P" x:Name="RibbonTransportButtonNewProduct" Header="New Product" LargeIcon="Images\NewProduct.png" Click="RibbonNewProduct"/>
+				</Fluent:RibbonGroupBox>
+				<Fluent:RibbonGroupBox x:Name="RibbonTransportGroupNewRecharges" Header="">
+					<Fluent:Button Fluent:KeyTip.Keys="G" x:Name="RibbonTransportButtonNewRecharges" Header="New Recharges" LargeIcon="Images\Recharge.png" Click="RibbonTransportButtonNewRechargesClick"/>
+				</Fluent:RibbonGroupBox>
+				<Fluent:RibbonGroupBox x:Name="RibbonParyGroupNewParty" Header="">
+					<Fluent:Button Fluent:KeyTip.Keys="A" x:Name="RibbonPartyButtonNewParty" Header="New Party" LargeIcon="Images\NewParty.png" Click="RibbonNewParty"/>
+				</Fluent:RibbonGroupBox>
+			</Fluent:RibbonTabItem>
+		
+			<!--Tabs Edit-->
+		
+			<Fluent:RibbonTabItem Fluent:KeyTip.Keys="E" x:Name="RibbonTabEdit" Header="Edit" ToolTip="Edit">
+				<Fluent:RibbonGroupBox x:Name="RibbonEditGroupProductInfo" Header="">
+					<Fluent:Button Fluent:KeyTip.Keys="N" x:Name="RibbonButtonNewProductInfo" Header="Product Info" LargeIcon="Images\NewProductEdit.png" Click="RibbonProductInfoEdit"/>
+				</Fluent:RibbonGroupBox>			
+				<Fluent:RibbonGroupBox x:Name="RibbonEditGroupPartyInfo" Header="">
+					<Fluent:Button Fluent:KeyTip.Keys="P" x:Name="RibbonEditButtonPartyInfo" Header="Party Info" LargeIcon="Images\EditParty.png" Click="RibbonPartyinfoEdit"/>
+				</Fluent:RibbonGroupBox>
+				<Fluent:RibbonGroupBox x:Name="RibbonEditGroupStock" Header="">
+					<Fluent:Button Fluent:KeyTip.Keys="S" x:Name="RibbonEditButtonStock" Header="Stock" LargeIcon="Images\StockEdit.png" Click="RibbonStockEdit"/>
+				</Fluent:RibbonGroupBox>
+				<Fluent:RibbonGroupBox x:Name="RibbonEditGroupRecharges" Header="">
+					<Fluent:Button Fluent:KeyTip.Keys="G" x:Name="RibbonEditButtonRecharges" Header="Recharges" LargeIcon="Images\Recharge.png" Click="RibbonEditButtonRechargesClick"/>				
+				</Fluent:RibbonGroupBox>
+			</Fluent:RibbonTabItem>
+		
+			<!--Tabs Transport-->
+			<Fluent:RibbonTabItem Fluent:KeyTip.Keys="T" x:Name="RibbonTabTransport" Header="Transport" ToolTip="Transport">
+				<Fluent:RibbonGroupBox x:Name="RibbonTransportGroupAddStock" Header="">
+					<Fluent:Button Fluent:KeyTip.Keys="P" x:Name="RibbonTransportButtonAddStock" Header="Puchase" LargeIcon="Images\AddStock.png" Click="RibbonAddStock"/>
+				</Fluent:RibbonGroupBox>
+				<Fluent:RibbonGroupBox x:Name="RibbonTransportGroupInvoice" Header="">
+					<Fluent:Button Fluent:KeyTip.Keys="I" x:Name="RibbonTransportButtonInvoice" Header="Invoice" LargeIcon="Images\Invoice.png" Click="RibbonInvoice"/>
+				</Fluent:RibbonGroupBox>
+				<Fluent:RibbonGroupBox x:Name="RibbonTransportGroupDebtorsPayment" Header="">
+					<Fluent:Button Fluent:KeyTip.Keys="D" x:Name="RibbonTransportButtonDebtorsPayment" Header="Payee" LargeIcon="Images\Debetors.png" Click="RibbonDebtorsPayment"/>
+				</Fluent:RibbonGroupBox>
+				<Fluent:RibbonGroupBox x:Name="RibbonTransportGroupBoxCreditorsPayment" Header="">
+					<Fluent:Button Fluent:KeyTip.Keys="C" x:Name="RibonTransportButtonCreditorsPayment" Header="Receiver" LargeIcon="Images\Creditors.png" Click="RibbonCreditorsPayment"/>
+				</Fluent:RibbonGroupBox>
+				<Fluent:RibbonGroupBox x:Name="RibbonTransportGroupPurchaseReturn" Header="">
+					<Fluent:Button Fluent:KeyTip.Keys="R" x:Name="RibbonTransportButtonPurchaseReturn" Header="Purchase Return" LargeIcon="Images\ProductReturn.png" Click="RinnonProductReturn"/>
+				</Fluent:RibbonGroupBox>
+				<Fluent:RibbonGroupBox x:Name="RibbonTransportGroupSalesReturn" Header="">
+					<Fluent:Button Fluent:KeyTip.Keys="S" x:Name="RibbonTransportButtonSalesReturn" Header="Sales Return" LargeIcon="Images\SealsReturn.png" Click="RibbonSalesReturn"/>
+				</Fluent:RibbonGroupBox>
+				<Fluent:RibbonGroupBox x:Name="RibbonTransportGroupCashPayment" Header="">
+					<Fluent:Button Fluent:KeyTip.Keys="C" x:Name="RibbonTransportButtonCashPayment" Header="Cash Payment" LargeIcon="Images\Cashpayment.png" Click="RibbonCashPayment"/>
+				</Fluent:RibbonGroupBox>
+				<Fluent:RibbonGroupBox x:Name="RibbonTransportGroupCashReceive" Header="">
+					<Fluent:Button Fluent:KeyTip.Keys="A" x:Name="RibbonTransportButtonCashReceive" Header="Cash Receive" LargeIcon="Images\CashRecive.png" Click="RibbonCashReceive"/>
+				</Fluent:RibbonGroupBox>
+				<Fluent:RibbonGroupBox x:Name="RibbonTransportGroupExpanses" Header="">
+					<Fluent:Button Fluent:KeyTip.Keys="E" x:Name="RibbonTransportButtonExpanses" Header="Expanses" LargeIcon="Images\Expance.png" Click="RibbonExpanses"/>
+				</Fluent:RibbonGroupBox>
+				<Fluent:RibbonGroupBox x:Name="RibbonTransportGroupSalary" Header="">
+					<Fluent:Button Fluent:KeyTip.Keys="L" x:Name="RibbonTransportButtonSalary" Header="Salary" LargeIcon="Images\Salary.png" Click="RibbonSalary"/>
+				</Fluent:RibbonGroupBox>
+			</Fluent:RibbonTabItem>
+			<!--Tabs View-->
+			<Fluent:RibbonTabItem Fluent:KeyTip.Keys="V" x:Name="RibbonTabView" Header="View">
+				<Fluent:RibbonGroupBox x:Name="RibbonViewGroupInvoiceView" Header="">
+					<Fluent:Button Fluent:KeyTip.Keys="I" x:Name="RibbonViewButtonInvoiceView" Header="Invoice" LargeIcon="Images\InvoiceSearch.png" Click="RibbonInvoiceView"/>
+				</Fluent:RibbonGroupBox>
+				<Fluent:RibbonGroupBox x:Name="RibbonViewGroupPurchaseView" Header="">
+					<Fluent:Button Fluent:KeyTip.Keys="P" x:Name="RibbonViewButtonPurchaseView" Header="Purchase" LargeIcon="Images\PurchaseView.png" Click="RibbonPurchaseView"/>
+				</Fluent:RibbonGroupBox>
+				<Fluent:RibbonGroupBox x:Name="RibbonViewGroupStockView" Header="">
+					<Fluent:Button Fluent:KeyTip.Keys="S" x:Name="RibbonViewButtonStockView" Header="Stock" LargeIcon="Images\Stocks.png" Click="RibbonStockView"/>
+				</Fluent:RibbonGroupBox>
+				<Fluent:RibbonGroupBox x:Name="RibbonViewGroupDebtorsPaymentView" Header="">
+					<Fluent:Button Fluent:KeyTip.Keys="D" x:Name="RibbonViewButtonDebtorsPaymentHistory" Header="Payee" LargeIcon="Images\DebetorsPaymentHistory.png" Click="RibbonDebtorsPaymentHistory"/>
+				</Fluent:RibbonGroupBox>
+				<Fluent:RibbonGroupBox x:Name="RibbonViewGroupCreditorPaymentHistoryView" Header="">
+					<Fluent:Button Fluent:KeyTip.Keys="C" x:Name="RibbonViewButtonCreditorsPaymnetHistory" Header="Receiver" LargeIcon="Images\CreditorsPamentHistory.png" Click="RibbonCreditorsPaymentHistory"/>
+				</Fluent:RibbonGroupBox>
+				<Fluent:RibbonGroupBox x:Name="RibbonViewGroupProductReturn" Header="">
+					<Fluent:Button Fluent:KeyTip.Keys="R" x:Name="RibbonViewButtonProductReturn" Header="Product Return" LargeIcon="Images\ProductReturnView.png" Click="RibbonProductReturnView"/>
+				</Fluent:RibbonGroupBox>
+				<Fluent:RibbonGroupBox x:Name="RibbonViewGroupSelasReturn" Header="">
+					<Fluent:Button Fluent:KeyTip.Keys="A" x:Name="RibbonViewButtonSelasReturn" Header="Sales Return" LargeIcon="Images\SelaseReturnView.png" Click="RibbonSelasReturnView"/>
+				</Fluent:RibbonGroupBox>
+				<Fluent:RibbonGroupBox x:Name="RibbonViewGroupExpance" Header="">
+					<Fluent:Button Fluent:KeyTip.Keys="E" x:Name="RibbonViewButtonExpance" Header="Expance" LargeIcon="Images\ExpanceView.png" Click="RibbonExpansesView"/>
+				</Fluent:RibbonGroupBox>
+				<Fluent:RibbonGroupBox x:Name="RibbonViewGroupRecharges" Header="">
+					<Fluent:Button Fluent:KeyTip.Keys="G" x:Name="RibbonViewButtonRecharge" Header="Recharges" LargeIcon="Images\Recharge.png" Click="RibbonViewButtonRechargeClick"/>
+				</Fluent:RibbonGroupBox>
+			</Fluent:RibbonTabItem>
+			<!--End View-->
+			<!--Tabs New-->
+		</Fluent:Ribbon>
+		<!--Ribbon End-->
+		
+		<!--Panel New Product-->
+		<Grid x:Name="PanelNewProduct" Margin="320.92,342.624,268,235.386" HorizontalAlignment="Center" VerticalAlignment="Center" Height="203.99" Width="417.33" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+			<dxe:TextEdit x:Name="NewProductTextBoxCompanyName" Height="25" Margin="137.829,8,133.499,0" VerticalAlignment="Top" FontSize="14.667"/>
+			<dxe:TextEdit x:Name="NewProductTextBoxProductName" Height="25" Margin="137.829,41.99,133.499,0" VerticalAlignment="Top" FontSize="14.667"/>
+			<dxe:TextEdit x:Name="NewProductTextBoxModelNumber" Margin="137.829,74.99,133.499,0" Height="25" VerticalAlignment="Top" FontSize="14.667" KeyDown="NewProductTextBoxModelNumberKeyDown" />
+			<TextBlock HorizontalAlignment="Left" Height="20" Margin="15,43.991,0,0" TextWrapping="Wrap" Text="Company Name :" VerticalAlignment="Top" Width="117" FontSize="14.667" Foreground="#FFD4D4D4"/>
+			<TextBlock HorizontalAlignment="Left" Margin="18,76.991,0,0" TextWrapping="Wrap" Text="Model Number :" Width="110" Height="20" VerticalAlignment="Top" FontSize="14.667" d:LayoutOverrides="VerticalAlignment" Foreground="#FFD4D4D4"/>
+			<TextBlock HorizontalAlignment="Left" Height="20" Margin="51,0,0,74.99" TextWrapping="Wrap" Text="Product ID :" VerticalAlignment="Bottom" Width="77" FontSize="14.667" Foreground="#FFD4D4D4"/>
+			<TextBlock Height="20" Margin="24,13,0,0" TextWrapping="Wrap" Text="Product Name :" VerticalAlignment="Top" HorizontalAlignment="Left" Width="104" FontSize="14.667" Foreground="#FFD4D4D4"/>
+			<dxe:CheckEdit x:Name="NewProductCheckBoxAutoGenerate" HorizontalAlignment="Right" Height="22.99" Margin="0,0,8,72" VerticalAlignment="Bottom" Width="121.499" Content="Auto Generate" IsChecked="True" d:LayoutOverrides="HorizontalAlignment" FontSize="14.667" Checked="AutoGenerateChcked" Validate="AutoGenerateunchecked" Foreground="#FFD4D4D4" />
+			<telerik:RadButton x:Name="NewProductCreateButton" Margin="127.549,0,0,5" VerticalAlignment="Bottom" Click="NewProductCreateButton_Click" FontSize="13.333" HorizontalAlignment="Left" Width="77.124" Height="24">
+				<StackPanel Orientation="Horizontal">
+					<Image Source="ButtonImages/Add.png" Margin="0,-1,0,0"/>
+					<TextBlock Text="Insert" FontSize="13.333" Margin="5,-5,0,0" Height="15.667"/>
+				</StackPanel>
+			</telerik:RadButton>
+			<dxe:TextEdit x:Name="NewProductTextBoxProductID" Margin="137.829,0,133.499,72" Height="25" VerticalAlignment="Bottom" FontSize="14.667" IsEnabled="False" KeyDown="NewProductTextBoxProductIDKeyDown" />
+			<telerik:RadButton x:Name="NewProductClearButton"  Margin="0,0,138.033,5" VerticalAlignment="Bottom" Click="NewProductClearButtonClick" FontSize="13.333" HorizontalAlignment="Right" Width="70.624" Height="24">
+				<StackPanel Orientation="Horizontal">
+					<Image Source="ButtonImages/New.png" Margin="0,-6,0,0"/>
+					<TextBlock Text="New" Margin="6,0,0,0"/>
+				</StackPanel>
+			</telerik:RadButton>
+			<dxe:TextEdit x:Name="NewProductTextBoxDescription" Margin="137.829,0,133.499,39.5" Height="25" VerticalAlignment="Bottom" FontSize="14.667" KeyDown="NewProductTextBoxModelNumberKeyDown" />
+			<TextBlock HorizontalAlignment="Left" Height="20" Margin="46,0,0,44.5" TextWrapping="Wrap" Text="Description :" VerticalAlignment="Bottom" Width="82" FontSize="14.667" Foreground="#FFD4D4D4"/>
+		</Grid>
+		<!--Panel Stock Add-->
+		<Grid x:Name="PanelStockAdd" Margin="197.58,298.833,152.51,159.053" RenderTransformOrigin="0.477,0.479" HorizontalAlignment="Center" VerticalAlignment="Center" Height="348.419" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+			<TextBlock x:Name="AddStockLabelProductIDInfo" HorizontalAlignment="Right" Margin="0,26,165,0" TextWrapping="Wrap" Width="87" Height="19" VerticalAlignment="Top" FontSize="14.667" Foreground="#FFC8C8C8"/>
+			<TextBlock x:Name="AddStockLabelProductID" Margin="300,26,256,0" TextWrapping="Wrap" Text="Product ID :" Height="20" VerticalAlignment="Top" FontSize="14.667" Foreground="#FFC8C8C8"/>
+			<TextBlock x:Name="AddStockLabelQuantity" Margin="315,58,256,0" TextWrapping="Wrap" Text="Quantity :" Height="19" VerticalAlignment="Top" FontSize="14.667" Foreground="#FFCAC8C8" RenderTransformOrigin="0.623,0.578"/>
+			<TextBlock x:Name="AddStockLabelQuantityInfo" HorizontalAlignment="Right" Margin="0,58,188,0" TextWrapping="Wrap" Width="64" Height="19" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Foreground="#FFD0D0D0" FontSize="14.667"/>
+			<TextBlock x:Name="AddStockLabelRate" HorizontalAlignment="Right" Margin="0,92,256,0" TextWrapping="Wrap" Text="Rate :" Width="38" Height="16" VerticalAlignment="Top" FontSize="14.667" Foreground="#FFC4C4C4"/>
+			<TextBlock x:Name="AddStockLabelRateInfo" HorizontalAlignment="Right" Margin="0,92,188,0" TextWrapping="Wrap" Width="64" Height="16" VerticalAlignment="Top" FontSize="14.667" Foreground="#FFCACACA"/>
+			<TextBlock x:Name="AddzstockLabelQuantityNew" HorizontalAlignment="Left" Margin="56,111.567,0,0" TextWrapping="Wrap" Text="Quantity :" Width="66" FontSize="14.667" Foreground="#FFC6C6C6" Height="17.5" VerticalAlignment="Top" d:LayoutOverrides="VerticalAlignment"/>
+			<TextBlock x:Name="AddStockLabelRateNew" HorizontalAlignment="Left" Margin="56.633,0,0,58.35" TextWrapping="Wrap" Text="Amount :" Width="59.7" FontSize="14.667" Foreground="#FFD0D0D0" Height="18.667" VerticalAlignment="Bottom" d:LayoutOverrides="VerticalAlignment"/>
+			<TextBlock x:Name="AddStockLabelAmount" HorizontalAlignment="Left" Margin="82.999,143.571,0,0" TextWrapping="Wrap" Text="Rate :" Width="37" Height="16" VerticalAlignment="Top" FontSize="14.667" Foreground="#FFD0D0D0"/>
+			<TextBlock x:Name="AddStockLabelAmountNewInfo" HorizontalAlignment="Left" Margin="126,0,0,58.35" TextWrapping="Wrap" Width="146" Foreground="#FFCCCCCC" FontSize="14.667" Height="17.667" VerticalAlignment="Bottom" d:LayoutOverrides="VerticalAlignment" Text="{Binding Source={StaticResource totalAmountIs},Path=AmountIs}"/>
+			<igEditors:XamNumericEditor HorizontalAlignment="Left" Margin="126,143.571,0,0" x:Name="AddStockTextBoxRate" VerticalAlignment="Top" Width="150" FontSize="14.667" Height="24" Text="{Binding ConstructorParameters[1], BindsDirectlyToSource=True, Mode=OneWayToSource, Source={StaticResource totalAmountIs}, UpdateSourceTrigger=PropertyChanged}">
+				<igEditors:XamNumericEditor.BorderBrush>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FF2E477A" Offset="0"/>
+						<GradientStop Color="#FF5B83BF" Offset="1"/>
+					</LinearGradientBrush>
+				</igEditors:XamNumericEditor.BorderBrush>
+				<igEditors:XamNumericEditor.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FFD8DEEB" Offset="0"/>
+						<GradientStop Color="#FFD8DEEB" Offset="1"/>
+						<GradientStop Color="#FFF0F3F7" Offset="0.5"/>
+					</LinearGradientBrush>
+				</igEditors:XamNumericEditor.Background>
+			</igEditors:XamNumericEditor>
+			<telerik:RadNumericUpDown HorizontalAlignment="Left" Margin="126,112.32,0,0" x:Name="AddStockNumericUpDown" Width="150" RenderTransformOrigin="0.787,0.091" FontSize="14.667" Height="24" VerticalAlignment="Top" d:LayoutOverrides="VerticalAlignment" IsInteger="True" Value="{Binding ConstructorParameters[0], BindsDirectlyToSource=True, Mode=OneWayToSource, Source={StaticResource totalAmountIs} , Converter ={StaticResource StringToDuble}, UpdateSourceTrigger=PropertyChanged}" UpdateValueEvent="PropertyChanged" Minimum="0">
+				<telerik:RadNumericUpDown.BorderBrush>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FF2C4578" Offset="0"/>
+						<GradientStop Color="#FF5C84C1" Offset="1"/>
+					</LinearGradientBrush>
+				</telerik:RadNumericUpDown.BorderBrush>
+				<telerik:RadNumericUpDown.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FFD8DEEB" Offset="0"/>
+						<GradientStop Color="#FFD8DEEB" Offset="1"/>
+						<GradientStop Color="#FFF0F3F7" Offset="0.478"/>
+					</LinearGradientBrush>
+				</telerik:RadNumericUpDown.Background>
+			</telerik:RadNumericUpDown>
+			<telerik:RadButton x:Name="AddStockButtonAdd" Margin="0,0,224.027,27.039" VerticalAlignment="Bottom" Click="AddStockUpdateClick" HorizontalAlignment="Right" Width="82.473" Height="24">
+				<telerik:RadButton.Content>
+					<StackPanel Orientation="Horizontal">
+						<Image Source="ButtonImages/Update.png" Margin="0,-1"/>
+						<TextBlock Text="Update" FontSize="13.333" Margin="5,-1,0,0"/>
+					</StackPanel>
+				</telerik:RadButton.Content>
+			</telerik:RadButton>
+			<telerik:RadDatePicker HorizontalAlignment="Left" Margin="126,0,0,148.994" x:Name="AddStockDatePicker" VerticalAlignment="Bottom" Width="150" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" FontSize="14.667" Height="24" DataContext="{Binding Source={StaticResource DateTimeDataSource}}" SelectedDate="{Binding Today.Today.Today, Mode=OneWay}" >
+				<telerik:RadDatePicker.BorderBrush>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FF304A7D" Offset="0"/>
+						<GradientStop Color="#FF5B82BE" Offset="1"/>
+					</LinearGradientBrush>
+				</telerik:RadDatePicker.BorderBrush>
+				<telerik:RadDatePicker.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FFDBE1EC" Offset="0"/>
+						<GradientStop Color="#FFD9DFEB" Offset="1"/>
+						<GradientStop Color="#FFF0F3F7" Offset="0.5"/>
+					</LinearGradientBrush>
+				</telerik:RadDatePicker.Background>
+			</telerik:RadDatePicker>
+			<TextBlock x:Name="AddStockLabelRateNew_Copy" HorizontalAlignment="Left" Margin="78.999,0,0,157.053" TextWrapping="Wrap" Text="Date :" Width="41" Height="16" VerticalAlignment="Bottom" FontSize="14.667" Foreground="#FFD0D0D0" d:LayoutOverrides="VerticalAlignment"/>
+			<Fluent:RadioButton x:Name="AddStockRadioButtonCash" Content="RadioButton" HorizontalAlignment="Right" Margin="0,164.928,256,161.491" Width="59" Foreground="#FFD8D8D8" Header="Cash" FontSize="14.667" IsChecked="True" d:LayoutOverrides="Height"/>
+			<Fluent:RadioButton x:Name="AddStockReadioButtonCredit" Content="RadioButton" HorizontalAlignment="Right" Margin="0,164.928,155.153,161.491" Width="95.837" Header="On Credit" FontSize="14.667" Foreground="#FFCCCCCC" Checked="AddStockReadioButtonCreditChecked" Unchecked="AddStockReadioButtonCreditUnchecked"/>
+			<Fluent:RadioButton x:Name="AddStockRadioButtonCheeck" Content="RadioButton" HorizontalAlignment="Right" Margin="0,165.174,83.143,161.245" Foreground="#FFDADADA" FontSize="14.667" Header="Cheek" Checked="AddStockRadioButtonCheeckChecked" Unchecked="AddStockRadioButtonCheeckUnchecked" d:LayoutOverrides="Height"/>
+			<dxe:TextEdit x:Name="AddStockTextBoxInvoiceNUmber" HorizontalAlignment="Left" Margin="126,0,0,116.697" VerticalAlignment="Bottom" Width="150" FontSize="14.667" KeyDown="AddStockTextBoxInvoiceNUmberKeyDown"/>
+			<TextBlock Height="17.46" Margin="3.833,208.716,0,0" TextWrapping="Wrap" Text="Invoice Number :" VerticalAlignment="Top" FontSize="14.667" Foreground="#FFC8C8C8" HorizontalAlignment="Left" Width="112.5"/>
+			<TextBlock Height="17.46" Margin="8,303.92,0,0" TextWrapping="Wrap" Text="Last Invoice Number :" VerticalAlignment="Top" FontSize="14.667" Foreground="#FFC8C8C8" HorizontalAlignment="Left" Width="140.5"/>
+			<TextBlock x:Name="AddStockLabelLastInvoiceNumber" Height="24" Margin="152.5,303.92,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14.667" Foreground="#FFC8C8C8" HorizontalAlignment="Left" Width="126" Text="{Binding Text, ElementName=AddStockTextBoxInvoiceNUmber}"/>
+			<Grid x:Name="AddStockPanelCredit" Height="98.849" Margin="300,0,36.49,52.999" VerticalAlignment="Bottom" Width="298">
+				<dxe:ComboBoxEdit x:Name="AddStockComboBoxCreditorsName" Margin="137.166,3.52,3.344,0" VerticalAlignment="Top" FontSize="14.667" IsTextEditable="False" d:LayoutOverrides="VerticalAlignment"/>
+				<TextBlock Height="17.46" Margin="11,3.52,0,0" TextWrapping="Wrap" Text="Creditors Name :" VerticalAlignment="Top" FontSize="14.667" Foreground="#FFC8C8C8" HorizontalAlignment="Left" Width="112.499" d:LayoutOverrides="VerticalAlignment"/>
+				<igEditors:XamNumericEditor Margin="137.166,35.02,3.344,0" x:Name="AddStockTextBoxPaymentAmount" VerticalAlignment="Top" FontSize="14.667" Height="26"  KeyDown="AddStockTextBoxPaymentAmountKeyDown" Text="{Binding PaymentAmountIs, Source={StaticResource totalAmountIs}}">
+					<igEditors:XamNumericEditor.BorderBrush>
+						<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+							<GradientStop Color="#FF2E477A" Offset="0"/>
+							<GradientStop Color="#FF5B83BF" Offset="1"/>
+						</LinearGradientBrush>
+					</igEditors:XamNumericEditor.BorderBrush>
+					<igEditors:XamNumericEditor.Background>
+						<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+							<GradientStop Color="#FFD8DEEB" Offset="0"/>
+							<GradientStop Color="#FFD8DEEB" Offset="1"/>
+							<GradientStop Color="#FFF0F3F7" Offset="0.5"/>
+						</LinearGradientBrush>
+					</igEditors:XamNumericEditor.Background>
+				</igEditors:XamNumericEditor>
+				<TextBlock Height="17.46" Margin="3,37.52,0,0" TextWrapping="Wrap" Text="Payment Amount :" VerticalAlignment="Top" FontSize="14.667" Foreground="#FFC8C8C8" HorizontalAlignment="Left" Width="120.499"/>
+				<TextBlock Height="17.46" Margin="21,69.889,0,0" TextWrapping="Wrap" Text="Credit Amount :" VerticalAlignment="Top" FontSize="14.667" Foreground="#FFC8C8C8" HorizontalAlignment="Left" Width="102.499"/>
+				<TextBlock x:Name="AddStockLabelCreditAmount" Height="18.46" Margin="137.166,71.389,3.344,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14.667" Foreground="#FFC8C8C8" Text="{Binding DueAmountIs, Source={StaticResource totalAmountIs}}"/>
+			</Grid>
+			<telerik:RadButton x:Name="AddStockButtonNew" HorizontalAlignment="Right" Margin="0,0,147.026,27.039" VerticalAlignment="Bottom" Width="69.973" Click="AddStockButtonNewClick" Height="24">
+				<telerik:RadButton.Content>
+					<StackPanel Orientation="Horizontal">
+						<Image Source="ButtonImages/New.png" Margin="0,-4,0,-2"/>
+						<TextBlock Text="New" FontSize="13.333" Margin="4,-1,0,0"/>
+					</StackPanel>
+				</telerik:RadButton.Content>
+			</telerik:RadButton>
+			<PetunicaControls:ProductInfo x:Name="StockAddProductInfo" Margin="12,20.567,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" d:LayoutOverrides="Width" ModelNumberIndexChanged="StockAddProductInfoModelNumberIndexChange"/>
+			<Grid x:Name="AddstockPanelCheck" HorizontalAlignment="Right" Height="58.903" Margin="0,0,117.49,85.15" VerticalAlignment="Bottom" Width="197.51" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+				<dxe:TextEdit x:Name="AddStockTextBoxIssueName" Margin="64.7,14.188,0,18.715" FontSize="14.667" KeyDown="AddStockTextBoxInvoiceNUmberKeyDown" d:LayoutOverrides="Height"/>
+				<TextBlock x:Name="AddStockLabelRateNew_Copy1" Margin="0,0,0,24.548" TextWrapping="Wrap" Text="Issue To :" FontSize="14.667" Foreground="#FFD0D0D0" Height="18.667" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="60.7"/>
+			</Grid>
+			<dxe:TextEdit x:Name="AddStockTextBoxInvoiceNote" HorizontalAlignment="Left" Margin="126,0,0,84.999" VerticalAlignment="Bottom" Width="150" FontSize="14.667" KeyDown="AddStockTextBoxInvoiceNUmberKeyDown"/>
+			<TextBlock Height="17.46" Margin="76.5,241.088,0,0" TextWrapping="Wrap" Text="Note :" VerticalAlignment="Top" FontSize="14.667" Foreground="#FFC8C8C8" HorizontalAlignment="Left" Width="39.833"/>
+		</Grid>
+		<!--Panel Invoice -->
+		<Grid x:Name="PaneInvoice" Margin="92.462,180.643,80.292,48.607" VerticalAlignment="Center" Height="548.668" HorizontalAlignment="Center" Width="814.949" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+			<TextBlock HorizontalAlignment="Left" Height="16" Margin="8,65,0,0" TextWrapping="Wrap" Text="Bill To :" VerticalAlignment="Top" Width="47" FontSize="14.667" Foreground="#FFD8D8D8"/>
+			<TextBox x:Name="InvoiceTextBoxBillTo" Margin="8,85,0,0" TextWrapping="Wrap" HorizontalAlignment="Left" Width="182" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" Height="106" VerticalAlignment="Top" FontSize="14.667" >
+				<TextBox.BorderBrush>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FF294274" Offset="0"/>
+						<GradientStop Color="#FF5C84C1" Offset="1"/>
+					</LinearGradientBrush>
+				</TextBox.BorderBrush>
+				<TextBox.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FFD4DBE9" Offset="0"/>
+						<GradientStop Color="#FFFDFDFE" Offset="1"/>
+						<GradientStop Color="#FFF2F4F8" Offset="0.5"/>
+					</LinearGradientBrush>
+				</TextBox.Background>
+			</TextBox>
+			<TextBlock HorizontalAlignment="Left" Height="16" Margin="8,8,0,0" TextWrapping="Wrap" Text="Customer Name :" VerticalAlignment="Top" Width="117" Foreground="#FFDADADA" FontSize="14.667"/>
+			<TextBlock HorizontalAlignment="Left" Height="16.5" Margin="8,286.585,0,0" TextWrapping="Wrap" Text="Invoice :" VerticalAlignment="Top" Width="53.5" Foreground="#FFD4D4D4" FontSize="14.667"/>
+			<TextBlock Height="18" Margin="304,131,0,0" TextWrapping="Wrap" Text="Date :" VerticalAlignment="Top" HorizontalAlignment="Left" Width="38" Foreground="#FFD8D8D8" FontSize="14.667"/>
+			<TextBlock x:Name="InvoiceLabelProductIDInfo" Height="18" Margin="0,27,78.026,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Right" Width="124" FontSize="14.667" Foreground="#FFD4D4D4"/>
+			<TextBlock Height="20" Margin="0,51,212,0" TextWrapping="Wrap" Text="Quantity :" VerticalAlignment="Top" HorizontalAlignment="Right" Width="63" Foreground="#FFDEDEDE" FontSize="14.667"/>
+			<TextBlock x:Name="InvoiceLabelQuantityInfo" Height="18" Margin="0,51,106.026,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Right" Width="96" Foreground="#FFDEDEDE" FontSize="14.667"/>
+			<TextBlock Height="18" Margin="0,74.332,212,0" TextWrapping="Wrap" Text="Rate :" VerticalAlignment="Top" HorizontalAlignment="Right" Width="37" Foreground="#FFDEDEDE" FontSize="14.667"/>
+			<TextBlock x:Name="InvoiceLabelRateinfo" Height="18" Margin="0,75,99.026,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Right" Width="103" Foreground="#FFDEDEDE" FontSize="14.667"/>
+			<TextBlock HorizontalAlignment="Left" Height="22" Margin="278,163,0,0" TextWrapping="Wrap" Text="Quantity :" VerticalAlignment="Top" Width="64" Foreground="#FFDEDEDE" FontSize="14.667"/>
+			<TextBlock HorizontalAlignment="Left" Margin="282,225.501,0,0" TextWrapping="Wrap" Text="Amount :" Width="60" FontSize="14.667" Foreground="Gainsboro" Height="18" VerticalAlignment="Top"/>
+			<TextBlock HorizontalAlignment="Left" Height="18" Margin="304.5,194.594,0,0" TextWrapping="Wrap" Text="Rate :" VerticalAlignment="Top" Width="37.5" Foreground="#FFE4E4E4" FontSize="14.667"/>
+			<TextBlock x:Name="InvoiceLabelSaleAmount" Height="24" Margin="351,225.501,321,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14.667" Foreground="#FFDADADA" Text="{Binding Source={StaticResource totalAmountIs},Path=AmountIs}"/>
+			<telerik:RadGridView HorizontalAlignment="Left" Margin="8.703,0,0,8" x:Name="InvoicegridControl" VerticalAlignment="Bottom" Height="233.583" Width="476.246" ShowGroupPanel="False" Background="#FF575757" BorderBrush="#FF575757" ShowColumnFooters="True" ItemsSource="{Binding GridViewInvoice, ElementName=window, Mode=OneTime}" AutoGenerateColumns="False">      
+				<telerik:RadGridView.Columns>
+					<telerik:GridViewDataColumn x:Name="Description" UniqueName="Description" Header="Description" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" IsReadOnly="True" DataMemberBinding="{Binding Description}"/>
+					<telerik:GridViewDataColumn x:Name="Quantity" UniqueName="Quantity" Header="Quantity" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" IsReadOnly="True" DataMemberBinding="{Binding Quantity}">
+					   <telerik:GridViewColumn.AggregateFunctions>
+                       	 <telerik:SumFunction Caption="Total: " ResultFormatString="{}{0:d}" SourceField="Quantity" />
+                       </telerik:GridViewColumn.AggregateFunctions>
+					</telerik:GridViewDataColumn>
+					<telerik:GridViewDataColumn x:Name="Rate" UniqueName="Rate" Header="Rate" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" IsReadOnly="True" DataMemberBinding="{Binding Rate}"/>
+					<telerik:GridViewDataColumn x:Name="Amount" UniqueName="Amount" Header="Amount" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" IsReadOnly="True" DataMemberBinding="{Binding Amount}">
+					   <telerik:GridViewColumn.AggregateFunctions>
+                       	 <telerik:SumFunction FunctionName="invoiceAmountTotal" Caption="Total: " SourceField="Amount" />
+                       </telerik:GridViewColumn.AggregateFunctions>
+					</telerik:GridViewDataColumn>
+				<telerik:GridViewColumn>
+                    <telerik:GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <telerik:RadButton Command="telerikGrid:RadGridViewCommands.Delete" CommandParameter="{Binding}">
+                                <telerik:RadButton.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="ButtonImages/Close.png" Height="15" Width="25"/>
+                                    </StackPanel>
+                                </telerik:RadButton.Content>
+                            </telerik:RadButton>
+                        </DataTemplate>
+                    </telerik:GridViewColumn.CellTemplate>
+                </telerik:GridViewColumn>
+				</telerik:RadGridView.Columns>
+			</telerik:RadGridView>
+			<telerik:RadButton x:Name="InvoiceButtonClear" HorizontalAlignment="Right" Margin="0,0,26.38,55.707" VerticalAlignment="Bottom" Width="75.143" FontSize="14.667" Click="InvoiceButtonClearClick" Height="26">
+				<StackPanel Orientation="Horizontal">
+					<Image Source="ButtonImages/New.png" Margin="0,-4,0,-1"/>
+					<TextBlock Text="New" Margin="6,-1,0,0" FontSize="13.333" Height="19"/>
+				</StackPanel>
+			</telerik:RadButton>
+			<telerik:RadSplitButton x:Name="InvoiceButtonSaveAndPrint" HorizontalAlignment="Right" Margin="0,0,105.523,55.707" VerticalAlignment="Bottom" Height="26" Width="91.003" Click="InvoiceSpritButtonSaveClick">
+				<telerik:RadSplitButton.Content>
+					<StackPanel Orientation="Horizontal">
+						<Image Source="ButtonImages/Save.png" Margin="0,-1"/>
+						<TextBlock Text="Save" Margin="8,-1,0,0" FontSize="13.333" Height="18.5"/>
+					</StackPanel>
+				</telerik:RadSplitButton.Content>
+				<telerik:RadSplitButton.DropDownContent>
+					<telerik:RadContextMenu BorderThickness="0">
+						<telerik:RadMenuItem x:Name="InvoiceSplitButtonSavePreview" Header="Save And Preview" Click="InvoiceSplitButtonSaveAndPreviewClick"/>
+						<telerik:RadMenuItem x:Name="InvoiceSplitButtonPreview" Header="Preview" Click="InvoiceSplitButtonPreviewClick"/>
+					</telerik:RadContextMenu>        	
+				</telerik:RadSplitButton.DropDownContent>
+			</telerik:RadSplitButton>
+			<telerik:RadNumericUpDown x:Name="InvoiceNumberUpDownQuantity" Margin="351,161.753,321,0" FontSize="14.667" VerticalAlignment="Top" IsInteger="True" Height="24" Minimum="0" Value="{Binding ConstructorParameters[0], BindsDirectlyToSource=True, Mode=OneWayToSource, Source={StaticResource totalAmountIs} , Converter ={StaticResource StringToDuble}, UpdateSourceTrigger=PropertyChanged}" UpdateValueEvent="PropertyChanged" Maximum="{Binding Text, ElementName=InvoiceLabelQuantityInfo, Converter={StaticResource StringToDuble}}">
+				<telerik:RadNumericUpDown.BorderBrush>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FF2F497C" Offset="0"/>
+						<GradientStop Color="#FF5A82BF" Offset="1"/>
+					</LinearGradientBrush>
+				</telerik:RadNumericUpDown.BorderBrush>
+				<telerik:RadNumericUpDown.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FFD5DCEA" Offset="0"/>
+						<GradientStop Color="#FFFBFBFD" Offset="1"/>
+						<GradientStop Color="#FFECEFF6" Offset="0.504"/>
+					</LinearGradientBrush>
+				</telerik:RadNumericUpDown.Background>
+			</telerik:RadNumericUpDown>
+			<igEditors:XamNumericEditor x:Name="InvoiceNumberBoxRate" HorizontalAlignment="Right" Margin="0,191.753,321,0" Width="142.949" Theme="Aero" FontSize="14.667" VerticalAlignment="Top" KeyDown="InvoiceNumberBoxRateKeyDown" Height="24" Text="{Binding ConstructorParameters[1], BindsDirectlyToSource=True, Mode=OneWayToSource, Source={StaticResource totalAmountIs}, UpdateSourceTrigger=PropertyChanged}" >
+				<igEditors:XamNumericEditor.BorderBrush>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FF314B7E" Offset="0"/>
+						<GradientStop Color="#FF5981BE" Offset="1"/>
+					</LinearGradientBrush>
+				</igEditors:XamNumericEditor.BorderBrush>
+				<igEditors:XamNumericEditor.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FFD7DDEB" Offset="0.013"/>
+						<GradientStop Color="#FFF9FAFC" Offset="0.987"/>
+						<GradientStop Color="#FFEAEEF5" Offset="0.5"/>
+					</LinearGradientBrush>
+				</igEditors:XamNumericEditor.Background>
+			</igEditors:XamNumericEditor>
+			<telerik:RadDatePicker
+				x:Name="InvoiceDateTimePicker" Margin="351,131,321,0" FontSize="14.667" VerticalAlignment="Top" Height="24" DataContext="{Binding Source={StaticResource DateTimeDataSource}}" SelectedDate="{Binding Today.Today, Mode=OneWay}">
+				<telerik:RadDatePicker.BorderBrush>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FF2E487B" Offset="0"/>
+						<GradientStop Color="#FF5C84C1" Offset="1"/>
+					</LinearGradientBrush>
+				</telerik:RadDatePicker.BorderBrush>
+				<telerik:RadDatePicker.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FFD3DAE9" Offset="0"/>
+						<GradientStop Color="#FFFDFDFE" Offset="1"/>
+						<GradientStop Color="#FFEFF1F7" Offset="0.5"/>
+					</LinearGradientBrush>
+				</telerik:RadDatePicker.Background>
+			</telerik:RadDatePicker>
+			<dxe:TextEdit x:Name="InvoiceTextBoxCustomerName" HorizontalAlignment="Left" Height="24" Margin="8,28,0,0" VerticalAlignment="Top" Width="159"/>
+			<telerik:RadButton x:Name="InvoiceButtonAdd" Margin="366,264.302,375.059,258.365" FontSize="14.667" Click="invoiceGridAddClick" Height="26" d:LayoutOverrides="VerticalMargin">
+				<telerik:RadButton.Content>
+					<StackPanel Orientation="Horizontal">
+						<Image Source="ButtonImages/Add.png" Margin="0,-1"/>
+						<TextBlock Text="Add" Margin="7,-1,0,0" FontSize="13.333" Height="18"/>
+					</StackPanel>
+				</telerik:RadButton.Content>
+			</telerik:RadButton>
+			<Fluent:RadioButton x:Name="InvoiceRadioButtonDebtor" Content="RadioButton" HorizontalAlignment="Right" Margin="0,0,85.657,244.939" VerticalAlignment="Bottom" Width="93.344" Header="On Credit" FontSize="14.667" Foreground="#FFDADADA" Checked="InvoiceRadioButtonCreditChecked" Unchecked="InvoiceRadioButtonCreditUnchecked"/>
+			<Fluent:RadioButton x:Name="InvoiceRadioButtonCash" Content="RadioButton" HorizontalAlignment="Right" Margin="0,0,193,245.583" VerticalAlignment="Bottom" Width="60" Header="Cash" FontSize="14.667" Foreground="#FFE0E0E0"/>
+			<Grid x:Name="InvoicePanelCredit" HorizontalAlignment="Right" Margin="0,0,20.026,110.335" Width="254.974" Height="123.585" VerticalAlignment="Bottom" Visibility="Hidden">
+				<dxe:ComboBoxEdit x:Name="InvoiceComboBoxDebtorName" Height="25" Margin="108,10.836,8,0" VerticalAlignment="Top" IsTextEditable="False" FontSize="14.667" d:LayoutOverrides="HorizontalAlignment" SelectedIndexChanged="InvoiceComboBoxDebtorNameSelectIndexChange"/>
+				<igEditors:XamNumericEditor x:Name="InvoiceNumberBoxPaidAmount" HorizontalAlignment="Right" Margin="0,51.159,8,46.917" Width="138.974" Theme="Aero" FontSize="14.667" d:LayoutOverrides="Height" TextChanged="InvoiceTextBoxAmountPaidTextChange" KeyDown="InvoiceNumberBoxPaidAmountKeyDown">
+					<igEditors:XamNumericEditor.BorderBrush>
+						<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+							<GradientStop Color="#FF2B4577" Offset="0"/>
+							<GradientStop Color="#FF5C83C0" Offset="1"/>
+						</LinearGradientBrush>
+					</igEditors:XamNumericEditor.BorderBrush>
+					<igEditors:XamNumericEditor.Background>
+						<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+							<GradientStop Color="#FFD2DAE9" Offset="0.011"/>
+							<GradientStop Color="#FFE6EAF2" Offset="0.196"/>
+							<GradientStop Color="White" Offset="0.989"/>
+							<GradientStop Color="#FF5C83C0" Offset="1"/>
+						</LinearGradientBrush>
+					</igEditors:XamNumericEditor.Background>
+				</igEditors:XamNumericEditor>
+				<TextBlock Height="17" Margin="8,10.836,0,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96" Text="Debtor Name :" Foreground="#FFE4E4E4" FontSize="14.667" d:LayoutOverrides="HorizontalAlignment"/>
+				<TextBlock Margin="12,51.159,0,56.426" TextWrapping="Wrap" HorizontalAlignment="Left" Width="92" Text="Paid Amount : " FontSize="14.667" Foreground="#FFD0D0D0"/>
+				<TextBlock Height="16" Margin="1,0,0,18.918" TextWrapping="Wrap" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="103" Text="Credit Amount : " FontSize="14.667" Foreground="#FFDADADA"/>
+				<TextBlock x:Name="InvoieLabelCreditAmount" Height="18" Margin="108,0,53.974,14.917" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="14.667" Foreground="#FFE4E4E4"/>
+			</Grid>
+			<Fluent:RadioButton x:Name="InvoiceRadioButtonCheck" Content="RadioButton" HorizontalAlignment="Right" Margin="0,0,15.349,244.939" VerticalAlignment="Bottom" Width="66.308" Header="Check" FontSize="14.667" Foreground="#FFE0E0E0" Checked="InvoiceRadioButtonCheckChecked" Unchecked="InvoiceRadioButtonCheckUnchecked"/>
+			<PetunicaControls:ProductInfo x:Name="InvoiceProductInfo" Margin="236.449,26,312,0" VerticalAlignment="Top" d:LayoutOverrides="Height" ModelNumberIndexChanged="InvoiceProductInfoModelNumberIndexChange"/>
+			<TextBlock Height="20" Margin="0,28,212,0" TextWrapping="Wrap" Text="Product ID :" VerticalAlignment="Top" HorizontalAlignment="Right" Width="77" Foreground="#FFDEDEDE" FontSize="14.667"/>
+			<Grid x:Name="InvoicePanelCheck" HorizontalAlignment="Right" Height="80.5" Margin="0,0,31.13,133.852" VerticalAlignment="Bottom" Width="207.191" d:IsHidden="True" Visibility="Hidden" d:IsLocked="True">
+				<dxe:TextEdit x:Name="InvoiceTextBoxIssueName" Margin="65.333,24.769,0,29.73" Height="26"/>
+				<TextBlock HorizontalAlignment="Left" Margin="0,28.185,0,29.815" TextWrapping="Wrap" Text="Issue To :" Width="61.333" FontSize="14.667" Foreground="Gainsboro"/>
+			</Grid>
+		</Grid>
+		<!--Panel Invoice View-->
+		<Grid x:Name="PanelPurchaseSalesView" Margin="63,144,60.5,20.5" HorizontalAlignment="Center" VerticalAlignment="Center" Height="621.848" Width="869.5" DataContext="{Binding Source={StaticResource DateTimeDataSource}}" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+			<TextBlock Height="21.5" Margin="8,113,0,0" TextWrapping="Wrap" Text="History" VerticalAlignment="Top" FontSize="14.667" Foreground="#FFE7E7E7" HorizontalAlignment="Left" Width="49.667"/>
+			<igEditors:XamNumericEditor x:Name="PurchaseSalesViewNumberBoxAmount" Margin="362.322,40.91,348.178,0" VerticalAlignment="Top" FontSize="14.667" KeyDown="PurchaseSalesViewNumberBoxAmountKeyDown">
+				<igEditors:XamNumericEditor.BorderBrush>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FF274072" Offset="0"/>
+						<GradientStop Color="#FF5C84C1" Offset="1"/>
+					</LinearGradientBrush>
+				</igEditors:XamNumericEditor.BorderBrush>
+				<igEditors:XamNumericEditor.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FFD6DCEA" Offset="0"/>
+						<GradientStop Color="#FFFEFEFE" Offset="1"/>
+						<GradientStop Color="#FFF0F2F7" Offset="0.5"/>
+					</LinearGradientBrush>
+				</igEditors:XamNumericEditor.Background>
+			</igEditors:XamNumericEditor>
+			<TextBlock Height="21.5" Margin="316,12.5,0,0" TextWrapping="Wrap" Text="Date :" VerticalAlignment="Top" FontSize="14.667" Foreground="#FFE7E7E7" HorizontalAlignment="Left" Width="38"/>
+			<TextBlock Height="21.5" Margin="294,40.92,0,0" TextWrapping="Wrap" Text="Amount :" VerticalAlignment="Top" FontSize="14.667" Foreground="#FFE7E7E7" HorizontalAlignment="Left" Width="60"/>
+			<telerik:RadDatePicker x:Name="PurchaseSalesViewDateAndTime" Margin="362.322,12,348.178,0" VerticalAlignment="Top" FontSize="14.667" KeyDown="PurchaseSalesViewDateAndTimeKeyDown" SelectedDate="{Binding Today.Today, Mode=OneWay}">
+				<telerik:RadDatePicker.BorderBrush>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FF2D4679" Offset="0"/>
+						<GradientStop Color="#FF5C83C0" Offset="1"/>
+					</LinearGradientBrush>
+				</telerik:RadDatePicker.BorderBrush>
+				<telerik:RadDatePicker.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FFD9DFEC" Offset="0"/>
+						<GradientStop Color="#FFFCFDFE" Offset="1"/>
+						<GradientStop Color="#FFF0F2F7" Offset="0.5"/>
+					</LinearGradientBrush>
+				</telerik:RadDatePicker.Background>
+			</telerik:RadDatePicker>
+			<TextBlock HorizontalAlignment="Left" Height="21.5" Margin="291,72.75,0,0" TextWrapping="Wrap" Text="Quantity :" VerticalAlignment="Top" Width="63" FontSize="14.667" Foreground="#FFE7E7E7"/>
+			<igEditors:XamNumericEditor x:Name="PurchaseSalesViewNumberBoxQuantity" Margin="362.322,72.289,348.178,0" VerticalAlignment="Top" FontSize="14.667" KeyDown="PurchaseSalesViewNumberBoxQuantityKeyDown">
+				<igEditors:XamNumericEditor.BorderBrush>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FF274072" Offset="0"/>
+						<GradientStop Color="#FF5C84C1" Offset="1"/>
+					</LinearGradientBrush>
+				</igEditors:XamNumericEditor.BorderBrush>
+				<igEditors:XamNumericEditor.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FFD6DCEA" Offset="0"/>
+						<GradientStop Color="#FFFEFEFE" Offset="1"/>
+						<GradientStop Color="#FFF0F2F7" Offset="0.5"/>
+					</LinearGradientBrush>
+				</igEditors:XamNumericEditor.Background>
+			</igEditors:XamNumericEditor>
+			<Grid HorizontalAlignment="Right" Height="122.5" Margin="0,8,14.192,0" VerticalAlignment="Top" Width="312.808">
+				<Fluent:RadioButton x:Name="PurchaseSalesViewRadioButtonByDate" Content="RadioButton" Margin="151.654,3.492,80.679,0" VerticalAlignment="Top" Foreground="#FFF1EDED" FontSize="14.667" Header="By Date" Checked="PurchaseSalesViewRadioButtonByDateChecked" Unchecked="PurchaseSalesViewRadioButtonByDateUnChecked"/>
+				<Fluent:RadioButton x:Name="PurchaseSalesViewRadioButtonByAmount" Content="RadioButton" Margin="151.654,29.492,62.012,0" Foreground="#FFF1EDED" FontSize="14.667" Header="By Amount" Checked="PurchaseSalesViewRadioButtonByAmountChecked" Height="22" VerticalAlignment="Top" Unchecked="PurchaseSalesViewRadioButtonByAmountUnChecked"/>
+				<Fluent:RadioButton x:Name="PurchaseSalesViewRadioButtonByQuantity" Content="RadioButton" Margin="151.654,55.492,57.346,44.253" Foreground="#FFF1EDED" FontSize="14.667" Header="By Quantity" Checked="PurchaseSalesViewRadioButtonByQuantityChecked" Unchecked="PurchaseSalesViewRadioButtonByQuantityUnChecked"/>
+				<Fluent:RadioButton x:Name="PurchaseSalesViewRadioButtonUpByAll" Content="RadioButton" Margin="151.654,0,96.154,18.253" VerticalAlignment="Bottom" Foreground="#FFF1EDED" FontSize="14.667" Header="By All" Checked="PurchaseSalesViewRadioButtonByAll"/>
+				<Fluent:RadioButton x:Name="PurchaseSalesViewRadioButtonByProductInfo" Content="RadioButton" Margin="0,3.492,0,0" VerticalAlignment="Top" Foreground="#FFF1EDED" FontSize="14.667" Header="By Product Info" Checked="PurchaseSalesViewRadioButtonByProductInfoChecked" HorizontalAlignment="Left" Width="127.667" Unchecked="PurchaseSalesViewRadioButtonByProductInfoUnchecked"/>
+				<Fluent:RadioButton x:Name="PurchaseSalesViewRadioButtonByCompanyName" Content="RadioButton" Margin="0,29.492,145.667,0" Foreground="#FFF1EDED" FontSize="14.667" Header="By Company Name" Checked="PurchaseSalesViewRadioButtonByCompanyNameChecked" VerticalAlignment="Top" Unchecked="PurchaseSalesViewRadioButtonByCompanyNameUnchecked"/>
+				<Fluent:RadioButton x:Name="PurchaseSalesViewRadioButtonByProductName" Content="RadioButton" Margin="0,55.492,0,44.253" Foreground="#FFF1EDED" FontSize="14.667" Header="By Product Name" Checked="PurchaseSalesViewRadioButtonByProductNameChecked" HorizontalAlignment="Left" Width="142.476" Unchecked="PurchaseSalesViewRadioButtonByProductNameUnChecked"/>
+				<Fluent:RadioButton x:Name="PurchaseSalesViewRadioButtonByModelNumber" Content="RadioButton" Margin="0.178,0,0,18.5" VerticalAlignment="Bottom" Foreground="#FFF1EDED" FontSize="14.667" Header="By Model Number" Checked="PurchaseSalesViewRadioButtonByModelNumberChecked" HorizontalAlignment="Left" Width="147.476" Height="21.753" Unchecked="PurchaseSalesViewRadioButtonByModelNumberUnchecked"/>
+				<telerik:RadButton x:Name="PurchaseSalesViewButtonSearch" HorizontalAlignment="Right" Margin="0,0,0,15.663" VerticalAlignment="Bottom" Width="92.154" Click="PurchaseSalesViewButtonSearchClick" Height="24">
+					<telerik:RadButton.Content>
+						<StackPanel Orientation="Horizontal">
+							<Image Source="ButtonImages/Search.png" Margin="0,-1"/>
+							<TextBlock Text="Search" Margin="5,-1,0,0" FontSize="13.333"/>
+						</StackPanel>
+					</telerik:RadButton.Content>
+				</telerik:RadButton>
+			</Grid>
+			<telerik:RadButton x:Name="PurchaseSalesViewButtonPrint" HorizontalAlignment="Right" Margin="0,0,10.667,18" VerticalAlignment="Bottom" Width="84.49" Click="PurchaseSalesViewButtonPrintClick" Height="24">
+				<telerik:RadButton.Content>
+					<StackPanel Orientation="Horizontal">
+						<Image Source="ButtonImages/Preview.png" Margin="0,-1"/>
+						<TextBlock Text="Preview" FontSize="13.333" Margin="6,-1,0,0"/>
+					</StackPanel>
+				</telerik:RadButton.Content>
+			</telerik:RadButton>
+			<PetunicaControls:ProductInfo x:Name="PurchaseSalesViewProductInfo" Margin="8,12.5,0,0" VerticalAlignment="Top" d:LayoutOverrides="Width, Height" HorizontalAlignment="Left"/>
+			<telerik:RadGridView x:Name="PerchaseSalesViewGridView" Margin="7.253,143.5,8.747,46" ShowGroupPanel="False" AutoGenerateColumns="False" IsReadOnly="True">
+				<telerik:RadGridView.Columns>
+					<telerik:GridViewDataColumn x:Name="SalesViewDate" UniqueName="EntryDate" Header="Date" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" DataMemberBinding="{Binding EntryDate}"/>
+					<telerik:GridViewDataColumn x:Name="SalesViewProductID" UniqueName="ProductID" Header="Product ID" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" DataMemberBinding="{Binding ProductID}"/>
+					<telerik:GridViewDataColumn x:Name="SalesViewCompanyName" UniqueName="CompanyName" Header="Company Name" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" DataMemberBinding="{Binding ProductName}"/>
+					<telerik:GridViewDataColumn x:Name="SalesViewProductName" UniqueName="ProductName" Header="Product Name" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" DataMemberBinding="{Binding CompanyName}"/>
+					<telerik:GridViewDataColumn x:Name="SalesViewModelNumber" UniqueName="ModelNumber" Header="Model Number" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" DataMemberBinding="{Binding ModelName}"/>
+					<telerik:GridViewDataColumn x:Name="SalesViewQuantity" UniqueName="Quantity" Header="Quantity" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" DataMemberBinding="{Binding Quantity}"/>
+					<telerik:GridViewDataColumn x:Name="SalesViewRate" UniqueName="Rate" Header="Rate" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" DataMemberBinding="{Binding Rate}"/>
+					<telerik:GridViewDataColumn x:Name="SalesViewAmount" UniqueName="Amount" Header="Amount" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" DataMemberBinding="{Binding Amount}"/>
+					<telerik:GridViewDataColumn x:Name="SalesViewInvoice_Number" UniqueName="Invoice_Number" Header="Invoice Number" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" DataMemberBinding="{Binding InvoiceNumber}"/>
+					<telerik:GridViewDataColumn x:Name="SalesViewTransaction" UniqueName="Transaction" Header="Transaction" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" DataMemberBinding="{Binding Transaction}"/>
+					<telerik:GridViewDataColumn x:Name="SalesViewDescription" UniqueName="Description" Header="Description" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" DataMemberBinding="{Binding Description}"/>
+				</telerik:RadGridView.Columns>
+			</telerik:RadGridView>
+			<TextBlock x:Name="PurchaseSalesViewLabelHeader" Margin="348.85,113,371,0" TextWrapping="Wrap" Foreground="Black" FontSize="14.667" Height="21" VerticalAlignment="Top" TextAlignment="Center">
+				<TextBlock.OpacityMask>
+					<LinearGradientBrush EndPoint="0.994,0.49" StartPoint="-0.011,0.501">
+						<GradientStop Color="Black" Offset="0.5"/>
+						<GradientStop Offset="1"/>
+						<GradientStop Color="#00000000"/>
+					</LinearGradientBrush>
+				</TextBlock.OpacityMask>
+				<TextBlock.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FF6C6C6C" Offset="0"/>
+						<GradientStop Color="DimGray" Offset="1"/>
+						<GradientStop Color="#FFCCCCCC" Offset="0.5"/>
+					</LinearGradientBrush>
+				</TextBlock.Background>
+			</TextBlock>
+		</Grid>
+		<!--Panel Edit Bew Panel-->
+		<Grid x:Name="PanelEditNewProduct" Margin="148.335,228.349,160.665,122.602" RenderTransformOrigin="0.635,0.362" HorizontalAlignment="Center" VerticalAlignment="Center" Height="427.453" Width="691.31" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+			<Grid x:Name="EditNewProductPanelProductID" Height="43.75" Margin="331,92.376,112,0" VerticalAlignment="Top">
+				<dxe:TextEdit x:Name="EditNewProductTextBoxProductID" Margin="89,6,8,0" Height="24" VerticalAlignment="Top" FontSize="14.667" KeyDown="EditNewProductTextBoxProductIDKeyDown"/>
+				<TextBlock Height="19.96" Margin="8,8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14.667" Text="Product ID :" Foreground="#FFE2E2E2" HorizontalAlignment="Left" Width="77"/>
+			</Grid>
+			<telerik:RadButton x:Name="EditNewProductButtonSearch" Margin="342.917,140.126,254.276,0" VerticalAlignment="Top" Click="EditNewProductSearchClick" Height="24">
+				<telerik:RadButton.Content>
+					<StackPanel Orientation="Horizontal">
+						<Image Source="ButtonImages/Search.png" Margin="0,-1"/>
+						<TextBlock Text="Search" Margin="5,-1,0,0" FontSize="13.333"/>
+					</StackPanel>
+				</telerik:RadButton.Content>
+			</telerik:RadButton>
+			<Fluent:RadioButton x:Name="EditNewProductRadioButtonByProductInfo" Content="RadioButton" HorizontalAlignment="Left" Margin="179.57,27.876,0,0" VerticalAlignment="Top" Width="130.68" Checked="EditNewProductRadioButtonByProductInfoChecked" Header="By Product Info" Foreground="#FFE2E2E2" FontSize="14.667" Unchecked="EditNewProductRadioButtonByProductInfoUnChecked"/>
+			<Fluent:RadioButton x:Name="EditNewProductRadioButtonByProductID" Content="RadioButton" Margin="331,27.876,229.63,0" VerticalAlignment="Top" Checked="EditNewProductRadioButtonByProductIDChecked" Header="By Product ID" Foreground="#FFE2E2E2" FontSize="14.667" Unchecked="EditNewProductRadioButtonByProductIDUnchecked"/>
+			<PetunicaControls:ProductInfo x:Name="EditNewProductProductInfo" HorizontalAlignment="Left" Margin="43.75,75.586,0,0" VerticalAlignment="Top" d:LayoutOverrides="Width, Height"/>
+			<Grid Height="27.767" Margin="230.061,175.013,270.109,0" VerticalAlignment="Top">
+				<Fluent:RadioButton x:Name="EditNewProductRadioButtonUpdate" Content="RadioButton" Margin="0,2.694,5.903,3.073" FontSize="14.667" Foreground="#FFE9E9E9" Header="Update" HorizontalAlignment="Right" Width="78.667" d:LayoutOverrides="Height" Checked="EditNewProductRadioButtonUpdateChecked" Unchecked="EditNewProductRadioButtonUpdateUnchecked"/>
+				<Fluent:RadioButton x:Name="EditNewProductRadioButtonDelete" Content="RadioButton" HorizontalAlignment="Left" Margin="16.236,2.694,0,3.073" Width="72.667" FontSize="14.667" Foreground="#FFE9E9E9" Header="Delete" d:LayoutOverrides="Height" Checked="EditNewProductRadioButtonDeleteChecked" Unchecked="EditNewProductRadioButtonDeleteUnchecked"/>
+			</Grid>
+			<GroupBox x:Name="EditNewProductGroupBoxDelete" Header="Delete" HorizontalAlignment="Left" Margin="43.75,209.657,0,29.796" Width="245" FontSize="14.667" Foreground="#FFE7E7E7">
+				<Grid Margin="0,0,-2.5,3.03">
+					<telerik:RadButton x:Name="EditNewProductButtonDelete" Margin="83.82,0,70.456,-0.004" VerticalAlignment="Bottom" Click="EditNewProductButtonDeleteClick" Height="24">
+						<telerik:RadButton.Content>
+							<StackPanel Orientation="Horizontal">
+								<Image Source="ButtonImages/close.png"/>
+								<TextBlock Text="Delete" Margin="7,-2,0,0" FontSize="13.333" Height="15.333"/>
+							</StackPanel>
+						</telerik:RadButton.Content>
+					</telerik:RadButton>
+					<Fluent:RadioButton x:Name="EditNewProductRdioButtonDeleteByProductInfo" Content="By Product Info" Margin="36.737,16.473,38.763,0" Foreground="#FFEFEFEF" FontSize="14.667" Header="By Product Info" Checked="EditNewProductRdioButtonDeleteByProductInfoChecked" VerticalAlignment="Top"/>
+					<Fluent:RadioButton x:Name="EditNewProductRdioButtonDeleteByCompanyName" Content="RadioButton" Margin="36.737,43.835,38.763,0" Foreground="#FFEFEFEF" FontSize="14.667" VerticalAlignment="Top" Header="By Company Name" Checked="EditNewProductRdioButtonDeleteByCompanyNameChecked"/>
+					<Fluent:RadioButton x:Name="EditNewProductRdioButtonDeleteByProductName" Content="RadioButton" Margin="36.737,70.66,38.763,63.624" Foreground="#FFEFEFEF" FontSize="14.667" Header="By Product Name" Checked="EditNewProductRdioButtonDeleteByProductNameChecked"/>
+					<Fluent:RadioButton x:Name="EditNewProductRdioButtonDeleteByModelNumber" Content="RadioButton" Margin="36.737,0,38.763,36.96" Foreground="#FFEFEFEF" FontSize="14.667" VerticalAlignment="Bottom" Header="By Model Number" Checked="EditNewProductRdioButtonDeleteByModelNumberChecked"/>
+				</Grid>
+			</GroupBox>
+			<GroupBox x:Name="EditNewProductgroupBoxUpdate" Header="Edit" Margin="0,209.657,8,8" HorizontalAlignment="Right" Width="306" FontSize="14.667" Foreground="#FFE5E5E5">
+				<Grid Margin="2.94,-3.99,12,-2">
+					<telerik:RadButton x:Name="EditNewProductButtonUpdate" Margin="0,0,38.334,8.999" VerticalAlignment="Bottom" Click="EditNewProductUpdateClick" HorizontalAlignment="Right" Width="86.224" Height="24">
+						<telerik:RadButton.Content>
+							<StackPanel Orientation="Horizontal">
+								<Image Source="ButtonImages/Update.png"/>
+								<TextBlock Text="Update" Margin="5,-1,0,0" FontSize="13.333"/>
+							</StackPanel>
+						</telerik:RadButton.Content>
+					</telerik:RadButton>
+					<TextBlock Margin="0,0,0,160.623" TextWrapping="Wrap" FontSize="14.667" Text="Company Name :" Foreground="#FFE2E2E2" Height="19.506" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="114.667"/>
+					<dxe:TextEdit x:Name="EditNewProductTextBoxCompanyName" Margin="127.75,8,0,0" Height="25" VerticalAlignment="Top" FontSize="14.667" d:LayoutOverrides="VerticalAlignment" Foreground="Black"/>
+					<dxe:TextEdit x:Name="EditNewProductTextBoxProductName" Margin="127.75,39.031,0,0" Height="25" VerticalAlignment="Top" FontSize="14.667" d:LayoutOverrides="VerticalAlignment" Foreground="Black"/>
+					<dxe:TextEdit x:Name="EditNewProductTextBoxModelNumber" Margin="127.75,69.234,0,0" Height="25" VerticalAlignment="Top" FontSize="14.667" KeyDown="EditNewProductTextBoxModelNumberKeyDown" Foreground="Black" d:LayoutOverrides="VerticalAlignment"/>
+					<TextBlock Margin="13.334,35.774,0,0" TextWrapping="Wrap" FontSize="14.667" Text="Product Name :" Foreground="#FFE2E2E2" Height="19.96" VerticalAlignment="Top" HorizontalAlignment="Left" Width="101.333"/>
+					<TextBlock Margin="7.667,68.521,0,0" TextWrapping="Wrap" FontSize="14.667" Text="Model Number :" Foreground="#FFE2E2E2" HorizontalAlignment="Left" Width="107" Height="18.565" VerticalAlignment="Top"/>
+					<TextBlock Margin="35.574,0,0,40.778" TextWrapping="Wrap" FontSize="14.667" Text="Product ID :" Foreground="#FFE2E2E2" Height="19.96" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="79.093"/>
+					<TextBlock x:Name="EditNewProductLabelProductID" Margin="129.75,0,0,40.778" TextWrapping="Wrap" FontSize="14.667" Foreground="#FFE2E2E2" Height="19.96" VerticalAlignment="Bottom"/>
+					<dxe:TextEdit x:Name="EditNewProductTextBoxDescription" Margin="127.75,98.874,0,0" Height="25" VerticalAlignment="Top" FontSize="14.667" KeyDown="EditNewProductTextBoxModelNumberKeyDown" Foreground="Black"/>
+					<TextBlock Margin="32.334,0,0,71.84" TextWrapping="Wrap" FontSize="14.667" Text="Description :" Foreground="#FFE2E2E2" HorizontalAlignment="Left" Width="82.333" Height="18.565" VerticalAlignment="Bottom"/>
+					<telerik:RadButton x:Name="EditNewProductButtonClear" Margin="60.25,0,0,8.999" VerticalAlignment="Bottom" Click="EditNewProductClearClick" Height="24" HorizontalAlignment="Left" Width="77.558">
+						<StackPanel Orientation="Horizontal">
+							<Image Source="ButtonImages/Clear.png" Margin="0,-2,0,-1"/>
+							<TextBlock Text="Clear" Margin="6,0,0,0" FontSize="13.333"/>
+						</StackPanel>
+					</telerik:RadButton>
+				</Grid>
+			</GroupBox>
+		</Grid>
+		<!--Panel New Party-->
+		<Grid x:Name="PanelNewParty" Margin="335.111,307.722,355.069,205.401" RenderTransformOrigin="0.523,0.423" VerticalAlignment="Center" HorizontalAlignment="Center" Height="305.192" Width="299.152" d:IsHidden="True" Visibility="Hidden" d:IsLocked="True">
+			<TextBlock HorizontalAlignment="Left" Margin="58.679,36.497,0,0" TextWrapping="Wrap" Text="User ID :" Width="55.5" Foreground="#FFD8D8D8" FontSize="14.667" Height="17" VerticalAlignment="Top"/>
+			<dxe:TextEdit x:Name="NewParyTextBoxUserID" Margin="134.82,31.497,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="150" FontSize="14.667"/>
+			<telerik:RadButton x:Name="NewParyButtonCreate" HorizontalAlignment="Left" Margin="131.207,258.916,0,0" VerticalAlignment="Top" Width="75.64" Click="NewPartyCreateClick" Height="24">
+				<telerik:RadButton.Content>
+					<StackPanel Orientation="Horizontal">
+						<Image Source="ButtonImages/Add.png" Margin="0,-2,0,0"/>
+						<TextBlock Text="Insert" FontSize="13.333" Margin="5,-1,0,0"/>
+					</StackPanel>
+				</telerik:RadButton.Content>
+			</telerik:RadButton>
+			<dxe:ComboBoxEdit x:Name="NewParyComboBoxAccountType" Margin="134.82,70,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="150" FontSize="14.667" IsTextEditable="False">
+				<dxe:ComboBoxEditItem Content="Employ"/>
+				<dxe:ComboBoxEditItem Content="Debtor"/>
+				<dxe:ComboBoxEditItem Content="Creditor"/>
+			</dxe:ComboBoxEdit>
+			<dxe:TextEdit x:Name="NewPartyTextBoxPhoneNumber" Margin="134.82,0,0,99.458" HorizontalAlignment="Left" Width="150" FontSize="14.667" Height="26" VerticalAlignment="Bottom"/>
+			<dxe:TextEdit x:Name="NewPartyTextBoxContractPerson" Margin="134.82,107.5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="150" d:LayoutOverrides="VerticalAlignment" FontSize="14.667"/>
+			<dxe:TextEdit x:Name="NewPartyTextBoxEmail" Margin="134.82,144.5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="150" FontSize="14.667"/>
+			<dxe:TextEdit x:Name="NewpartyTextBoxAddress" Margin="134.82,0,0,62.539" HorizontalAlignment="Left" Width="150" VerticalAlignment="Bottom" FontSize="14.667" Height="26" VerticalScrollBarVisibility="Auto" KeyDown="NewpartyTextBoxAddressKeyDown"/>
+			<TextBlock HorizontalAlignment="Left" Margin="21,70,0,0" TextWrapping="Wrap" Text="Account Type :" Width="96.5" Foreground="#FFD8D8D8" FontSize="14.667" Height="20" VerticalAlignment="Top"/>
+			<TextBlock HorizontalAlignment="Left" Margin="6,108.5,0,0" TextWrapping="Wrap" Text="Contract Person :" Width="111.5" Foreground="#FFD8D8D8" FontSize="14.667" Height="19" VerticalAlignment="Top" d:LayoutOverrides="VerticalAlignment"/>
+			<TextBlock HorizontalAlignment="Left" Margin="10,179.734,0,0" TextWrapping="Wrap" Text="Phone Number :" Width="107.5" Foreground="#FFD8D8D8" FontSize="14.667" Height="18" VerticalAlignment="Top"/>
+			<TextBlock HorizontalAlignment="Left" Margin="69,144.5,0,142.192" TextWrapping="Wrap" Text="E-Mail :" Width="48.5" Foreground="#FFD8D8D8" FontSize="14.667" Height="18.5"/>
+			<TextBlock HorizontalAlignment="Left" Margin="53.679,0,0,69.536" TextWrapping="Wrap" Text="Address :" Width="60.5" Foreground="#FFD8D8D8" FontSize="14.667" Height="17.003" VerticalAlignment="Bottom"/>
+			<telerik:RadButton x:Name="NewParyButtonClear" HorizontalAlignment="Left" Margin="210.847,258.916,0,0" VerticalAlignment="Top" Width="73.973" Click="NewParyButtonClearClick" Height="24">
+				<telerik:RadButton.Content>
+					<StackPanel Orientation="Horizontal">
+						<Image Source="ButtonImages/New.png" Margin="0,-5,0,0"/>
+						<TextBlock Text="New" Margin="6,-1,0,0" FontSize="13.333"/>
+					</StackPanel>
+				</telerik:RadButton.Content>
+			</telerik:RadButton>
+		</Grid>
+		<!--Panel Edit Party Info-->
+		<Grid x:Name="PanelEditPartyInfo" Margin="344.284,280.997,229.875,160.9" RenderTransformOrigin="0.749,0.457" HorizontalAlignment="Center" VerticalAlignment="Center" Width="454.841" Height="339.727" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+			<dxe:ComboBoxEdit x:Name="EditPartyInfoComboBoxUserID" Margin="73,8,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="150" FontSize="14.667" IsTextEditable="False" SelectedIndexChanged="EditPartyInfoUserIDIndexChaged"/>
+			<dxe:TextEdit x:Name="EditParyInfoTextBoxPhoneNumber" Margin="132.821,0,168.179,144.224" FontSize="14.667" VerticalAlignment="Bottom" KeyDown="EditParyInfoTextBoxPhoneNumberKeyDown"/>
+			<telerik:RadButton x:Name="EditPartyInfoButtonUpdate" Margin="210.026,0,164.179,23.764" VerticalAlignment="Bottom" Click="EditPartyInfoUpdateClickk" Height="24">
+				<telerik:RadButton.Content>
+					<StackPanel Orientation="Horizontal">
+						<Image Source="ButtonImages/Update.png" Margin="0,-1"/>
+						<TextBlock Text="Update" Margin="4,-2,0,0" FontSize="13.333"/>
+					</StackPanel>
+				</telerik:RadButton.Content>
+			</telerik:RadButton>
+			<TextBlock HorizontalAlignment="Left" Height="19" Margin="13,87.376,0,0" TextWrapping="Wrap" Text="Contract Person :" VerticalAlignment="Top" Width="111" Foreground="#FFDADADA" FontSize="14.667"/>
+			<dxe:TextEdit x:Name="EditPartyInfoTextBoxEmail" Margin="132.821,0,168.179,107.264" VerticalAlignment="Bottom" FontSize="14.667"/>
+			<dxe:TextEdit x:Name="EditPartyInfoTextBoxControctPerson" Margin="132.821,85.376,168.179,0" VerticalAlignment="Top" FontSize="14.667"/>
+			<dxe:TextEdit x:Name="EditPartyInfoTextBoxAddress" Margin="132.821,0,168.179,71.264" VerticalAlignment="Bottom" FontSize="14.667" KeyDown="EditPartyInfoTextBoxAddressKeyDown"/>
+			<dxe:ComboBoxEdit x:Name="EditPartyInfoComboBoxAccountType" Margin="132.821,129.376,168.179,0" VerticalAlignment="Top" FontSize="14.667" IsTextEditable="False">
+				<dxe:ComboBoxEditItem Content="Creditor"/>
+				<dxe:ComboBoxEditItem Content="Debtor"/>
+				<dxe:ComboBoxEditItem Content="Employ"/>
+			</dxe:ComboBoxEdit>
+			<TextBlock HorizontalAlignment="Left" Height="19" Margin="8,8,0,0" TextWrapping="Wrap" Text="User ID :" VerticalAlignment="Top" Width="56" Foreground="#FFDADADA" FontSize="14.667"/>
+			<TextBlock HorizontalAlignment="Left" Height="19" Margin="62,0,0,77.264" TextWrapping="Wrap" Text="Address :" VerticalAlignment="Bottom" Width="65" Foreground="#FFDADADA" FontSize="14.667"/>
+			<TextBlock HorizontalAlignment="Left" Height="19" Margin="28,129.376,0,0" TextWrapping="Wrap" Text="Account Type :" VerticalAlignment="Top" Width="96" Foreground="#FFDADADA" FontSize="14.667"/>
+			<TextBlock HorizontalAlignment="Left" Margin="17,0,0,151.224" TextWrapping="Wrap" Text="Phone Number :" Width="107" Foreground="#FFDADADA" FontSize="14.667" Height="19.003" VerticalAlignment="Bottom"/>
+			<TextBlock HorizontalAlignment="Left" Height="19" Margin="75.5,0,0,114.264" TextWrapping="Wrap" Text="E-Mail :" VerticalAlignment="Bottom" Width="52" Foreground="#FFDADADA" FontSize="14.667"/>
+			<telerik:RadButton x:Name="EditPartyInfoButtonDelete" Margin="132.821,0,0,23.764" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="73.205" Click="EditPartyInfoButtonDeleteClick" Height="24">
+				<telerik:RadButton.Content>
+					<StackPanel Orientation="Horizontal">
+						<Image Source="Buttonimages/close.png"/>
+						<TextBlock Text="Delete" Margin="5,-4,0,0" Height="15.167" FontSize="13.333"/>
+					</StackPanel>
+				</telerik:RadButton.Content>
+			</telerik:RadButton>
+		</Grid>
+		<!--Panel Stock info-->
+		<Grid x:Name="PanelStockInfo" Margin="8,144,8,8" d:IsHidden="True" Visibility="Hidden" d:IsLocked="True">
+			<ScrollViewer VerticalScrollBarVisibility="Auto" Margin="8,103.685,-8,8">
+				<WrapPanel x:Name="StockinfoWapPanel" Margin="0,8.7,0,0" Height="508.816"/>
+			</ScrollViewer>
+			<Grid Margin="8,4.185,26.5,0" Height="95.5" VerticalAlignment="Top" RenderTransformOrigin="0.498,0.892" Width="934">
+				<TextBlock Height="16.816" Margin="318.834,3,0,0" TextWrapping="Wrap" Text="Product ID :" VerticalAlignment="Top" FontSize="14.667" Foreground="White" HorizontalAlignment="Left" Width="76.5"/>
+				<Fluent:RadioButton x:Name="StockInfoRadioButtonByCompanyName" Content="RadioButton" HorizontalAlignment="Right" Margin="0,25,224.8,0" Width="152.7" Foreground="White" FontSize="14.667" Header="By Company Name" VerticalAlignment="Top" Checked="StockInfoRadioButtonByCompanyNameChecked" d:LayoutOverrides="VerticalAlignment" Unchecked="StockInfoRadioButtonByCompanyNameUnChecked"/>
+				<Fluent:RadioButton x:Name="StockInfoRadioButtonByProductInfo" Content="" HorizontalAlignment="Right" Margin="0,1,249.5,0" VerticalAlignment="Top" Width="128" FontSize="14.667" Foreground="White" Header="By Product Info" Checked="StockInfoRadioButtonProductInfoChecked" Unchecked="StockInfoRadioButtonByProductInfoUnchecked"/>
+				<dxe:TextEdit x:Name="StockInfotextBoxProductID" Margin="402.334,0,393.166,0" VerticalAlignment="Top" FontSize="14.667" KeyDown="StockInfotextBoxProductIDKeyDown"/>
+				<TextBlock Margin="334.834,35,0,0" TextWrapping="Wrap" Text="Amount :" FontSize="14.667" Foreground="White" HorizontalAlignment="Left" Width="60.5" Height="15.816" VerticalAlignment="Top"/>
+				<TextBlock Margin="358.834,65.541,0,0" TextWrapping="Wrap" Text="Rate :" FontSize="14.667" Foreground="White" HorizontalAlignment="Left" Width="36.5" Height="16.816" VerticalAlignment="Top"/>
+				<Fluent:RadioButton x:Name="StockInfoRadioButtonByProductName" Content="RadioButton" HorizontalAlignment="Right" Margin="0,49.041,236.2,0" Width="141.3" Foreground="White" FontSize="14.667" Header="By Product Name" VerticalAlignment="Top" Checked="StockInfoRadioButtonByProductNameCheeked" Unchecked="StockInfoRadioButtonByProductNameUnChecked"/>
+				<Fluent:RadioButton x:Name="StockInfoRadioButtonByModelNumber" Content="RadioButton" HorizontalAlignment="Right" Margin="0,73.541,230.3,0" Width="147.2" Foreground="White" Header="By Model Number" FontSize="14.667" Checked="StockInfoRadioButtonByModelNumberChecked" Unchecked="StockInfoRadioButtonByModelNumberUnChecked"/>
+				<Fluent:RadioButton x:Name="StockInfoRadioButtonByProductID" Content="RadioButton" HorizontalAlignment="Right" Margin="0,4,113.333,0" VerticalAlignment="Top" Width="116.3" Foreground="White" FontSize="14.667" Header="By Product ID" Checked="StockInfoRadioButtonByProductIDChecked" Unchecked="StockInfoRadioButtonByProductIDUnChecked"/>
+				<Fluent:RadioButton x:Name="StockInfoRadioButtonByAmount" Content="RadioButton" HorizontalAlignment="Right" Margin="0,26.5,129.933,0" Width="99.7" Foreground="White" Header="By Amount" FontSize="14.667" VerticalAlignment="Top" Checked="StockInfoRadioButtonByAmountChecked" Unchecked="StockInfoRadioButtonByAmountUnchecked"/>
+				<Fluent:RadioButton x:Name="StockInfoRadioButtonByRate" Content="RadioButton" HorizontalAlignment="Right" Margin="0,47.041,152.933,0" Width="76.7" FontSize="14.667" Foreground="White" Header="By Rate" VerticalAlignment="Top" Checked="StockInfoRadioButtonByRateChecked" Unchecked="StockInfoRadioButtonByRateUnchecked"/>
+				<Fluent:RadioButton x:Name="StockInfoRadioButtonAll" Content="RadioButton" HorizontalAlignment="Right" Margin="0,70.041,185.933,3" Width="43.7" FontSize="14.667" Foreground="White" Header="All" Checked="StockInfoRadioButtonAllChecked"/>
+				<telerik:RadButton x:Name="StockinfoButtonSearch" HorizontalAlignment="Right" Margin="0,0,-1,3" VerticalAlignment="Bottom" FontSize="14.667" Width="96.433" d:LayoutOverrides="VerticalAlignment" Click="StockInfoButtonSearchClick" Height="24">
+					<telerik:RadButton.Content>
+						<StackPanel Orientation="Horizontal">
+							<Image Source="ButtonImages/Search.png" Margin="0,-1"/>
+							<TextBlock Text="Search" Margin="5,-2,0,0" FontSize="13.333" Height="18"/>
+						</StackPanel>
+					</telerik:RadButton.Content>
+				</telerik:RadButton>
+				<igEditors:XamNumericEditor x:Name="StockInfoTextBoxAmount" Margin="402.334,31,392.666,37.373" FontSize="14.667" BorderBrush="#FF5475B1" KeyDown="StockInfoTextBoxAmountKeyDown">
+					<igEditors:XamNumericEditor.Background>
+						<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+							<GradientStop Color="#FFDAE0EC" Offset="0"/>
+							<GradientStop Color="#FFFAFAFC" Offset="1"/>
+							<GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+						</LinearGradientBrush>
+					</igEditors:XamNumericEditor.Background>
+				</igEditors:XamNumericEditor>
+				<igEditors:XamNumericEditor x:Name="StockInfoTextBoxRate" Margin="402.334,0,392.666,3.832" FontSize="14.667" Height="27.127" VerticalAlignment="Bottom" BorderBrush="#FF5475B1" KeyDown="StockInfoTextBoxRateKeyDown">
+					<igEditors:XamNumericEditor.Background>
+						<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+							<GradientStop Color="#FFDAE0EC" Offset="0"/>
+							<GradientStop Color="#FFFAFAFC" Offset="1"/>
+							<GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+						</LinearGradientBrush>
+					</igEditors:XamNumericEditor.Background>
+				</igEditors:XamNumericEditor>
+				<PetunicaControls:ProductInfo x:Name="StockinfoProductInfo" d:LayoutOverrides="Width" HorizontalAlignment="Left" Margin="23,3.5,0,5.5"/>
+				<dxe:CheckEdit x:Name="StockInfoCheckBoxAll" Margin="0,0,99.433,3" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="87.5" FontSize="14.667" Content="Grouping" Foreground="Gainsboro" Height="20.627"/>
+			</Grid>
+		</Grid>
+		<!--Panel Debtors payment-->
+		<Grid x:Name="PanelDebtorsPayment" Margin="213.885,166.173,292.115,0" Height="207.024" VerticalAlignment="Center" HorizontalAlignment="Center" RenderTransformOrigin="0.519,0.84" Width="480.7" Visibility="Hidden" DataContext="{Binding Source={StaticResource DateTimeDataSource}}" d:IsHidden="True" d:IsLocked="True">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<dxe:ComboBoxEdit x:Name="DebtorsCredtorsPaymentComboBoxName" Margin="132,52,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="150" FontSize="14.667" d:LayoutOverrides="VerticalAlignment" SelectedIndexChanged="DebtorsPaymentComboboxDebtornameIndexChange" IsTextEditable="False"/>
+			<TextBlock HorizontalAlignment="Left" Height="19" Margin="77.7,52,0,0" TextWrapping="Wrap" Text="Name :" VerticalAlignment="Top" Width="49" Foreground="#FFF3F3F3" FontSize="14.667"/>
+			<telerik:RadButton x:Name="DebtorsCredtorsPaymentButtonPayment" Margin="178.39,0,204.207,7.84" VerticalAlignment="Bottom" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Click="DebtorPaymentButtonPamentClick" Height="24">
+				<telerik:RadButton.Content>
+					<StackPanel Orientation="Horizontal">
+						<Image Source="ButtonImages/Payment.png" Margin="0,-2,0,-1"/>
+						<TextBlock Text="Payment" HorizontalAlignment="Center" Margin="6,-1,0,0" FontSize="13.333"/>
+					</StackPanel>
+				</telerik:RadButton.Content>
+			</telerik:RadButton>
+			<TextBlock Height="18" Margin="4.7,146.238,0,0" TextWrapping="Wrap" Text="Payment Amount :" VerticalAlignment="Top" Foreground="#FFF3F3F3" FontSize="14.667" HorizontalAlignment="Left" Width="122"/>
+			<TextBlock HorizontalAlignment="Right" Margin="0,85.436,353.779,0" TextWrapping="Wrap" Text="Amount :" Width="62.7" Foreground="#FFF3F3F3" FontSize="14.667" Height="19.5" VerticalAlignment="Top"/>
+			<TextBlock x:Name="DebtorsCredtorsPaymentLabelAmount" Margin="131,85.436,196.777,0" TextWrapping="Wrap" Foreground="#FFF3F3F3" FontSize="14.667" Height="23" VerticalAlignment="Top"/>
+			<dxe:TextEdit x:Name="DebtorsCredtorsPaymentTextBoxName" Margin="0,52,8.361,0" VerticalAlignment="Top" FontSize="14.667" HorizontalAlignment="Right" Width="149.779" KeyDown="DebtorsCredtorsPaymentTextBoxNameKeyDown"/>
+			<TextBlock Height="18" Margin="0,56,166.402,0" TextWrapping="Wrap" Text="OR" VerticalAlignment="Top" Foreground="#FFF3F3F3" FontSize="14.667" HorizontalAlignment="Right" Width="22" d:LayoutOverrides="VerticalAlignment"/>
+			<telerik:RadButton x:Name="DebtorsCredtorsPaymentButtonSearch" Margin="361.375,0,25.555,98.064" VerticalAlignment="Bottom" Click="DebtorPaymentButtonSearchClick" Height="24">
+				<telerik:RadButton.Content>
+					<StackPanel Orientation="Horizontal">
+						<Image Source="ButtonImages/Search.png" Margin="0,-1"/>
+						<TextBlock Text="Search" FontSize="13.333" Margin="7,-1,0,0"/>
+					</StackPanel>
+				</telerik:RadButton.Content>
+			</telerik:RadButton>
+			<igEditors:XamNumericEditor x:Name="DebtorsCredtorsPaymentNumberBoxPaymentAmount" Margin="132,0,198.479,39.058" BorderBrush="#FF5C84C1" Height="21.728" VerticalAlignment="Bottom" FontSize="14.667" KeyDown="DebtorsCredtorsPaymentNumberBoxPaymentAmountKeyDown">
+				<igEditors:XamNumericEditor.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FFD6DDEA"/>
+						<GradientStop Color="#FFFCFDFE" Offset="1"/>
+						<GradientStop Color="#FFEFF1F7" Offset="0.5"/>
+					</LinearGradientBrush>
+				</igEditors:XamNumericEditor.Background>
+			</igEditors:XamNumericEditor>
+			<telerik:RadDatePicker x:Name="DebtorsCredtorsPaymentDateAndTimePicker" Margin="132,0,198.479,71.588" FontSize="14.667" BorderBrush="#FF5C84C1" VerticalAlignment="Bottom" SelectedDate="{Binding Today.Today, Mode=OneWay}">
+				<telerik:RadDatePicker.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FFD6DDEA" Offset="0"/>
+						<GradientStop Color="#FFFDFDFE" Offset="1"/>
+						<GradientStop Color="#FFF0F3F7" Offset="0.5"/>
+					</LinearGradientBrush>
+				</telerik:RadDatePicker.Background>
+			</telerik:RadDatePicker>
+			<TextBlock HorizontalAlignment="Right" Margin="0,113.936,350.479,0" TextWrapping="Wrap" Text="Date :" Width="41.7" Foreground="#FFF3F3F3" FontSize="14.667" Height="19.5" VerticalAlignment="Top"/>
+			<TextBlock x:Name="DebtorCredtorsPaymentLabelHeader" Margin="132,17.988,196.777,0" TextWrapping="Wrap" Foreground="Black" FontSize="14.667" Height="21" VerticalAlignment="Top" TextAlignment="Center">
+				<TextBlock.OpacityMask>
+					<LinearGradientBrush EndPoint="0.994,0.49" StartPoint="-0.011,0.501">
+						<GradientStop Color="Black" Offset="0.5"/>
+						<GradientStop Offset="1"/>
+						<GradientStop Color="#00000000"/>
+					</LinearGradientBrush>
+				</TextBlock.OpacityMask>
+				<TextBlock.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FF6C6C6C" Offset="0"/>
+						<GradientStop Color="DimGray" Offset="1"/>
+						<GradientStop Color="#FFCCCCCC" Offset="0.5"/>
+					</LinearGradientBrush>
+				</TextBlock.Background>
+			</TextBlock>
+		</Grid>
+		<!--Panel Debetors Creditors Payment History-->
+		<!--Panel Return Product Sales-->
+		<Grid x:Name="PanelReturnProductSales" Margin="62,183.684,42,51.648" RenderTransformOrigin="0.64,1.064" HorizontalAlignment="Center" VerticalAlignment="Center" Height="562.168" Width="895.168" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<TextBlock Height="20.5" Margin="355.126,47.783,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14.667" Foreground="#FFF3F3F3" HorizontalAlignment="Left" Width="65.254"><Run Text="Quantity :"/><LineBreak/><Run/></TextBlock>
+			<TextBlock x:Name="ReturnProductSalesLabelProductID" Height="18" Margin="434.88,20.783,342.62,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14.667" Foreground="#FFF3F3F3"/>
+			<TextBlock Height="17.5" Margin="341.245,19.983,0,0" TextWrapping="Wrap" Text="Product ID :" VerticalAlignment="Top" FontSize="14.667" Foreground="#FFF3F3F3" HorizontalAlignment="Left" Width="79.135"/>
+			<telerik:RadDatePicker x:Name="ReturnProductSalesDateAndTime" Margin="0,84.516,96.501,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="150.119" FontSize="14.667" DisplayDate="2011-12-01" KeyDown="ReturnProductSalesDateAndTimeKeyDown" DataContext="{Binding Source={StaticResource DateTimeDataSource}}" SelectedDate="{Binding Today.Today, Mode=OneWay}">
+				<telerik:RadDatePicker.BorderBrush>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FF274072" Offset="0"/>
+						<GradientStop Color="#FF5C83C0" Offset="1"/>
+					</LinearGradientBrush>
+				</telerik:RadDatePicker.BorderBrush>
+				<telerik:RadDatePicker.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FFD4DBE9" Offset="0"/>
+						<GradientStop Color="#FFFCFDFE" Offset="1"/>
+						<GradientStop Color="#FFF2F4F8" Offset="0.5"/>
+					</LinearGradientBrush>
+				</telerik:RadDatePicker.Background>
+			</telerik:RadDatePicker>
+			<telerik:RadGridView x:Name="ReturnProductSalesGridViewHistory" Margin="8,154.599,307.941,234.724" ShowGroupPanel="False" Height="172.845" CanUserInsertRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding GridViewLoadProductHistory, ElementName=window}">
+				<telerik:RadGridView.Columns>
+					<telerik:GridViewDataColumn x:Name="returnEntryDate" UniqueName="EntryDate" Header="Date" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" DataMemberBinding="{Binding EntryDate}"/>
+					<telerik:GridViewDataColumn x:Name="returnCompanyName" UniqueName="CompanyName" Header="Company Name" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" DataMemberBinding="{Binding CompanyName}"/>
+					<telerik:GridViewDataColumn x:Name="returnProductName" UniqueName="ProductName" Header="Product Name" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" DataMemberBinding="{Binding ProductName}"/>
+					<telerik:GridViewDataColumn x:Name="returnModelName" UniqueName="ModelName" Header="Model Name" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" DataMemberBinding="{Binding ModelName}"/>
+					<telerik:GridViewDataColumn x:Name="returnQuantity" UniqueName="Quantity" Header="Quantity" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" DataMemberBinding="{Binding Quantity}"/>
+					<telerik:GridViewDataColumn x:Name="returnRate" UniqueName="Rate" Header="Rate" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" DataMemberBinding="{Binding Rate}"/>
+					<telerik:GridViewDataColumn x:Name="returnAmount" UniqueName="Amount" Header="Amount" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" DataMemberBinding="{Binding Amount}"/>
+					<telerik:GridViewDataColumn x:Name="returnInvoiceNumber" UniqueName="InvoiceNumber" Header="Invoice Number" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" DataMemberBinding="{Binding InvoiceNumber}"/>
+					<telerik:GridViewDataColumn x:Name="returnTransaction" UniqueName="Transaction" Header="Transaction" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" DataMemberBinding="{Binding Transaction}"/>
+				</telerik:RadGridView.Columns>	
+			</telerik:RadGridView>
+			<telerik:RadGridView x:Name="ReturnProductSalesGridViewChart" Margin="8,0,415.168,8" Height="202.619" VerticalAlignment="Bottom" ShowGroupPanel="False" CanUserInsertRows="False" AutoGenerateColumns="False" ShowColumnFooters="True" ItemsSource="{Binding GridViewInvoice, ElementName=window}">
+				<telerik:RadGridView.Columns>
+					<telerik:GridViewDataColumn x:Name="returnchartDescription" UniqueName="Description" Header="Description" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" IsReadOnly="True" DataMemberBinding="{Binding Description}"/>
+					<telerik:GridViewDataColumn x:Name="returnChartQuantity" UniqueName="Quantity" Header="Quantity" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" IsReadOnly="True" DataMemberBinding="{Binding Quantity}">
+						<telerik:GridViewColumn.AggregateFunctions>
+                       	 <telerik:SumFunction Caption="Total: " ResultFormatString="{}{0:d}" SourceField="Quantity" />
+                       </telerik:GridViewColumn.AggregateFunctions>
+					</telerik:GridViewDataColumn>
+					<telerik:GridViewDataColumn x:Name="returnChartRate" UniqueName="Rate" Header="Rate" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" IsReadOnly="True" DataMemberBinding="{Binding Rate}"/>
+					<telerik:GridViewDataColumn x:Name="returnCartAmount" UniqueName="Amount" Header="Amount" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" IsReadOnly="True" DataMemberBinding="{Binding Amount}">
+						<telerik:GridViewColumn.AggregateFunctions>
+                       	 <telerik:SumFunction FunctionName="returnProductTotalAmount" Caption="Total: "  SourceField="Amount" />
+                       </telerik:GridViewColumn.AggregateFunctions>
+					</telerik:GridViewDataColumn>
+					<telerik:GridViewColumn>
+                    <telerik:GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <telerik:RadButton Command="telerikGrid:RadGridViewCommands.Delete" CommandParameter="{Binding}">
+                                <telerik:RadButton.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="ButtonImages/Close.png" Height="15" Width="25"/>
+                                    </StackPanel>
+                                </telerik:RadButton.Content>
+                            </telerik:RadButton>
+                        </DataTemplate>
+                    </telerik:GridViewColumn.CellTemplate>
+                </telerik:GridViewColumn>
+				</telerik:RadGridView.Columns>
+			</telerik:RadGridView>
+			<TextBlock x:Name="ReturnProductSalesLabelQuantity" Height="22.233" Margin="434.88,48.783,342.62,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14.667" Foreground="#FFF3F3F3"/>
+			<TextBlock Margin="0,84.283,251.411,0" TextWrapping="Wrap" Text="Date :" FontSize="14.667" Foreground="#FFF3F3F3" Height="16.5" VerticalAlignment="Top" HorizontalAlignment="Right" Width="38.5"/>
+			<TextBlock Margin="359.126,74.855,0,0" TextWrapping="Wrap" Text="Amount :" FontSize="14.667" Foreground="#FFF3F3F3" Height="17.5" VerticalAlignment="Top" HorizontalAlignment="Left" Width="62.254"/>
+			<TextBlock x:Name="ReturnProductSalesLabelAmount" Margin="434.88,76.355,342.62,0" TextWrapping="Wrap" FontSize="14.667" Foreground="#FFF3F3F3" Height="18" VerticalAlignment="Top"/>
+			<telerik:RadButton x:Name="ReturnProductSalesButtonSave" HorizontalAlignment="Right" Margin="0,0,126.944,21.67" VerticalAlignment="Bottom" Width="77.17" Click="ReturnProductSalesButtonSaveClick" Height="24">
+				<telerik:RadButton.Content>
+					<StackPanel Orientation="Horizontal">
+						<Image Source="ButtonImages/Save.png" Margin="0,-1"/>
+						<TextBlock Text="Save" FontSize="13.333" Margin="6,-1,0,0"/>
+					</StackPanel>
+				</telerik:RadButton.Content>
+				
+			</telerik:RadButton>
+			<telerik:RadButton x:Name="ReturnProductSalesButtonSearch" HorizontalAlignment="Right" Margin="0,120.855,155.378,0" VerticalAlignment="Top" Width="92.033" Click="ReturnProductSalesButtonSearchClick" Height="24">
+				<telerik:RadButton.Content>
+					<StackPanel Orientation="Horizontal">
+						<Image Source="ButtonImages/Search.png" Margin="0,-2,0,-1"/>
+						<TextBlock Text="Search" FontSize="13.333" Margin="3,-1,0,0"/>
+					</StackPanel>
+				</telerik:RadButton.Content>
+			</telerik:RadButton>
+			<telerik:RadButton x:Name="ReturnProductSalesButtonClear" Margin="0,0,43.825,21.67" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="72.288" Click="ReturnProductSalesButtonClearClick" Height="24">
+				<telerik:RadButton.Content>
+					<StackPanel Orientation="Horizontal">
+						<Image Source="ButtonImages/New.png" Margin="0,-4,0,-2"/>
+						<TextBlock Text="New" FontSize="13.333" Margin="5,-1,0,0"/>
+					</StackPanel>
+				</telerik:RadButton.Content>
+			</telerik:RadButton>
+			<TextBlock Margin="8,0,0,214.619" TextWrapping="Wrap" Text="Chart :" FontSize="14.667" Foreground="#FFF3F3F3" Height="17.5" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="42.8"/>
+			<TextBlock Margin="8,130.099,0,0" TextWrapping="Wrap" Text="History :" FontSize="14.667" Foreground="#FFF3F3F3" Height="20.5" VerticalAlignment="Top" HorizontalAlignment="Left" Width="55.833"/>
+			<telerik:RadButton x:Name="ReturnProductSalesButtonAdd" HorizontalAlignment="Right" Margin="0,0,81.315,215" VerticalAlignment="Bottom" Width="76.843" Click="ReturnProductSalesButtonAddClick" Height="24">
+				<telerik:RadButton.Content>
+					<StackPanel Orientation="Horizontal">
+						<Image Source="ButtonImages/Add.png" Margin="0,-1"/>
+						<TextBlock Text="Add" FontSize="13.333" Margin="8,-1,0,0"/>
+					</StackPanel>
+				</telerik:RadButton.Content>
+			</telerik:RadButton>
+			<Fluent:RadioButton x:Name="ReturnProductSalesRadioButtonCash" Content="RadioButton" HorizontalAlignment="Right" Height="20" Margin="0,0,251.411,138.976" VerticalAlignment="Bottom" Width="61.2" Header="Cash" Foreground="#FFE5E5E5" FontSize="14.667"/>
+			<Fluent:RadioButton x:Name="ReturnProductSalesRadioButtonCreditOrDebit" Content="RadioButton" Height="20" Margin="0,0,161.634,138.976" VerticalAlignment="Bottom" Header="Credit" Foreground="#FFE5E5E5" FontSize="14.667" Checked="ReturnProductSalesRadioButtonCreditOrDebitChecked" HorizontalAlignment="Right" Width="84.986" Unchecked="ReturnProductSalesRadioButtonCreditOrDebitUnChecked"/>
+			<Grid x:Name="ReturnProductSalesGridCreditOrDebit" Height="87.146" Margin="0,0,48.492,43.63" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="281.911" Visibility="Hidden" d:IsHidden="True">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="0*"/>
+					<ColumnDefinition/>
+				</Grid.ColumnDefinitions>
+				<dxe:ComboBoxEdit x:Name="ReturnProductSalesComboBoxName" Margin="123.532,0,8,0" IsTextEditable="False" FontSize="14.667" Height="23.55" VerticalAlignment="Top" SelectedIndexChanged="ReturnProductSalesComboBoxNameSelectIndexChange" Grid.Column="1"/>
+				<TextBlock TextWrapping="Wrap" Text="Name :" FontSize="14.667" Foreground="#FFF3F3F3" Height="18.05" VerticalAlignment="Top" HorizontalAlignment="Left" Width="46.5" Margin="75.765,0.5,0,0" Grid.Column="1"/>
+				<igEditors:XamNumericEditor x:Name="ReturnProductSalesNumberBoxPaymentAmountCreditOrDebit" HorizontalAlignment="Right" Margin="0,31.639,8,32.507" Width="150.158" FontSize="14.667" BorderBrush="#FF5C84C1" Height="23" KeyDown="ReturnProductSalesNumberBoxPaymentAmountCreditOrDebitKeyDown" TextChanged="ReturnProductSalesNumberBoxPaymentAmountCreditOrDebitTextChanged" Grid.Column="1">
+					<igEditors:XamNumericEditor.Background>
+						<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+							<GradientStop Color="#FFD2DAE9" Offset="0"/>
+							<GradientStop Color="#FFFDFDFE" Offset="1"/>
+							<GradientStop Color="#FFF0F2F7" Offset="0.5"/>
+						</LinearGradientBrush>
+					</igEditors:XamNumericEditor.Background>
+				</igEditors:XamNumericEditor>
+				<TextBlock TextWrapping="Wrap" Text="Payment Amount :" FontSize="14.667" Foreground="#FFF3F3F3" Margin="0,31.639,0,32.507" Height="23" Grid.Column="1" HorizontalAlignment="Left" Width="122.265"/>
+				<TextBlock x:Name="ReturnProductSalesLabelCreditAmount" TextWrapping="Wrap" FontSize="14.667" Foreground="#FFF3F3F3" Margin="126.265,0,8,4.757" Height="23" VerticalAlignment="Bottom" d:LayoutOverrides="Height" Grid.Column="1"/>
+				<TextBlock TextWrapping="Wrap" Text="Credit Amount :" FontSize="14.667" Foreground="#FFF3F3F3" Margin="0,0,0,4.757" Height="23" VerticalAlignment="Bottom" d:LayoutOverrides="Height" Grid.Column="1" HorizontalAlignment="Left" Width="122.265"/>
+			</Grid>
+			<TextBlock Margin="383.126,98.855,0,0" TextWrapping="Wrap" Text="Rate :" FontSize="14.667" Foreground="#FFF3F3F3" Height="17.5" VerticalAlignment="Top" HorizontalAlignment="Left" Width="37.254"/>
+			<TextBlock x:Name="ReturnProductSalesLabelRate" Margin="434.88,98.855,342.62,0" TextWrapping="Wrap" FontSize="14.667" Foreground="#FFF3F3F3" Height="17.5" VerticalAlignment="Top"/>
+			<TextBlock Margin="0,0,168.611,256.095" TextWrapping="Wrap" Text="Return Quantity :" FontSize="14.667" Foreground="#FFF3F3F3" HorizontalAlignment="Right" Width="110.8" Height="20.667" VerticalAlignment="Bottom"/>
+			<Grid HorizontalAlignment="Right" Height="23.106" Margin="0,48.783,149.878,0" VerticalAlignment="Top" Width="141.494">
+				<Fluent:RadioButton x:Name="ReturnProductSalesRadioButtonbyAll" Content="RadioButton" HorizontalAlignment="Left" Margin="-1,1,0,2.106" Width="51.208" Header="All" Foreground="#FFE5E5E5" FontSize="14.667" Checked="ReturnProductSalesRadioButtonbyAllChecked"/>
+				<Fluent:RadioButton x:Name="ReturnProductSalesRadioButtonByDate" Content="RadioButton" Margin="0,-1,5.495,0.106" Header="By Date" FontSize="14.667" Foreground="#FFF3F3F3" Checked="ReturnProductSalesRadioButtonByDateChecked" HorizontalAlignment="Right" Width="81"/>
+			</Grid>
+			<PetunicaControls:ProductInfo x:Name="ReturnProductSalesProductInfo" Margin="51.954,20.783,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" ModelNumberIndexChanged="ReturnProductSalesProductInfoModelNumberIndexChange"/>
+			<GroupBox Header="Product Information" Margin="0,148.242,8,0" HorizontalAlignment="Right" Width="292.941" FontSize="14.667" Foreground="#FFE9E9E9" Height="130.322" VerticalAlignment="Top">
+				<Grid Margin="2.399,0.636,51.592,1.225">
+					<TextBlock Margin="8,7,0,0" TextWrapping="Wrap" Text="Invoice Number :" FontSize="14.667" Foreground="#FFF3F3F3" HorizontalAlignment="Left" Width="110.5" Height="18.395" VerticalAlignment="Top"/>
+					<TextBlock x:Name="ReturnProductSalesLabelInvoiceNumber" Margin="122.5,8,0,0" TextWrapping="Wrap" FontSize="14.667" Foreground="#FFF3F3F3" Height="20.5" VerticalAlignment="Top" HorizontalAlignment="Left" Width="107.45" Text="{Binding SelectedItem.InvoiceNumber, ElementName=ReturnProductSalesGridViewHistory}"/>
+					<TextBlock Margin="55,29.395,0,0" TextWrapping="Wrap" Text="Quantity :&#x9;" FontSize="14.667" Foreground="#FFF3F3F3" HorizontalAlignment="Left" Width="63.5" Height="20.5" VerticalAlignment="Top"/>
+					<TextBlock x:Name="ReturnProductSalesLabelQuantityHistory" Margin="122.5,31.395,0,0" TextWrapping="Wrap" FontSize="14.667" Foreground="#FFF3F3F3" Height="18.5" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment" Text="{Binding SelectedItem.Quantity, ElementName=ReturnProductSalesGridViewHistory}"/>
+					<TextBlock Margin="82,0,0,31.605" TextWrapping="Wrap" Text="Rate :" FontSize="14.667" Foreground="#FFF3F3F3" HorizontalAlignment="Left" Width="36.5" Height="18.954" VerticalAlignment="Bottom"/>
+					<TextBlock x:Name="ReturnProductSalesLabelRateHistory" Margin="122.5,0,0,31.605" TextWrapping="Wrap" FontSize="14.667" Foreground="#FFF3F3F3" HorizontalAlignment="Left" Width="107.45" Height="18.954" VerticalAlignment="Bottom" Text="{Binding SelectedItem.Rate, ElementName=ReturnProductSalesGridViewHistory}"/>
+					<TextBlock Margin="58,0,0,6.938" TextWrapping="Wrap" Text="Amount :" FontSize="14.667" Foreground="#FFF3F3F3" Height="20.667" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="60.5"/>
+					<TextBlock x:Name="ReturnProductSalesLabelAmountHistory" Margin="122.5,0,0,7.605" TextWrapping="Wrap" FontSize="14.667" Foreground="#FFF3F3F3" Height="20" VerticalAlignment="Bottom" Text="{Binding SelectedItem.Amount, ElementName=ReturnProductSalesGridViewHistory}"/>
+				</Grid>
+			</GroupBox>
+			<telerik:RadNumericUpDown x:Name="ReturnProductSalesNumericReturnQuantity" HorizontalAlignment="Right" Margin="0,0,8,253.262" VerticalAlignment="Bottom" Width="150.158" Height="24" Minimum="0" IsInteger="True" FontSize="14.667" Maximum="{Binding Text, ElementName=ReturnProductSalesLabelQuantity, Converter={StaticResource StringToDuble}}" KeyDown="ReturnProductSalesNumericReturnQuantityKeyDown">
+				<telerik:RadNumericUpDown.BorderBrush>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FF5C84C1" Offset="0"/>
+						<GradientStop Color="#FF5C84C1" Offset="0.992"/>
+					</LinearGradientBrush>
+				</telerik:RadNumericUpDown.BorderBrush>
+				<telerik:RadNumericUpDown.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FFD5DCEA" Offset="0.014"/>
+						<GradientStop Color="#FFFDFDFE" Offset="0.971"/>
+						<GradientStop Color="#FF5C84C1" Offset="0.986"/>
+					</LinearGradientBrush>
+				</telerik:RadNumericUpDown.Background>
+			</telerik:RadNumericUpDown>
+			<TextBlock x:Name="ReturnProductSalesHeader" Margin="0,19.983,140.261,0" TextWrapping="Wrap" Text="Name :" Foreground="Black" FontSize="14.667" Height="21" VerticalAlignment="Top" TextAlignment="Center" HorizontalAlignment="Right" Width="149.65">
+				<TextBlock.OpacityMask>
+					<LinearGradientBrush EndPoint="0.994,0.49" StartPoint="-0.011,0.501">
+						<GradientStop Color="Black" Offset="0.5"/>
+						<GradientStop Offset="1"/>
+						<GradientStop Color="#00000000"/>
+					</LinearGradientBrush>
+				</TextBlock.OpacityMask>
+				<TextBlock.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FF6C6C6C" Offset="0"/>
+						<GradientStop Color="DimGray" Offset="1"/>
+						<GradientStop Color="#FFCCCCCC" Offset="0.5"/>
+					</LinearGradientBrush>
+				</TextBlock.Background>
+			</TextBlock>
+		</Grid>
+		<Grid x:Name="PanelCashReceivePayment" Margin="309.795,371.574,321.319,224.796" RenderTransformOrigin="0.589,0.519" HorizontalAlignment="Center" VerticalAlignment="Center" Width="354" Height="188" DataContext="{Binding Source={StaticResource DateTimeDataSource}}" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+			<igEditors:XamNumericEditor x:Name="CashReceivePaymentNumberBoxAmount" HorizontalAlignment="Right" Margin="0,120.4,64.662,0" VerticalAlignment="Top" Width="150.258" BorderBrush="#FF5C84C1" Height="23" FontSize="14.667" KeyDown="CashReceivePaymentNumberBoxAmountKeyDown">
+				<igEditors:XamNumericEditor.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FFD4DBE9" Offset="0"/>
+						<GradientStop Color="#FFFEFEFE" Offset="1"/>
+						<GradientStop Color="#FFEEF1F6" Offset="0.5"/>
+					</LinearGradientBrush>
+				</igEditors:XamNumericEditor.Background>
+			</igEditors:XamNumericEditor>
+			<TextBlock Height="17" Margin="71.167,0,0,50.229" TextWrapping="Wrap" Text="Amount :" VerticalAlignment="Bottom" FontSize="14.667" Foreground="#FFE9E9E9" HorizontalAlignment="Left" Width="59.8" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"/>
+			<TextBlock Height="17" Margin="92.167,60.233,0,0" TextWrapping="Wrap" Text="Date :" VerticalAlignment="Top" FontSize="14.667" Foreground="#FFE9E9E9" HorizontalAlignment="Left" Width="38.8" d:LayoutOverrides="HorizontalAlignment"/>
+			<TextBlock Height="17" Margin="49.167,87.4,0,0" TextWrapping="Wrap" Text="Description : " VerticalAlignment="Top" FontSize="14.667" Foreground="#FFE9E9E9" HorizontalAlignment="Left" Width="81.8" d:LayoutOverrides="HorizontalAlignment"/>
+			<dxe:TextEdit x:Name="CashReceivePaymentTextBoxDescription" Margin="137.781,85.15,65.218,75.85" FontSize="14.667" d:LayoutOverrides="VerticalAlignment" Height="24" Width="151"/>
+			<telerik:RadDatePicker x:Name="CashReceivePaymentDateTime" Margin="137.967,0,64.662,109.398" VerticalAlignment="Bottom" Height="23" BorderBrush="#FF5578B4" Width="150.258" FontSize="14.667" SelectedDate="{Binding Today.Today, Mode=OneWay}">
+				<telerik:RadDatePicker.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FFD4DBE9" Offset="0"/>
+						<GradientStop Color="#FFFDFDFE" Offset="1"/>
+						<GradientStop Color="#FFF7F8FB" Offset="0.5"/>
+					</LinearGradientBrush>
+				</telerik:RadDatePicker.Background>
+			</telerik:RadDatePicker>
+			<telerik:RadButton x:Name="CashReceivePaymentButtonUpdate"  Margin="157.637,0,111.268,8" VerticalAlignment="Bottom" Click="CashReceivePaymentButtonUpdateClick" Height="24">
+				<telerik:RadButton.Content>
+					<StackPanel Orientation="Horizontal">
+						<Image Source="ButtonImages/Update.png" Margin="0,-1"/>
+						<TextBlock Text="Update" FontSize="13.333" Margin="4,-1,0,0"/>
+					</StackPanel>
+				</telerik:RadButton.Content>
+			</telerik:RadButton>
+			<TextBlock x:Name="CashReceivePaymentLabelHeader" Margin="114.688,8,79.662,0" TextWrapping="Wrap" Foreground="Black" FontSize="14.667" Height="21" VerticalAlignment="Top" TextAlignment="Center">
+				<TextBlock.OpacityMask>
+					<LinearGradientBrush EndPoint="0.994,0.49" StartPoint="-0.011,0.501">
+						<GradientStop Color="Black" Offset="0.5"/>
+						<GradientStop Offset="1"/>
+						<GradientStop Color="#00000000"/>
+					</LinearGradientBrush>
+				</TextBlock.OpacityMask>
+				<TextBlock.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FF6C6C6C" Offset="0"/>
+						<GradientStop Color="DimGray" Offset="1"/>
+						<GradientStop Color="#FFCCCCCC" Offset="0.5"/>
+					</LinearGradientBrush>
+				</TextBlock.Background>
+			</TextBlock>
+		</Grid>
+		<Grid x:Name="PanelExpanses" Margin="338.738,376.723,340.762,255.198" RenderTransformOrigin="0.492,0.433" HorizontalAlignment="Center" VerticalAlignment="Center" Width="304" Height="152" DataContext="{Binding Source={StaticResource DateTimeDataSource}}" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+			<dxe:ComboBoxEdit x:Name="ExpansesComboBoxExpansesType" Margin="130.965,47.286,25.527,0" VerticalAlignment="Top" FontSize="14.667" Height="26" Width="147.508">
+				<dxe:ComboBoxEditItem Content="OfficeExpance"/>
+				<dxe:ComboBoxEditItem Content="Stationary"/>
+				<dxe:ComboBoxEditItem Content="Other"/>
+			</dxe:ComboBoxEdit>
+			<TextBlock HorizontalAlignment="Left" Height="20" Margin="21.965,48.335,0,0" TextWrapping="Wrap" Text="Expanses Type  :" VerticalAlignment="Top" Width="105" FontSize="14.667" Foreground="#FFE4E4E4"/>
+			<igEditors:XamNumericEditor x:Name="ExpansesNumberBoxAmount" Margin="130.965,0,26.027,47.685" BorderBrush="#FF5C84C1" Height="26" VerticalAlignment="Bottom" FontSize="14.667" KeyDown="ExpansesNumberBoxAmountKeyDown" d:LayoutOverrides="VerticalAlignment">
+				<igEditors:XamNumericEditor.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FFD3DAE9" Offset="0"/>
+						<GradientStop Color="#FFFDFDFE" Offset="1"/>
+						<GradientStop Color="#FFF0F2F7" Offset="0.5"/>
+					</LinearGradientBrush>
+				</igEditors:XamNumericEditor.Background>
+			</igEditors:XamNumericEditor>
+			<telerik:RadButton x:Name="ExpansesButtonUpdate" HorizontalAlignment="Right" Margin="0,110.912,62.026,17.167" Width="84.973" Click="ExpansesButtonUpdateClick" Height="24">
+				<telerik:RadButton.Content>
+					<StackPanel Orientation="Horizontal">
+						<Image Source="ButtonImages/Update.png" Margin="0,-1,0,0"/>
+						<TextBlock Text="Update" Margin="7,-1,0,0" FontSize="13.333"/>
+					</StackPanel>
+				</telerik:RadButton.Content>
+			</telerik:RadButton>
+			<TextBlock HorizontalAlignment="Left" Margin="66.965,0,0,52.351" TextWrapping="Wrap" Text="Amount :" Width="60" FontSize="14.667" Foreground="#FFE4E4E4" Height="18" VerticalAlignment="Bottom"/>
+			<TextBlock HorizontalAlignment="Left" Height="20" Margin="87.965,16.666,0,0" TextWrapping="Wrap" Text="Date :" VerticalAlignment="Top" Width="39" FontSize="14.667" Foreground="#FFE4E4E4"/>
+			<telerik:RadDatePicker x:Name="ExpansesDataAndTime" Margin="130.965,16.666,26.027,0" VerticalAlignment="Top" BorderBrush="#FF5C83C0" FontSize="14.667" Height="24" SelectedDate="{Binding Today.Today.Today, Mode=OneWay}">
+				<telerik:RadDatePicker.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FFD6DCEA" Offset="0"/>
+						<GradientStop Color="#FFFBFCFD" Offset="1"/>
+						<GradientStop Color="#FFEBEFF5" Offset="0.5"/>
+					</LinearGradientBrush>
+				</telerik:RadDatePicker.Background>
+			</telerik:RadDatePicker>
+		</Grid>
+		<Grid x:Name="PanelSalary" Margin="266.9,273.634,228.508,137.872" HorizontalAlignment="Center" VerticalAlignment="Center" Height="359.874" Width="491.592" DataContext="{Binding Source={StaticResource DateTimeDataSource}}" Visibility="Hidden" d:IsLocked="True" d:IsHidden="True">
+			<telerik:RadDatePicker x:Name="SalaryDateAndTime" Margin="160.651,0,0,105.128" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="152.942" FontSize="14.667" Height="25" SelectedDate="{Binding Today, Mode=OneWay}">
+				<telerik:RadDatePicker.BorderBrush>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FF2D477A" Offset="0.004"/>
+						<GradientStop Color="#FF5C84C1" Offset="1"/>
+					</LinearGradientBrush>
+				</telerik:RadDatePicker.BorderBrush>
+				<telerik:RadDatePicker.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FFDAE0EC" Offset="0"/>
+						<GradientStop Color="#FFFBFCFD" Offset="1"/>
+						<GradientStop Color="#FFEFF1F7" Offset="0.5"/>
+					</LinearGradientBrush>
+				</telerik:RadDatePicker.Background>
+			</telerik:RadDatePicker>
+			<TextBlock HorizontalAlignment="Left" Height="18" Margin="33,8,0,0" TextWrapping="Wrap" Text="Name :" VerticalAlignment="Top" Width="46" FontSize="14.667" Foreground="#FFEDEDED"/>
+			<igEditors:XamNumericEditor x:Name="SalaryNumberBoxAmount" Margin="160.651,0,178,43.128" Height="25" VerticalAlignment="Bottom" KeyDown="SalaryNumberBoxAmountKeyDown" FontSize="14.667">
+				<igEditors:XamNumericEditor.BorderBrush>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FF2F497E" Offset="0"/>
+						<GradientStop Color="#FF5C84C1" Offset="1"/>
+					</LinearGradientBrush>
+				</igEditors:XamNumericEditor.BorderBrush>
+				<igEditors:XamNumericEditor.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FFD3DBE9" Offset="0"/>
+						<GradientStop Color="#FFFDFEFE" Offset="1"/>
+						<GradientStop Color="#FFF1F3F8" Offset="0.5"/>
+					</LinearGradientBrush>
+				</igEditors:XamNumericEditor.Background>
+			</igEditors:XamNumericEditor>
+			<telerik:RadGridView x:Name="SalaryGridViewHistory" Margin="89.5,96.246,70.5,137.128" ShowGroupPanel="False" IsReadOnly="True" AutoGenerateColumns="False" Background="#FF5E5E5E" BorderBrush="#FF5D5D5D">
+				<telerik:RadGridView.Columns>
+					<telerik:GridViewDataColumn x:Name="SalaryDate" UniqueName="EntryDate" Header="Date" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" DataMemberBinding="{Binding EntryDate}"/>
+					<telerik:GridViewDataColumn x:Name="SalaryDescriptio" UniqueName="Description" Header="Description" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" DataMemberBinding="{Binding Description}"/>
+					<telerik:GridViewDataColumn x:Name="SalaryDebt_Tk" UniqueName="Amount" Header="Amount" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" DataMemberBinding="{Binding Amount}"/>
+				</telerik:RadGridView.Columns>
+			</telerik:RadGridView>
+			<telerik:RadButton x:Name="SalaryButtonUpdate" Margin="235.312,0,177.999,8" VerticalAlignment="Bottom" Click="SalaryButtonUpdateClick" Height="24">
+				<telerik:RadButton.Content>
+					<StackPanel Orientation="Horizontal">
+						<Image Source="ButtonImages/Update.png" Margin="1,-1,0,-1"/>
+						<TextBlock Text="Update" Margin="4,-2,0,0" FontSize="13.333"/>
+					</StackPanel>
+				</telerik:RadButton.Content>
+			</telerik:RadButton>
+			<dxe:TextEdit x:Name="SalaryTextBoxDescription" Margin="160.651,0,178,74.128" VerticalAlignment="Bottom" FontSize="14.667"/>
+			<dxe:ComboBoxEdit x:Name="SalaryComboBoxName" Margin="83,8,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="142" IsTextEditable="False"/>
+			<TextBlock HorizontalAlignment="Left" Height="18" Margin="33,74.246,0,0" TextWrapping="Wrap" Text="History :" VerticalAlignment="Top" Width="54" FontSize="14.667" Foreground="#FFEDEDED"/>
+			<TextBlock HorizontalAlignment="Left" Height="16" Margin="89.5,0,0,49.128" TextWrapping="Wrap" Text="Amount :" VerticalAlignment="Bottom" Width="59.5" FontSize="14.667" Foreground="#FFEDEDED"/>
+			<TextBlock HorizontalAlignment="Left" Height="16" Margin="110,0,0,111.128" TextWrapping="Wrap" Text="Date :" VerticalAlignment="Bottom" Width="39" FontSize="14.667" Foreground="#FFEDEDED"/>
+			<TextBlock HorizontalAlignment="Left" Height="16" Margin="68,0,0,79.878" TextWrapping="Wrap" Text="Description :" VerticalAlignment="Bottom" Width="81" FontSize="14.667" Foreground="#FFEDEDED"/>
+			<Fluent:RadioButton x:Name="SalaryRadioButtonNone" Content="RadioButton" Margin="83,45.246,0,0" VerticalAlignment="Top" Foreground="#FFE2E2E2" FontSize="14.667" HorizontalAlignment="Left" Width="66" Header="None"/>
+			<Fluent:RadioButton x:Name="SalaryRadioButtonLast3Month" Content="RadioButton" Margin="198,45.246,178,0" VerticalAlignment="Top" Foreground="#FFE2E2E2" FontSize="14.667" Header="Last 3 Month" d:LayoutOverrides="HorizontalAlignment"/>
+			<Fluent:RadioButton x:Name="SalaryRadioButtonAll" Content="RadioButton" Margin="148,45.246,0,0" VerticalAlignment="Top" Foreground="#FFE2E2E2" FontSize="14.667" HorizontalAlignment="Left" Width="46" Header="All"/>
+			<telerik:RadButton x:Name="SalaryButtonView" HorizontalAlignment="Right" Margin="0,48.122,98.737,0" VerticalAlignment="Top" Width="79.263" d:LayoutOverrides="HorizontalAlignment" Click="SalaryButtonViewClick" Height="24">
+				<telerik:RadButton.Content>
+					<StackPanel Orientation="Horizontal">
+						<Image Source="ButtonImages/PreView.png" Margin="0,-2,0,-1"/>
+						<TextBlock Text="View" Margin="10,-1,0,0" FontSize="13.333"/>
+					</StackPanel>
+				</telerik:RadButton.Content>
+			</telerik:RadButton>
+		</Grid>
+		<Grid x:Name="PanelStockEdit" Margin="197.582,300.68,154.006,175.655" HorizontalAlignment="Center" VerticalAlignment="Center" Height="300.171" Width="633.908" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+			<TextBlock HorizontalAlignment="Left" Margin="138.787,152.172,0,0" TextWrapping="Wrap" Text="New Quantity :" Width="97" FontSize="14.667" Foreground="#FFEFEFEF" Height="21" VerticalAlignment="Top"/>
+			<igEditors:XamNumericEditor x:Name="StockEditNumberBoxNewRate" Margin="242.787,0,252.625,96.489" VerticalAlignment="Bottom"  FontSize="14.667" Height="24" Text="{Binding ConstructorParameters[1], BindsDirectlyToSource=True, Mode=OneWayToSource, Source={StaticResource totalAmountIs}, UpdateSourceTrigger=PropertyChanged}">
+				<igEditors:XamNumericEditor.BorderBrush>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FF2D4679" Offset="0"/>
+						<GradientStop Color="#FF5C83C0" Offset="1"/>
+					</LinearGradientBrush>
+				</igEditors:XamNumericEditor.BorderBrush>
+				<igEditors:XamNumericEditor.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FFDCE2ED" Offset="0"/>
+						<GradientStop Color="#FFFCFCFD" Offset="1"/>
+						<GradientStop Color="#FFF3F5F9" Offset="0.5"/>
+					</LinearGradientBrush>
+				</igEditors:XamNumericEditor.Background>
+			</igEditors:XamNumericEditor>
+			<telerik:RadNumericUpDown x:Name="StockEditNumberUpDownNewQuantity" Margin="242.787,152.172,252.625,0" VerticalAlignment="Top" FontSize="14.667" IsInteger="True" Value="{Binding ConstructorParameters[0], BindsDirectlyToSource=True, Mode=OneWayToSource, Source={StaticResource totalAmountIs} , Converter ={StaticResource StringToDuble}}">
+				<telerik:RadNumericUpDown.BorderBrush>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FF274071" Offset="0"/>
+						<GradientStop Color="#FF5C83C0" Offset="1"/>
+					</LinearGradientBrush>
+				</telerik:RadNumericUpDown.BorderBrush>
+				<telerik:RadNumericUpDown.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FFD7DEEB" Offset="0"/>
+						<GradientStop Color="#FFFBFCFD" Offset="1"/>
+						<GradientStop Color="#FFF5F7FA" Offset="0.5"/>
+					</LinearGradientBrush>
+				</telerik:RadNumericUpDown.Background>
+			</telerik:RadNumericUpDown>
+			<TextBlock HorizontalAlignment="Right" Height="21" Margin="0,13,192.625,0" TextWrapping="Wrap" Text="Product ID :" VerticalAlignment="Top" Width="78" FontSize="14.667" Foreground="#FFEFEFEF"/>
+			<TextBlock HorizontalAlignment="Right" Height="21" Margin="0,40,192.625,0" TextWrapping="Wrap" Text="Quantity :" VerticalAlignment="Top" Width="64" FontSize="14.667" Foreground="#FFEFEFEF"/>
+			<TextBlock HorizontalAlignment="Right" Height="21" Margin="0,68.172,192.625,0" TextWrapping="Wrap" Text="Amount :" VerticalAlignment="Top" Width="61" FontSize="14.667" Foreground="#FFEFEFEF"/>
+			<TextBlock HorizontalAlignment="Right" Margin="0,93.172,193.625,0" TextWrapping="Wrap" Text="Rate :" Width="37" FontSize="14.667" Foreground="#FFEFEFEF" Height="21" VerticalAlignment="Top"/>
+			<TextBlock x:Name="StockEditLabelQuantity" HorizontalAlignment="Right" Height="21" Margin="0,42,86.625,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" FontSize="14.667" Foreground="#FFEFEFEF"/>
+			<TextBlock x:Name="StockEditLabelProductID" HorizontalAlignment="Right" Height="21" Margin="0,13,86.625,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" FontSize="14.667" Foreground="#FFEFEFEF"/>
+			<TextBlock x:Name="StockEditLabelAmount" HorizontalAlignment="Right" Height="21" Margin="0,67,86.625,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" FontSize="14.667" Foreground="#FFEFEFEF"/>
+			<TextBlock x:Name="StockEditLabelRate" HorizontalAlignment="Right" Height="21" Margin="0,93.172,86.625,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" FontSize="14.667" Foreground="#FFEFEFEF"/>
+			<TextBlock HorizontalAlignment="Left" Margin="141.787,0,0,70.246" TextWrapping="Wrap" Text="New Amount :" Width="94" FontSize="14.667" Foreground="#FFEFEFEF" Height="18.462" VerticalAlignment="Bottom"/>
+			<TextBlock HorizontalAlignment="Left" Height="18" Margin="165.787,0,0,101.157" TextWrapping="Wrap" Text="New Rate :" VerticalAlignment="Bottom" Width="70" FontSize="14.667" Foreground="#FFEFEFEF" d:LayoutOverrides="VerticalAlignment"/>
+			<TextBlock x:Name="StockEditLanelNewAmount" Height="21" Margin="242.787,0,252.625,67.708" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="14.667" Foreground="#FFEFEFEF" d:LayoutOverrides="VerticalAlignment" Text="{Binding Source={StaticResource totalAmountIs},Path=AmountIs}"/>
+			<telerik:RadButton x:Name="StockEditButtonUpdate" Margin="282.12,0,270.625,23.952" VerticalAlignment="Bottom" Click="StockEditButtonUpdateClick" Height="24">
+				<StackPanel Orientation="Horizontal">
+					<Image Source="ButtonImages/Update.png" Margin="0,-1,1,-1"/>
+					<TextBlock Text="Update" FontSize="13.333" Margin="4,-1,0,0"/>
+				</StackPanel>
+			</telerik:RadButton>
+			<PetunicaControls:ProductInfo x:Name="StockEditProductInfo" Margin="56.283,13,311.125,0" VerticalAlignment="Top" d:LayoutOverrides="Height" ModelNumberIndexChanged="StockEditProductInfoModelNumberIndexChange"/>
+		</Grid>
+		<Grid x:Name="PanelDebtorsCreditorsView" Margin="54.416,180.717,46.796,38.859" RenderTransformOrigin="0.605,0.337" HorizontalAlignment="Center" Width="893.938" DataContext="{Binding Source={StaticResource DateTimeDataSource}}" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+			<telerik:RadButton x:Name="DebtorsCreditorsViewButtonSearch" HorizontalAlignment="Left" Margin="324.874,0,0,72.601" VerticalAlignment="Bottom" Height="24" Width="91.026" Click="DebtorsCreditorsViewButtonSearchClick">
+				<telerik:RadButton.Content>
+					<StackPanel Orientation="Horizontal">
+						<Image Source="ButtonImages/Search.png" Margin="0,-1"/>
+						<TextBlock Text="Search" Margin="4,-1,0,0" FontSize="13.333"/>
+					</StackPanel>
+				</telerik:RadButton.Content>
+			</telerik:RadButton>
+			<dxe:ComboBoxEdit x:Name="DebtorsCreditorsViewComboBoxName" Margin="72.497,7.996,0,0" VerticalAlignment="Top" IsTextEditable="False" FontSize="14.667" HorizontalAlignment="Left" Width="150" SelectedIndexChanged="DebtorsCreditorsViewComboBoxNameIndexChange"/>
+			<Fluent:RadioButton x:Name="DebtorsCreditorsViewRadioButtonByDate" Content="RadioButton" HorizontalAlignment="Left" Margin="112.953,0,0,200" VerticalAlignment="Bottom" Width="83" Foreground="#FFEFEFEF" FontSize="14.667" Header="By Date " Checked="DebtorsCreditorsViewRadioButtonByDateChecked" Unchecked="DebtorsCreditorsViewRadioButtonByDateUnChecked"/>
+			<igEditors:XamNumericEditor x:Name="DebtorsCreditorsViewNumberBoxAmount" HorizontalAlignment="Right" Margin="0,0,486.538,128.639" VerticalAlignment="Bottom" Width="169.722" KeyDown="DebtorsCreditorsViewNumberBoxAmountKeyDown" Height="24">
+				<igEditors:XamNumericEditor.BorderBrush>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FF2A4476" Offset="0"/>
+						<GradientStop Color="#FF5C83C0" Offset="1"/>
+					</LinearGradientBrush>
+				</igEditors:XamNumericEditor.BorderBrush>
+				<igEditors:XamNumericEditor.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FFD3DAE9" Offset="0"/>
+						<GradientStop Color="#FFFEFEFE" Offset="0.983"/>
+					</LinearGradientBrush>
+				</igEditors:XamNumericEditor.Background>
+			</igEditors:XamNumericEditor>
+			<GroupBox Header="Personal Info" Margin="161,51.5,444.538,0" FontSize="14.667" Foreground="#FFFDFDFD" Height="237.4" VerticalAlignment="Top">
+				<Grid Margin="4.788,5.809,0,-2.102" d:LayoutOverrides="VerticalAlignment" HorizontalAlignment="Left" Width="268.593">
+					<TextBlock Margin="8,18,0,0" TextWrapping="Wrap" Text="Contract Person :" Foreground="#FFEBEBEB" FontSize="14.667" Height="21" VerticalAlignment="Top" HorizontalAlignment="Left" Width="111"/>
+					<TextBlock Margin="69.333,52,0,0" TextWrapping="Wrap" Text="Phone :" Foreground="#FFEBEBEB" FontSize="14.667" Height="21" VerticalAlignment="Top" HorizontalAlignment="Left" Width="49.667"/>
+					<TextBlock Margin="69.333,85,0,100.602" TextWrapping="Wrap" Text="E-Mail :" Foreground="#FFEBEBEB" FontSize="14.667" HorizontalAlignment="Left" Width="49.667"/>
+					<TextBlock x:Name="DebtorsCreditorsViewLabelPerInfoContractPerson" Margin="131,18,0,0" TextWrapping="Wrap" Foreground="#FFEBEBEB" FontSize="14.667" Height="21" VerticalAlignment="Top"/>
+					<TextBlock Margin="58,0,0,65" TextWrapping="Wrap" Text="Address :" Foreground="#FFEBEBEB" FontSize="14.667" HorizontalAlignment="Left" Width="61" Height="23.283" VerticalAlignment="Bottom"/>
+					<TextBlock x:Name="DebtorsCreditorsViewLabelPerPhone" Margin="131,52,0,0" TextWrapping="Wrap" Foreground="#FFEBEBEB" FontSize="14.667" Height="21" VerticalAlignment="Top"/>
+					<TextBlock x:Name="DebtorsCreditorsViewLabelPerInfoEmail" Margin="131,85,0,100.602" TextWrapping="Wrap" Foreground="#FFEBEBEB" FontSize="14.667"/>
+					<TextBlock x:Name="DebtorsCreditorsViewLabelPerInfoAddress" Margin="131,0,0,10" TextWrapping="Wrap" Foreground="#FFEBEBEB" FontSize="14.667" Height="78.283" VerticalAlignment="Bottom"/>
+				</Grid>
+			</GroupBox>
+			<TextBlock Margin="8,8,0,0" TextWrapping="Wrap" Text="User ID :" Foreground="#FFEBEBEB" FontSize="14.667" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="55.5"/>
+			<GroupBox Header="Account Info" Margin="446.506,51.5,231.875,0" FontSize="14.667" Foreground="#FFFDFDFD" Height="237.4" VerticalAlignment="Top">
+				<Grid Margin="4.547,0.414,1.335,1.559" RenderTransformOrigin="0.754,0.528">
+					<TextBlock Margin="8.65,81,0,0" TextWrapping="Wrap" Text="Amount :" Foreground="#FFEBEBEB" FontSize="14.667" HorizontalAlignment="Left" Width="65.233" Height="21" VerticalAlignment="Top"/>
+					<TextBlock x:Name="DebtorsCreditorsViewLabelAccInfoAmount" Margin="73.883,0,0,106.92" TextWrapping="Wrap" Foreground="#FFEBEBEB" FontSize="14.667" Height="21" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="99.792"/>
+				</Grid>
+			</GroupBox>
+			<telerik:RadGridView x:Name="DebtorsCreditorsViewGridView" Margin="454.381,0,0,8" VerticalAlignment="Bottom" HorizontalAlignment="Left" ShowGroupPanel="False" Height="235.601" Width="343.572" IsReadOnly="True" AutoGenerateColumns="False" Background="#FF5D5D5D">
+				<telerik:RadGridView.Columns>
+					<telerik:GridViewDataColumn x:Name="CreditDebtorViewDate" UniqueName="EntryDate" Header="Date" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" DataMemberBinding="{Binding EntryDate}"/>
+					<telerik:GridViewDataColumn x:Name="CreditDebtorViewProductID" UniqueName="ProductID" Header="Product ID" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" DataMemberBinding="{Binding ProductID}"/>
+					<telerik:GridViewDataColumn x:Name="CreditDebtorViewAmount" UniqueName="Amount" Header="Amount" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" DataMemberBinding="{Binding Amount}"/>
+				</telerik:RadGridView.Columns>
+			</telerik:RadGridView>
+			<TextBlock Margin="0,0,385.057,247.524" TextWrapping="Wrap" Text="History :" Foreground="#FFEBEBEB" FontSize="14.667" HorizontalAlignment="Right" Height="21" VerticalAlignment="Bottom" Width="54.5"/>
+			<Fluent:RadioButton x:Name="DebtorsCreditorsViewRadioButtonByProductID" Content="RadioButton" HorizontalAlignment="Left" Margin="112.953,0,0,165.601" VerticalAlignment="Bottom" Width="117" Foreground="#FFEFEFEF" FontSize="14.667" Header="By product ID" Checked="DebtorsCreditorsViewRadioButtonByProductIDChecked" Unchecked="DebtorsCreditorsViewRadioButtonByProductIDUnchecked"/>
+			<telerik:RadDatePicker x:Name="DebtorsCreditorsViewDateAndTime" HorizontalAlignment="Left" Height="24" Margin="237.678,0,0,197.999" VerticalAlignment="Bottom" Width="169.722" FontSize="14.667" KeyDown="DebtorsCreditorsViewDateAndTimeKeyDown" SelectedDate="{Binding Today, Mode=OneWay}">
+				<telerik:RadDatePicker.BorderBrush>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FF2B4477" Offset="0"/>
+						<GradientStop Color="#FF5C84C1" Offset="0.983"/>
+					</LinearGradientBrush>
+				</telerik:RadDatePicker.BorderBrush>
+				<telerik:RadDatePicker.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FFD2DAE9" Offset="0.013"/>
+						<GradientStop Color="White" Offset="1"/>
+					</LinearGradientBrush>
+				</telerik:RadDatePicker.Background>
+			</telerik:RadDatePicker>
+			<dxe:TextEdit x:Name="DebtorsCreditorsViewTextBoxProductID" HorizontalAlignment="Left" Height="24" Margin="237.678,0,0,161.601" VerticalAlignment="Bottom" Width="169.722" FontSize="14.667" KeyDown="DebtorsCreditorsViewTextBoxProductIDKeyDown"/>
+			<Fluent:RadioButton x:Name="DebtorsCreditorsViewRadioButtonByAmount" Content="RadioButton" HorizontalAlignment="Left" Margin="112.953,0,0,130.64" VerticalAlignment="Bottom" Width="94" Foreground="#FFEFEFEF" FontSize="14.667" Header="By Amount" Checked="DebtorsCreditorsViewRadioButtonByAmountChecked" Unchecked="DebtorsCreditorsViewRadioButtonByAmountUnchecked"/>
+			<TextBlock x:Name="DebtorsCreditorsViewLabelHader" Margin="407,8,337.288,0" TextWrapping="Wrap" Text="Name :" Foreground="Black" FontSize="14.667" Height="21" VerticalAlignment="Top" TextAlignment="Center">
+				<TextBlock.OpacityMask>
+					<LinearGradientBrush EndPoint="0.994,0.49" StartPoint="-0.011,0.501">
+						<GradientStop Color="Black" Offset="0.5"/>
+						<GradientStop Offset="1"/>
+						<GradientStop Color="#00000000"/>
+					</LinearGradientBrush>
+				</TextBlock.OpacityMask>
+				<TextBlock.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FF6C6C6C" Offset="0"/>
+						<GradientStop Color="DimGray" Offset="1"/>
+						<GradientStop Color="#FFCCCCCC" Offset="0.5"/>
+					</LinearGradientBrush>
+				</TextBlock.Background>
+			</TextBlock>
+			<Fluent:RadioButton x:Name="DebtorsCreditorsViewRadioButtonByAll" Content="RadioButton" HorizontalAlignment="Left" Margin="112.953,0,0,94.955" VerticalAlignment="Bottom" FontSize="14.667" Header="By All" Foreground="#FFE7E7E7"/>
+		</Grid>
+		<Grid x:Name="PanelExpansesViewUpdate" Margin="249.339,296.934,266.008,179.402" HorizontalAlignment="Center" VerticalAlignment="Center" Height="273.007" Width="475.288" DataContext="{Binding Source={StaticResource DateTimeDataSource}}" d:IsHidden="True" Visibility="Hidden" d:IsLocked="True">
+			<telerik:RadDatePicker x:Name="ExpansesViewDateAndTime" Margin="116.003,8,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="166.5" FontSize="14.667" d:LayoutOverrides="HorizontalAlignment" SelectedDate="{Binding Today, Mode=OneWay}">
+				<telerik:RadDatePicker.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FFD0D7E7" Offset="0.005"/>
+						<GradientStop Color="#FFE6EAF2" Offset="0.208"/>
+						<GradientStop Color="White" Offset="0.99"/>
+						<GradientStop Color="#FF5C83C0" Offset="0.995"/>
+					</LinearGradientBrush>
+				</telerik:RadDatePicker.Background>
+				<telerik:RadDatePicker.BorderBrush>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FF2D477A" Offset="0"/>
+						<GradientStop Color="#FF5C84C1" Offset="1"/>
+					</LinearGradientBrush>
+				</telerik:RadDatePicker.BorderBrush>
+			</telerik:RadDatePicker>
+			<dxe:ComboBoxEdit x:Name="ExpansesViewComboBoxName" Margin="116.003,39.41,0,0" FontSize="14.667" IsTextEditable="False" HorizontalAlignment="Left" Width="166.5" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment"/>
+			<Fluent:RadioButton x:Name="ExpansesViewRadioButtonByDate" Content="RadioButton" Margin="116.003,81.91,0,0" VerticalAlignment="Top" FontSize="14.667" Foreground="#FFEFEFEF" Header="By Date" HorizontalAlignment="Left" Width="79.444" Checked="ExpansesViewRadioButtonByDateChecked"/>
+			<telerik:RadGridView x:Name="ExpansesViewGiewView" Margin="92.925,130.91,48.732,8" ShowGroupPanel="False" Background="#FF626262" BorderBrush="{x:Null}" d:LayoutOverrides="VerticalAlignment">
+				<telerik:RadGridView.Columns>
+					<telerik:GridViewDataColumn x:Name="ExpanseViewEntryDate" UniqueName="EntryDate" Header="Date" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" DataMemberBinding="{Binding EntryDate}"/>
+					<telerik:GridViewDataColumn x:Name="ExpanseViewAmount" UniqueName="Amount" Header="Amount" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" DataMemberBinding="{Binding Amount}"/>
+					<telerik:GridViewDataColumn x:Name="ExpanseViewDescription" UniqueName="Description" Header="Description" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" DataMemberBinding="{Binding Description}"/>
+				</telerik:RadGridView.Columns>
+			</telerik:RadGridView>
+			<TextBlock Height="22" Margin="39.667,108.91,0,0" TextWrapping="Wrap" Text="History :" VerticalAlignment="Top" FontSize="14.667" Foreground="#FFE5E5E5" HorizontalAlignment="Left" Width="53.372" d:LayoutOverrides="VerticalAlignment"/>
+			<TextBlock HorizontalAlignment="Left" Height="22" Margin="67.493,8,0,0" TextWrapping="Wrap" Text="Date :" VerticalAlignment="Top" Width="38.1" FontSize="14.667" Foreground="#FFE5E5E5"/>
+			<TextBlock Height="22" Margin="8,39.41,0,0" TextWrapping="Wrap" Text="Expanse Type : " VerticalAlignment="Top" FontSize="14.667" Foreground="#FFE5E5E5" HorizontalAlignment="Left" Width="97.593"/>
+			<telerik:RadButton x:Name="ExpansesViewbuttonSearch" HorizontalAlignment="Right" Margin="0,84.787,20.732,0" VerticalAlignment="Top" Height="24" Width="91.109" Click="ExpansesViewbuttonSearchClick">
+				<telerik:RadButton.Content>
+					<StackPanel Orientation="Horizontal">
+						<Image Source="ButtonImages/Search.png" Margin="0,-1,0,0"/>
+						<TextBlock Text="Search" FontSize="13.333" Margin="8,-2,0,0"/>
+					</StackPanel>
+				</telerik:RadButton.Content>
+			</telerik:RadButton>
+			<Fluent:RadioButton x:Name="ExpansesViewRadioButtonByType" Content="RadioButton" HorizontalAlignment="Left" Margin="195.447,81.91,0,0" VerticalAlignment="Top" Width="81" FontSize="14.667" Foreground="#FFEFEFEF" Header="By Type" d:LayoutOverrides="HorizontalAlignment" Checked="ExpansesViewRadioButtonByTypeChecked"/>
+			<Fluent:RadioButton x:Name="ExpansesViewRadioButtonByBoth" Content="RadioButton" HorizontalAlignment="Left" Margin="280.447,81.91,0,0" Width="79" FontSize="14.667" Foreground="#FFEFEFEF" Header="By Both" VerticalAlignment="Top" Checked="ExpansesViewRadioButtonByBothChecked"/>
+		</Grid>
+		<TitelBar:ProcestaCustromTittleBar x:Name="mainwindowTitleBar" VerticalAlignment="Top" Height="20" Width="Auto" WindowTitle="" WindowIcon="Icon/petunai 2.0.ico" d:IsLocked="True"/>
+		<Grid x:Name="PanelSummary" Margin="112.809,165.235,101.19,76.648" Width="770" d:LayoutOverrides="HorizontalMargin" DataContext="{Binding Source={StaticResource DateTimeDataSource}}" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+			<Rectangle HorizontalAlignment="Left" Margin="158,89.758,0,0" Width="225" RadiusY="2.941" RadiusX="2.941" Height="163" VerticalAlignment="Top">
+				<Rectangle.Fill>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="White" Offset="0"/>
+						<GradientStop Color="#FF5F5F5F" Offset="1"/>
+						<GradientStop Color="#FF1C1C1C" Offset="0.111"/>
+					</LinearGradientBrush>
+				</Rectangle.Fill>
+			</Rectangle>
+			<Rectangle Margin="0,89.758,135,0" RadiusY="2.941" RadiusX="2.941" HorizontalAlignment="Right" Width="225" Height="163" VerticalAlignment="Top">
+				<Rectangle.Fill>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="White" Offset="0"/>
+						<GradientStop Color="#FF5F5F5F" Offset="1"/>
+						<GradientStop Color="#FF1C1C1C" Offset="0.111"/>
+					</LinearGradientBrush>
+				</Rectangle.Fill>
+			</Rectangle>
+			<TextBlock Margin="190.792,96.664,0,0" TextWrapping="Wrap" Text="Purchase" Foreground="Black" FontSize="14.667" Height="21" VerticalAlignment="Top" TextAlignment="Center" HorizontalAlignment="Left" Width="149.65">
+				<TextBlock.OpacityMask>
+					<LinearGradientBrush EndPoint="0.994,0.49" StartPoint="-0.011,0.501">
+						<GradientStop Color="Black" Offset="0.5"/>
+						<GradientStop Offset="1"/>
+						<GradientStop Color="#00000000"/>
+					</LinearGradientBrush>
+				</TextBlock.OpacityMask>
+				<TextBlock.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FFA7A7A7" Offset="0"/>
+						<GradientStop Color="#FF222222" Offset="1"/>
+						<GradientStop Color="#FFCCCCCC" Offset="0.5"/>
+					</LinearGradientBrush>
+				</TextBlock.Background>
+			</TextBlock>
+			<TextBlock Margin="0,96.664,163.891,0" TextWrapping="Wrap" Text="Sales" Foreground="Black" FontSize="14.667" Height="21" VerticalAlignment="Top" TextAlignment="Center" HorizontalAlignment="Right" Width="149.65">
+				<TextBlock.OpacityMask>
+					<LinearGradientBrush EndPoint="0.994,0.49" StartPoint="-0.011,0.501">
+						<GradientStop Color="Black" Offset="0.5"/>
+						<GradientStop Offset="1"/>
+						<GradientStop Color="#00000000"/>
+					</LinearGradientBrush>
+				</TextBlock.OpacityMask>
+				<TextBlock.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FFA7A7A7" Offset="0"/>
+						<GradientStop Color="#FF222222" Offset="1"/>
+						<GradientStop Color="#FFCCCCCC" Offset="0.5"/>
+					</LinearGradientBrush>
+				</TextBlock.Background>
+			</TextBlock>
+			<Rectangle HorizontalAlignment="Left" Margin="36.5,0,0,88.05" Width="225" RadiusY="2.941" RadiusX="2.941" Height="163.5" VerticalAlignment="Bottom">
+				<Rectangle.Fill>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="White" Offset="0"/>
+						<GradientStop Color="#FF5F5F5F" Offset="1"/>
+						<GradientStop Color="#FF1C1C1C" Offset="0.111"/>
+					</LinearGradientBrush>
+				</Rectangle.Fill>
+			</Rectangle>
+			<Rectangle Margin="282.5,0,262.5,90.05" RadiusY="2.941" RadiusX="2.941" Height="163.5" VerticalAlignment="Bottom">
+				<Rectangle.Fill>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="White" Offset="0"/>
+						<GradientStop Color="#FF5F5F5F" Offset="1"/>
+						<GradientStop Color="#FF1C1C1C" Offset="0.111"/>
+					</LinearGradientBrush>
+				</Rectangle.Fill>
+			</Rectangle>
+			<TextBlock Margin="69.292,0,0,223.336" TextWrapping="Wrap" Text="Cash" Foreground="Black" FontSize="14.667" Height="21" VerticalAlignment="Bottom" TextAlignment="Center" HorizontalAlignment="Left" Width="149.65">
+				<TextBlock.OpacityMask>
+					<LinearGradientBrush EndPoint="0.994,0.49" StartPoint="-0.011,0.501">
+						<GradientStop Color="Black" Offset="0.5"/>
+						<GradientStop Offset="1"/>
+						<GradientStop Color="#00000000"/>
+					</LinearGradientBrush>
+				</TextBlock.OpacityMask>
+				<TextBlock.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FFA7A7A7" Offset="0"/>
+						<GradientStop Color="#FF222222" Offset="1"/>
+						<GradientStop Color="#FFCCCCCC" Offset="0.5"/>
+					</LinearGradientBrush>
+				</TextBlock.Background>
+			</TextBlock>
+			<TextBlock Margin="328.959,0,291.391,225.336" TextWrapping="Wrap" Text="Expanses" Foreground="Black" FontSize="14.667" Height="21" VerticalAlignment="Bottom" TextAlignment="Center">
+				<TextBlock.OpacityMask>
+					<LinearGradientBrush EndPoint="0.994,0.49" StartPoint="-0.011,0.501">
+						<GradientStop Color="Black" Offset="0.5"/>
+						<GradientStop Offset="1"/>
+						<GradientStop Color="#00000000"/>
+					</LinearGradientBrush>
+				</TextBlock.OpacityMask>
+				<TextBlock.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FFA7A7A7" Offset="0"/>
+						<GradientStop Color="#FF222222" Offset="1"/>
+						<GradientStop Color="#FFCCCCCC" Offset="0.5"/>
+					</LinearGradientBrush>
+				</TextBlock.Background>
+			</TextBlock>
+			<Rectangle Margin="0,0,12.109,61" RadiusY="2.941" RadiusX="2.941" HorizontalAlignment="Right" Width="225" Height="193.55" VerticalAlignment="Bottom">
+				<Rectangle.Fill>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="White" Offset="0"/>
+						<GradientStop Color="#FF5F5F5F" Offset="1"/>
+						<GradientStop Color="#FF1C1C1C" Offset="0.111"/>
+					</LinearGradientBrush>
+				</Rectangle.Fill>
+			</Rectangle>
+			<TextBlock Margin="0,0,41,226.336" TextWrapping="Wrap" Text="Return" Foreground="Black" FontSize="14.667" TextAlignment="Center" HorizontalAlignment="Right" Width="149.65" Height="21" VerticalAlignment="Bottom">
+				<TextBlock.OpacityMask>
+					<LinearGradientBrush EndPoint="0.994,0.49" StartPoint="-0.011,0.501">
+						<GradientStop Color="Black" Offset="0.5"/>
+						<GradientStop Offset="1"/>
+						<GradientStop Color="#00000000"/>
+					</LinearGradientBrush>
+				</TextBlock.OpacityMask>
+				<TextBlock.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FFA7A7A7" Offset="0"/>
+						<GradientStop Color="#FF222222" Offset="1"/>
+						<GradientStop Color="#FFCCCCCC" Offset="0.5"/>
+					</LinearGradientBrush>
+				</TextBlock.Background>
+			</TextBlock>
+			<TextBlock Height="24.684" Margin="162,146.766,0,0" TextWrapping="Wrap" Text="Quantity :" VerticalAlignment="Top" FontSize="14.667" Foreground="#FFE5E5E5" HorizontalAlignment="Left" Width="64.3"/>
+			<TextBlock Height="24.684" Margin="233.942,146.766,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14.667" Foreground="#FFE5E5E5" HorizontalAlignment="Left" Width="138.441" Text="{Binding TotalSummary.PurchasQuantity, ElementName=window}"/>
+			<TextBlock Height="24.684" Margin="167.349,189.766,0,0" TextWrapping="Wrap" Text="Amount :" VerticalAlignment="Top" FontSize="14.667" Foreground="#FFE5E5E5" HorizontalAlignment="Left" Width="60.942"/>
+			<TextBlock Height="24.684" Margin="233.942,189.766,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14.667" Foreground="#FFE5E5E5" HorizontalAlignment="Left" Width="138.441" Text="{Binding TotalSummary.PurchaseAmount, ElementName=window}"/>
+			<TextBlock Height="24.684" Margin="0,146.766,291.7,0" TextWrapping="Wrap" Text="Quantity :" VerticalAlignment="Top" FontSize="14.667" Foreground="#FFE5E5E5" HorizontalAlignment="Right" Width="64.3"/>
+			<TextBlock Height="24.684" Margin="0,146.766,145.617,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14.667" Foreground="#FFE5E5E5" HorizontalAlignment="Right" Width="138.441" Text="{Binding TotalSummary.SalesQuantity, ElementName=window}"/>
+			<TextBlock Height="24.684" Margin="0,189.766,289.709,0" TextWrapping="Wrap" Text="Amount :" VerticalAlignment="Top" FontSize="14.667" Foreground="#FFE5E5E5" HorizontalAlignment="Right" Width="60.942"/>
+			<TextBlock Height="24.684" Margin="0,189.766,145.617,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14.667" Foreground="#FFE5E5E5" HorizontalAlignment="Right" Width="138.441" Text="{Binding TotalSummary.SalesAmount, ElementName=window}"/>
+			<TextBlock Height="24.684" Margin="36.5,0,0,182.55" TextWrapping="Wrap" Text="Starting :" VerticalAlignment="Bottom" FontSize="14.667" Foreground="#FFE5E5E5" HorizontalAlignment="Left" Width="59"/>
+			<TextBlock Height="24.684" Margin="355.958,0,274.043,149.55" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="14.667" Foreground="#FFE5E5E5" Text="{Binding TotalSummary.Expanses, ElementName=window}"/>
+			<TextBlock Height="24.684" Margin="102.501,0,0,136.55" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="14.667" Foreground="#FFE5E5E5" HorizontalAlignment="Left" Width="142.998" Text="{Binding TotalSummary.EndingCash, ElementName=window}"/>
+			<TextBlock Height="24.684" Margin="36.5,0,0,136.55" TextWrapping="Wrap" Text="Ending :" VerticalAlignment="Bottom" FontSize="14.667" Foreground="#FFE5E5E5" HorizontalAlignment="Left" Width="53"/>
+			<TextBlock Height="24.684" Margin="102.501,0,0,182.55" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="14.667" Foreground="#FFE5E5E5" HorizontalAlignment="Left" Width="142.998" Text="{Binding TotalSummary.StartingCash, ElementName=window}"/>
+			<TextBlock Height="24.684" Margin="291.959,0,0,149.55" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="14.667" Foreground="#FFE5E5E5" Text="Amount :" HorizontalAlignment="Left" Width="59.999"/>
+			<TextBlock HorizontalAlignment="Right" Height="23.684" Margin="0,0,168.773,174.652" TextWrapping="Wrap" Text="Quantity :" VerticalAlignment="Bottom" Width="63" FontSize="14.667" Foreground="#FFE5E5E5"/>
+			<TextBlock x:Name="ReturnProductSalesHeader_Copy1" Margin="0,0,41,198.336" TextWrapping="Wrap" Text="Purchase Return" Foreground="Black" FontSize="14.667" Height="21" VerticalAlignment="Bottom" TextAlignment="Center" HorizontalAlignment="Right" Width="149.65">
+				<TextBlock.OpacityMask>
+					<LinearGradientBrush EndPoint="0.994,0.49" StartPoint="-0.011,0.501">
+						<GradientStop Color="Black" Offset="0.5"/>
+						<GradientStop Offset="1"/>
+						<GradientStop Color="#00000000"/>
+					</LinearGradientBrush>
+				</TextBlock.OpacityMask>
+				<TextBlock.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FF242424" Offset="0"/>
+						<GradientStop Color="#FF2E2E2E" Offset="1"/>
+						<GradientStop Color="#FFCCCCCC" Offset="0.5"/>
+					</LinearGradientBrush>
+				</TextBlock.Background>
+			</TextBlock>
+			<TextBlock Margin="0,0,41,120.132" TextWrapping="Wrap" Text="Sales Return" Foreground="Black" FontSize="14.667" Height="21" VerticalAlignment="Bottom" TextAlignment="Center" HorizontalAlignment="Right" Width="149.65">
+				<TextBlock.OpacityMask>
+					<LinearGradientBrush EndPoint="0.994,0.49" StartPoint="-0.011,0.501">
+						<GradientStop Color="Black" Offset="0.5"/>
+						<GradientStop Offset="1"/>
+						<GradientStop Color="#00000000"/>
+					</LinearGradientBrush>
+				</TextBlock.OpacityMask>
+				<TextBlock.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FF404040" Offset="0"/>
+						<GradientStop Color="#FF494949" Offset="1"/>
+						<GradientStop Color="#FFCCCCCC" Offset="0.5"/>
+					</LinearGradientBrush>
+				</TextBlock.Background>
+			</TextBlock>
+			<TextBlock Height="20.102" Margin="0,0,168.773,149.132" TextWrapping="Wrap" Text="Amount :" VerticalAlignment="Bottom" FontSize="14.667" Foreground="#FFE5E5E5" HorizontalAlignment="Right" Width="60.942"/>
+			<TextBlock Height="23.684" Margin="0,0,21.668,174.652" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="14.667" Foreground="#FFE5E5E5" HorizontalAlignment="Right" Width="138.441" Text="{Binding TotalSummary.PuchaseReturnQuantity, ElementName=window}"/>
+			<TextBlock Height="20.684" Margin="0,0,21.668,149.132" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="14.667" Foreground="#FFE5E5E5" HorizontalAlignment="Right" Width="138.441" Text="{Binding TotalSummary.PuchaseReturnAmount, ElementName=window}"/>
+			<TextBlock HorizontalAlignment="Right" Height="23.684" Margin="0,0,164.55,91.52" TextWrapping="Wrap" Text="Quantity :" VerticalAlignment="Bottom" Width="63" FontSize="14.667" Foreground="#FFE5E5E5"/>
+			<TextBlock Height="20.102" Margin="0,0,164.55,67" TextWrapping="Wrap" Text="Amount :" VerticalAlignment="Bottom" FontSize="14.667" Foreground="#FFE5E5E5" HorizontalAlignment="Right" Width="60.942"/>
+			<TextBlock Height="23.684" Margin="0,0,16.111,91.52" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="14.667" Foreground="#FFE5E5E5" HorizontalAlignment="Right" Width="138.441" Text="{Binding TotalSummary.SalesReturnQuantity, ElementName=window}"/>
+			<TextBlock Height="20.684" Margin="0,0,16.111,67" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="14.667" Foreground="#FFE5E5E5" HorizontalAlignment="Right" Width="138.441" Text="{Binding TotalSummary.SalesReurnAmount, ElementName=window}"/>
+			<telerik:RadDatePicker x:Name="SummaryDate" Margin="265.5,27.006,343.5,0" VerticalAlignment="Top" MinHeight="24" FontSize="14.667" SelectedDate="{Binding Today, Mode=OneWay}"/>
+			<telerik:RadButton x:Name="SummaryButtonSearch" HorizontalAlignment="Right" Margin="0,27.006,240.067,0" VerticalAlignment="Top" Height="24" Width="84.692" Click="SummaryButtonSearchClick">
+				<telerik:RadButton.Content>
+					<StackPanel Orientation="Horizontal">
+						<Image Source="ButtonImages/Search.png" Margin="0,-1"/>
+						<TextBlock Text="Search" Margin="6,0,0,0"/>
+					</StackPanel>
+				</telerik:RadButton.Content>
+			</telerik:RadButton>
+			<TextBlock Height="21.837" Margin="223.059,29.169,0,0" TextWrapping="Wrap" Text="Date :" VerticalAlignment="Top" FontSize="14.667" Foreground="#FFE5E5E5" HorizontalAlignment="Left" Width="38.441"/>
+		</Grid>
+		<Grid x:Name="HomeImage" Margin="131.18,249.147,62.857,24.192" d:IsHidden="True" d:IsLocked="True">
+			<Image Margin="0,0,161.387,183.035" Source="Images/shopLogo.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="327"/>
+			<Image HorizontalAlignment="Right" Height="73" Source="Images/ProcestaLogo.png" Stretch="Fill" VerticalAlignment="Bottom" Width="70"/>
+		
+		</Grid>
+		<Button x:Name="LogoutBotton" HorizontalAlignment="Right" Height="20" Margin="0,0,120.792,0" Style="{DynamicResource LogoutButton}" VerticalAlignment="Top" Width="62.5" BorderBrush="{x:Null}" Click="LogoutButtonClick" Cursor="Hand" d:IsLocked="True">
+			<StackPanel Orientation="Horizontal">
+				<Image Source="ButtonImages/Logout.png" Height="19.083" Width="17.086"/>
+				<TextBlock Text="Logout" Height="16.085"/>			
+			</StackPanel>  	
+		</Button>
+		<Grid x:Name="PanelNewRecharge" Margin="361.405,307.994,290.765,249.006" Width="331" HorizontalAlignment="Center" Height="227" DataContext="{Binding Source={StaticResource DateTimeDataSource}}" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+			<dxe:TextEdit x:Name="NewRecgaresTextBoxCompnayName" Margin="127.338,47.995,46.12,0" FontSize="14.667" d:LayoutOverrides="HorizontalAlignment" VerticalAlignment="Top"/>
+			<TextBlock Margin="8,0,0,118.931" TextWrapping="Wrap" Text="Contract Person :" FontSize="14.667" Foreground="#FFD6D6D6" HorizontalAlignment="Left" Width="113.7" Height="22.667" VerticalAlignment="Bottom" d:LayoutOverrides="HorizontalAlignment"/>
+			<telerik:RadDatePicker x:Name="NewRechargeDate" Margin="127.338,14.661,46.12,0" VerticalAlignment="Top" FontSize="14.667" SelectedDate="{Binding Now.Today, Mode=OneWay}">
+				<telerik:RadDatePicker.BorderBrush>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FF2B4477" Offset="0"/>
+						<GradientStop Color="#FF5C83C0" Offset="1"/>
+					</LinearGradientBrush>
+				</telerik:RadDatePicker.BorderBrush>
+				<telerik:RadDatePicker.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FFD6DCEA" Offset="0.011"/>
+						<GradientStop Color="#FFFEFEFE" Offset="0.989"/>
+					</LinearGradientBrush>
+				</telerik:RadDatePicker.Background>
+			</telerik:RadDatePicker>
+			<telerik:RadButton x:Name="NewRecgaresButtonInsert" HorizontalAlignment="Left" Margin="132.505,0,0,38.637" VerticalAlignment="Bottom" Height="24" Width="71.973" Click="NewRecgaresButtonInsertClick">
+				<telerik:RadButton.Content>
+					<StackPanel Orientation="Horizontal">
+						<Image Source="ButtonImages/Add.png"/>
+						<TextBlock Text="Insert" FontSize="13.333" Margin="5,-1,0,0"/>
+					</StackPanel>
+				</telerik:RadButton.Content>
+			</telerik:RadButton>
+			<TextBlock Margin="8,51.366,0,0" TextWrapping="Wrap" FontSize="14.667" Foreground="#FFD6D6D6" Height="22.667" VerticalAlignment="Top" Text="Company Name :" HorizontalAlignment="Left" Width="113.7"/>
+			<TextBlock Margin="83.034,14.67,0,0" TextWrapping="Wrap" FontSize="14.667" Foreground="#FFD6D6D6" HorizontalAlignment="Left" Width="38.666" Height="22.667" VerticalAlignment="Top" Text="Date :"/>
+			<TextBlock Margin="14,0,0,80.931" TextWrapping="Wrap" Text="Phone Number :" FontSize="14.667" Foreground="#FFD6D6D6" HorizontalAlignment="Left" Width="107.7" Height="22.667" VerticalAlignment="Bottom" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"/>
+			<dxe:TextEdit x:Name="NewRecgaresTextBoxContractPerson" Margin="127.338,85.591,46.12,0" FontSize="14.667" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment"/>
+			<dxe:TextEdit x:Name="NewRecgaresTextBoxPhoneNumber" Margin="127.338,0,46.12,79.596" FontSize="14.667" VerticalAlignment="Bottom" d:LayoutOverrides="HorizontalAlignment"/>
+			<telerik:RadButton x:Name="NewRecgaresButtonClear" HorizontalAlignment="Left" Margin="214.239,0,0,38.637" VerticalAlignment="Bottom" Height="24" Width="70.641" Click="NewRecgaresButtonClearClick">
+				<telerik:RadButton.Content>
+					<StackPanel Orientation="Horizontal">
+						<Image Source="ButtonImages/Clear.png"/>
+						<TextBlock Text="Clear" FontSize="13.333" Margin="6,-1,0,0" Height="16.667"/>
+					</StackPanel>
+				</telerik:RadButton.Content>
+			</telerik:RadButton>
+		</Grid>
+		<Grid x:Name="PanelRechagreAmount" Margin="338.234,279.576,371.766,313.424" DataContext="{Binding Source={StaticResource DateTimeDataSource}}" Width="274" Height="191" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+			<dxe:ComboBoxEdit x:Name="RechargeAmountComBoxBoxCompayName" Margin="124.5,68.098,0,0" FontSize="14.667" HorizontalAlignment="Left" Width="150" SelectedIndexChanged="RechargeAmountComBoxBoxCompayNameSelectIndexChange" VerticalAlignment="Top" d:LayoutOverrides="VerticalAlignment" IsTextEditable="False"/>
+			<TextBlock HorizontalAlignment="Left" Margin="60,0,0,46.106" TextWrapping="Wrap" Text="Amount :" Width="60.5" FontSize="14.667" Foreground="#FFE2E2E2" Height="22" VerticalAlignment="Bottom"/>
+			<igEditors:XamNumericEditor x:Name="RechargeAmountNumicBoxAmount" Margin="124.5,120.073,0,0" VerticalAlignment="Top" FontSize="14.667" HorizontalAlignment="Left" Width="150" KeyDown="RechargeAmountNumicBoxAmountKeyDown">
+				<igEditors:XamNumericEditor.BorderBrush>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FF294274" Offset="0"/>
+						<GradientStop Color="#FF5C84C1" Offset="1"/>
+					</LinearGradientBrush>
+				</igEditors:XamNumericEditor.BorderBrush>
+				<igEditors:XamNumericEditor.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FFCFD7E7" Offset="0"/>
+						<GradientStop Color="#FFE7EBF2" Offset="0.234"/>
+						<GradientStop Color="#FFFCFCFD" Offset="0.943"/>
+					</LinearGradientBrush>
+				</igEditors:XamNumericEditor.Background>
+			</igEditors:XamNumericEditor>
+			<telerik:RadButton x:Name="RechargeAmountButonUpdate" HorizontalAlignment="Right" Margin="0,150.297,43.429,0" VerticalAlignment="Top" Height="24" Width="80.563" Click="RechargeAmountButonUpdateClick">
+				<telerik:RadButton.Content>
+					<StackPanel Orientation="Horizontal">
+						<Image Source="ButtonImages/Update.png"/>
+						<TextBlock Text="Update" FontSize="13.333" Margin="7,-1,0,0"/>
+					</StackPanel>
+				</telerik:RadButton.Content>
+			</telerik:RadButton>
+			<TextBlock HorizontalAlignment="Left" Margin="8,70.034,0,0" TextWrapping="Wrap" Text="Company Name :" Width="112.5" FontSize="14.667" Foreground="#FFE2E2E2" Height="22" VerticalAlignment="Top"/>
+			<Fluent:RadioButton x:Name="RechargeAmountRedioButtonPurchase" Content="RadioButton" Margin="76.667,8,109.335,0" VerticalAlignment="Top" FontSize="14.667" Foreground="#FFCCCCCC" Header="Purchase"/>
+			<Fluent:RadioButton x:Name="RechargeAmountRedioButtonSales" Content="RadioButton" HorizontalAlignment="Right" Margin="0,8,47.335,0" VerticalAlignment="Top" FontSize="14.667" Foreground="#FFCCCCCC" Width="62" Header="Sales"/>
+			<TextBlock HorizontalAlignment="Left" Margin="20.667,94.521,0,75.272" TextWrapping="Wrap" Text="Stock Amount :" Width="99.833" FontSize="14.667" Foreground="#FFE2E2E2" Height="21"/>
+			<TextBlock x:Name="RechargeAmountTextBlockStockAmount" Margin="124.5,0,89.002,75.192" TextWrapping="Wrap" FontSize="14.667" Foreground="#FFE2E2E2" Height="19.286" VerticalAlignment="Bottom"/>
+			<telerik:RadDatePicker x:Name="RechargeAmountDate" Margin="124.5,39.389,0,0" VerticalAlignment="Top" FontSize="14.667" Width="149.502" Height="24" SelectedDate="{Binding Today.Today, Mode=OneWay}">
+				<telerik:RadDatePicker.BorderBrush>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FF2B4477" Offset="0"/>
+						<GradientStop Color="#FF5C83C0" Offset="1"/>
+					</LinearGradientBrush>
+				</telerik:RadDatePicker.BorderBrush>
+				<telerik:RadDatePicker.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FFD6DDEA" Offset="0.022"/>
+						<GradientStop Color="#FFFAFBFC" Offset="0.852"/>
+					</LinearGradientBrush>
+				</telerik:RadDatePicker.Background>
+			</telerik:RadDatePicker>
+			<TextBlock HorizontalAlignment="Left" Margin="82.667,40.388,0,0" TextWrapping="Wrap" Text="Date :" Width="37.833" FontSize="14.667" Foreground="#FFE2E2E2" Height="18.667" VerticalAlignment="Top"/>
+		</Grid>
+		<Grid x:Name="PanelRechargeHistory" Margin="278.676,249.147,231.323,114.853" DataContext="{Binding Source={StaticResource DateTimeDataSource}}" Width="474" Height="420" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+			<telerik:RadGridView x:Name="RechargeHistoryGridView" Margin="14.79,128.353,28.143,45.059" ShowGroupPanel="False" Background="{x:Null}" d:LayoutOverrides="HorizontalAlignment" AutoGenerateColumns="False" IsReadOnly="True">
+                <telerik:RadGridView.Columns>
+					<telerik:GridViewDataColumn x:Name="RechargeDate" UniqueName="EntryDate" Header="Date" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" DataMemberBinding="{Binding EntryDate}"/>
+					<telerik:GridViewDataColumn x:Name="RechargeCompanyName" UniqueName="CompanyName" Header="Company Name" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" DataMemberBinding="{Binding CompanyName}"/>
+					<telerik:GridViewDataColumn x:Name="RechargeAmount" UniqueName="Amount" Header="Amount" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" DataMemberBinding="{Binding Amount}"/>
+					<telerik:GridViewDataColumn x:Name="RechargeStatues" UniqueName="Statues" Header="Statues" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" DataMemberBinding="{Binding Status}"/>
+			    </telerik:RadGridView.Columns>
+			</telerik:RadGridView>
+			<telerik:RadButton x:Name="RechargeHistoryButtonSearch" Margin="170.79,82.204,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="24" Width="85.936" Click="RechargeHistoryButtonSearchClick">
+			<telerik:RadButton.Content>
+				<StackPanel Orientation="Horizontal">
+					<Image Source="ButtonImages/Search.png"/>
+					<TextBlock Text="Search" FontSize="13.333" Margin="4,-1,0,0"/>
+				</StackPanel>
+			</telerik:RadButton.Content>
+			</telerik:RadButton>
+			<telerik:RadDatePicker x:Name="RechargeHistoryDate" HorizontalAlignment="Left" Margin="170.79,47,0,0" VerticalAlignment="Top" FontSize="14.667" Width="159" Height="24" SelectedDate="{Binding Today.Today, Mode=OneWay}">
+				<telerik:RadDatePicker.BorderBrush>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FF2A4476" Offset="0"/>
+						<GradientStop Color="#FF5C83C0" Offset="1"/>
+					</LinearGradientBrush>
+				</telerik:RadDatePicker.BorderBrush>
+				<telerik:RadDatePicker.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FFD1D9E8" Offset="0"/>
+						<GradientStop Color="#FFE6EAF2" Offset="0.184"/>
+						<GradientStop Color="#FFFEFEFF" Offset="1"/>
+					</LinearGradientBrush>
+				</telerik:RadDatePicker.Background>
+			</telerik:RadDatePicker>
+			<Fluent:RadioButton x:Name="RechargeHistoryRadioButtonDate" Content="RadioButton" HorizontalAlignment="Left" Margin="8,47,0,0" VerticalAlignment="Top" FontSize="14.667" Foreground="#FFE4E4E4" Header="By Date" Width="78.573" Checked="RechargeHistoryRadioButtonDateChecked" Unchecked="RechargeHistoryRadioButtonDateUnchecked"/>
+			<dxe:ComboBoxEdit x:Name="RechargeHistoryComboBoxCompanyName" Margin="170.79,9.5,0,0" VerticalAlignment="Top" FontSize="14.667" HorizontalAlignment="Left" Width="159" IsTextEditable="False"/>
+			<Fluent:RadioButton x:Name="RechargeHistoryRadioButtonCompanyName" Content="RadioButton" HorizontalAlignment="Left" Margin="8,8,0,0" VerticalAlignment="Top" FontSize="14.667" Foreground="#FFE4E4E4" Header="By Company Name" Width="153.573" Checked="RechargeHistoryRadioButtonCompanyNameChecked" Unchecked="RechargeHistoryRadioButtonCompanyNameUnchecked"/>
+		</Grid>
+		<Grid x:Name="PanelRechargeEditCompanyInfo" Margin="381.152,302.152,316.848,312.734" Height="169" Width="286" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+			<TextBlock HorizontalAlignment="Left" Height="18" Margin="8,27.343,0,0" TextWrapping="Wrap" Text="Company Name :" VerticalAlignment="Top" Width="113" FontSize="14.667" Foreground="#FFE0E0E0"/>
+			<dxe:ComboBoxEdit x:Name="EditRechagreComboBoxCompanyName" Margin="125,27.343,8,0" VerticalAlignment="Top" Height="25.667" FontSize="14.667" d:LayoutOverrides="HorizontalAlignment" IsTextEditable="False" SelectedIndexChanged="EditRechagreComboBoxCompanyNameSelectIndexChange"/>
+			<dxe:TextEdit x:Name="EditRechagreTextBoxPhoneNumber" Margin="125,95.423,8,0" FontSize="14.667" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment" KeyDown="EditRechagreTextBoxPhoneNumberKeyDown"/>
+			<TextBlock HorizontalAlignment="Left" Margin="13,95.454,0,0" TextWrapping="Wrap" Text="Phone Number :" Width="108" FontSize="14.667" Foreground="#FFE0E0E0" Height="17.5" VerticalAlignment="Top"/>
+			<TextBlock Height="18" Margin="8,59.954,0,0" TextWrapping="Wrap" Text="Contract Person :" VerticalAlignment="Top" FontSize="14.667" Foreground="#FFE0E0E0" HorizontalAlignment="Left" Width="113"/>
+			<dxe:TextEdit x:Name="EditRechagreTextBoxContractPerson" Margin="125,59.923,8,83.184" FontSize="14.667" d:LayoutOverrides="HorizontalAlignment, Height"/>
+			<telerik:RadButton x:Name="EditRechagreButtonUpdate" Margin="125,125.423,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23.25" Click="EditRechagreButtonUpdateClick">
+				<telerik:RadButton.Content>
+					<StackPanel Orientation="Horizontal">
+						<Image Source="ButtonImages/Update.png" Margin="3,0,0,0"/>
+						<TextBlock Text="Update" FontSize="13.333" Margin="4,-1,3,0"/>
+					</StackPanel>
+				</telerik:RadButton.Content>
+			</telerik:RadButton>
+			<telerik:RadButton x:Name="EditRechagreButtonDelete" Margin="205.075,125.423,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23.25" Click="EditRechagreButtonDeleteClick">
+				<StackPanel Orientation="Horizontal">
+					<Image Source="ButtonImages/Delete.png" Margin="3,0,0,0"/>
+					<TextBlock Text="Delete" FontSize="13.333" Margin="4,-1,3,0"/>
+				</StackPanel>
+			</telerik:RadButton>
+		</Grid>
+		
+	</Grid>
+</Window>

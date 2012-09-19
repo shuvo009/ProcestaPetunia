@@ -1,0 +1,17 @@
+﻿1st release at 31-3-2011
+	Version : 1.0.0.0
+------------------------
+2nd release at 31-3-2011
+	Version : 1.0.0.1
+		Fix : 1) Clear Invoice Chart.
+			  2) Search by product Name.
+			  3) Search by Model Number.
+-------------------------
+3rd release at 2-4-2010
+	Version : 1.0.0.2
+		Fix : 1) Product Original Rate at Invoice.
+			  2) Clear InvoiceMaker Data set at Invoice start
+			  3) Add Clear Button on Invoice.
+			  4) Add Exit Button on BackTag in Ribbon Menu. 
+			  5) Add About Petunia on BackTag in Ribbon Menu
+			  6) Fix error stock oration via sales ledger in Account Class.

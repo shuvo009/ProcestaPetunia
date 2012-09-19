@@ -1,0 +1,105 @@
+﻿//Title :           Procesta Variable
+//Version :         1.0.0.0
+//Copyright :       Copyright (c) 2010
+//Author :          Md.Hasanuzzaman (shuvo009@live.com)
+//Company :         procesta (http://www.procesta.com/)
+//Description :     All kinds global variable are here 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace ProcestaVariables
+{
+    public class Variables
+    {
+        public enum OperationTrypes { purchase, Sales, Debtors, Creditors, ProductReturn, SalesReturn, CashReceive, CashPayment, InvPurDebCre}
+
+        public static String[,] ERROR_MESSAGES = new String[2, 15]
+        {
+            {"Petunia 1.0","Database Connection Failed","Error","Writing Error","Reading Error","Fields Are Empty","Login fail Password incorrect","Password Not Mash","Database Connection Ok","Product ID Already Exit","Product Info Already Exit","Update Successfully","Invalid Number","Please Select a Item","No Item In your Cart"},
+            //   00                 01                      02          03          04              05                  06                                  07                  08                  09                                  010                 011                 012                 013                 014
+            {"No More Product In your Stock","Are You Want Exit ?","Password Mash","No product Found","Please Select a Option","User ID Already Exit","Are you want to remove","This Product already in your cart are you want to update.","User ID Doesn`t Exit","Please Select a Product","No Item Found !","Are you want to update ?","Are you want to delete ?","Delete successfully ","Are You Want to Save"}
+            //      10                              11                      12          13                      14                  15                      16                                      17                                            18                    19                          110                 111                     112                         113                     114
+        };
+        public static String[] ACCOUNT_DISCRIPTION = new String[1]
+        { 
+            "Cash"
+            // 0
+        };
+        public static String[] OTHERS_VARIALES = new String[4]
+        {
+            "Product Return","Sales Return","Purchase","Invoices"
+        };
+        public static String[] ACCOUNT_TYPE = new String[3]
+        {
+            "Creditor","Debtor","Employ"
+        };
+        public static String[] TABLE_NAME = new String[26]
+        {
+            "balance_sheet","bank_account","cash_ledger","company_and_personal_account","comapny_and_personal_information","creditors_ledger","daily_cash","debtors_ledger","depreciation_ledger","expense_ledger","furnture_ledger","income_statement","lone_account","office_expanse_ledger","office_instrument_ledger","product_information","profit_and_lose_account","purchase_ledger","rent_ledger","salary_ledger","sales_ledger","stationary_leder","stock","stock_ledger","company_And_person_History","trading_accounting"
+             // 0               1               2               3                           4                                       5               6           7               8                       9               10                  11              12              13                      14                          15                            16                    17              18          19              20          21                  22      23              24                              25
+        };
+        public static String[] COLUMN_NAME = new String[17]
+        {
+            "Petunia_Date","Description","Quantity","Rate","Average_Rate","Invoice_Number","Debt_Tk","Credit_Tk","Debt_Balance_Tk","Credit_Balance_Tk","Product_ID","Amount","User_ID","Company_Name","Product_Name","Model_number","Account_Type"
+            // 0                1           2           3       4               5               6           7       8                   9                   10          11      12          13              14              15          16
+        };
+
+        public static String[] EXPASES_TYPE = new String[3]
+        {
+            "Rent","OfficeExpance","Stationary"
+        };
+
+        public static string passPhrase = "IUYTh$5&17t@g1}";
+        public static string saltValue = "i@g*(pst@4%^val";
+        public static string hashAlgorithm = "MD5";
+        public static int passwordIterations = 20;
+        public static string initVector = "@1B2c3D4e5F6g7H8";
+        public static int keySize = 256;
+
+
+        public static String[] DATABASE_LOGIN_INFO = new String[5];
+        //Registry 
+        public static string REGISTRY_PATH = @"Software\Procesta Petunia";
+        public static string CURRENT_DATE = DateTime.Now.ToString("yyyy-MM-dd");
+
+        public static void InitializeLoaclData()
+        {
+ 
+        }
+        #region Mysql Table Sql Statement
+        public static String[] MYSQL_TABLE_SQL_STATEMENT = new String[28]
+        {
+           "CREATE DATABASE  IF NOT EXISTS `petunia`;",
+           "USE `petunia`;",
+           "CREATE TABLE IF NOT EXISTS `stationary_leder` ( `Petunia_Date` date DEFAULT NULL,`Description` varchar(45) DEFAULT NULL,`Transaction` varchar(45) DEFAULT NULL,`Debt_Tk` decimal(30,2) DEFAULT NULL,`Credit_Tk` decimal(30,2) DEFAULT NULL,`Debt_Balance_Tk` decimal(30,2) DEFAULT NULL,`Credit_Balance` decimal(30,2) DEFAULT NULL) ENGINE=MyISAM DEFAULT CHARSET=latin1;",
+           "CREATE TABLE IF NOT EXISTS `product_information` ( `Product_ID` varchar(45) DEFAULT NULL,`Company_Name` varchar(45) DEFAULT NULL,`Product_Name` varchar(45) DEFAULT NULL,`Model_number` varchar(45) DEFAULT NULL,`Join_Date` date DEFAULT NULL) ENGINE=MyISAM DEFAULT CHARSET=latin1;",
+           "CREATE TABLE IF NOT EXISTS `creditors_ledger` (`Petunia_Date` date DEFAULT NULL,`User_ID` varchar(45) DEFAULT NULL,`Product_ID` varchar(45) DEFAULT NULL,`Description` varchar(45) DEFAULT NULL,`Debt_Tk` decimal(30,2) DEFAULT NULL,`Credit_Tk` decimal(30,2) DEFAULT NULL,`Debt_Balance_Tk` decimal(30,2) DEFAULT NULL,`Credit_Balance_Tk` decimal(30,2) DEFAULT NULL) ENGINE=MyISAM DEFAULT CHARSET=latin1;",
+           "CREATE TABLE IF NOT EXISTS `comapny_and_personal_information` (`User_ID` varchar(45) DEFAULT NULL,`Account_Type` varchar(45) DEFAULT NULL,`Contract_Person` varchar(45) DEFAULT NULL,`Phone_Number` varchar(45) DEFAULT NULL,`E_Mail` varchar(45) DEFAULT NULL,`Address` varchar(45) DEFAULT NULL) ENGINE=MyISAM DEFAULT CHARSET=latin1;",
+           "CREATE TABLE IF NOT EXISTS `balance_sheet` (`Petunia_Date` date DEFAULT NULL,`Description` varchar(45) DEFAULT NULL,`Amount_Tk` decimal(30,2) DEFAULT NULL,`Debt_Tk` decimal(30,2) DEFAULT NULL,`Credit_Tk` decimal(30,2) DEFAULT NULL,`Debt_Balance_Tk` decimal(30,2) DEFAULT NULL,`Credit_Balance_Tk` decimal(30,2) DEFAULT NULL) ENGINE=MyISAM DEFAULT CHARSET=latin1;",
+           "CREATE TABLE IF NOT EXISTS `trading_accounting` (`Petunia_Date` date DEFAULT NULL,`Description` varchar(45) DEFAULT NULL,`Purchase_Rate` decimal(30,2) DEFAULT NULL,`Sales_Rate` decimal(30,2) DEFAULT NULL,`Debt_Tk` decimal(30,2) DEFAULT NULL,`credit_Tk` decimal(30,2) DEFAULT NULL,`Debt_Balance_Tk` decimal(30,2) DEFAULT NULL,`Credit_Balance_Tk` decimal(30,2) DEFAULT NULL) ENGINE=MyISAM DEFAULT CHARSET=latin1;",
+           "CREATE TABLE IF NOT EXISTS `purchase_ledger` (`Petunia_Date` date DEFAULT NULL,`Product_ID` varchar(45) DEFAULT NULL,`Description` varchar(45) DEFAULT NULL,`Transaction` varchar(45) DEFAULT NULL,`Quantity` decimal(30,0) DEFAULT NULL,`Rate` decimal(30,2) DEFAULT NULL,`Average_Rate` decimal(30,2) DEFAULT NULL,`Invoice_Number` varchar(45) DEFAULT NULL,`Debt_Tk` decimal(30,2) DEFAULT NULL,`Credit_Tk` decimal(30,2) DEFAULT NULL,`Debt_Balance_Tk` decimal(30,2) DEFAULT NULL,`Credit_Balance_Tk` decimal(30,2) DEFAULT NULL) ENGINE=MyISAM DEFAULT CHARSET=latin1;",
+           "CREATE TABLE IF NOT EXISTS `depreciation_ledger` (`Petunia_Date` date DEFAULT NULL, `Description` varchar(45) DEFAULT NULL,`Debt_Tk` decimal(30,2) DEFAULT NULL,`Credit_Tk` decimal(30,2) DEFAULT NULL,`Bebt_Balance_Tk` decimal(30,2) DEFAULT NULL,`Credit_Balance_Tk` decimal(30,2) DEFAULT NULL) ENGINE=MyISAM DEFAULT CHARSET=latin1;",
+           "CREATE TABLE IF NOT EXISTS `debtors_ledger` (`Petunia_Date` date DEFAULT NULL,`User_ID` varchar(45) DEFAULT NULL,`Product_ID` varchar(45) DEFAULT NULL,`Description` varchar(45) DEFAULT NULL,`Debt_Tk` decimal(30,2) DEFAULT NULL,`Credit_Tk` decimal(30,2) DEFAULT NULL,`Debt_Balance_Tk` decimal(30,2) DEFAULT NULL,`Credit_Balance_Tk` decimal(30,2) DEFAULT NULL) ENGINE=MyISAM DEFAULT CHARSET=latin1;",
+           "CREATE TABLE IF NOT EXISTS `office_instrument_ledger` (`Petunia_Date` date DEFAULT NULL,`Transaction` varchar(45) DEFAULT NULL,`Debt_Tk` decimal(30,2) DEFAULT NULL,`Credit_Tk` decimal(30,2) DEFAULT NULL,`Debt_Balance_Tk` decimal(30,2) DEFAULT NULL,`Credit_balance_Tk` decimal(30,2) DEFAULT NULL) ENGINE=MyISAM DEFAULT CHARSET=latin1;",
+           "CREATE TABLE IF NOT EXISTS `stock_ledger` (`Petunia_Date` date DEFAULT NULL,`Product_ID` varchar(45) DEFAULT NULL,`Description` varchar(45) DEFAULT NULL,`Particulars` varchar(45) DEFAULT NULL,`Quantity` decimal(30,0) DEFAULT NULL,`Rate` decimal(30,2) DEFAULT NULL,`Average_Rate` decimal(30,2) DEFAULT NULL,`Invoice_Number` varchar(45) DEFAULT NULL,`Debt_Tk` decimal(30,2) DEFAULT NULL,`Credit_Tk` decimal(30,2) DEFAULT NULL,`Debt_Balance_Tk` decimal(30,2) DEFAULT NULL,`Credit_Balance_Tk` decimal(30,2) DEFAULT NULL) ENGINE=MyISAM DEFAULT CHARSET=latin1;",
+           "CREATE TABLE IF NOT EXISTS `bank_account` (`Petuna_Date` date DEFAULT NULL,`Description` varchar(45) DEFAULT NULL,`Debt_Tk` decimal(30,2) DEFAULT NULL,`Credit_Tk` decimal(30,2) DEFAULT NULL,`Debt_Balance_Tk` decimal(30,2) DEFAULT NULL,`Credit_Balance_Tk` decimal(30,2) DEFAULT NULL) ENGINE=MyISAM DEFAULT CHARSET=latin1;",
+           "CREATE TABLE IF NOT EXISTS `furnture_ledger` (`Petuian_Date` date DEFAULT NULL,`Transaction` varchar(45) DEFAULT NULL,`Debt_Tk` decimal(30,2) DEFAULT NULL,`Credit_Tk` decimal(30,2) DEFAULT NULL,`Debt_Balance_Tk` decimal(30,2) DEFAULT NULL,`Credit_Balance_Tk` decimal(30,2) DEFAULT NULL) ENGINE=MyISAM DEFAULT CHARSET=latin1;",
+           "CREATE TABLE IF NOT EXISTS `rent_ledger` (`Petunia_Date` date DEFAULT NULL,`Description` varchar(45) DEFAULT NULL,`Transaction` varchar(45) DEFAULT NULL,`Debt_Tk` decimal(30,2) DEFAULT NULL,`Credit_Tk` decimal(30,2) DEFAULT NULL,`Debt_Balance_Tk` decimal(30,2) DEFAULT NULL,`Credit_Balance_Tk` decimal(30,2) DEFAULT NULL) ENGINE=MyISAM DEFAULT CHARSET=latin1;",
+           "CREATE TABLE IF NOT EXISTS `daily_cash` (`Petunia_date` date DEFAULT NULL,`Debt_Tk` decimal(30,2) DEFAULT NULL,`Credit_Tk` decimal(30,2) DEFAULT NULL,`Debt_Balance_Tk` decimal(30,2) DEFAULT NULL,`Credit_Balance_Tk` decimal(30,2) DEFAULT NULL,`Total_Products` decimal(30,2) DEFAULT NULL) ENGINE=MyISAM DEFAULT CHARSET=latin1;",
+           "CREATE TABLE IF NOT EXISTS `lone_account` (`Petunia_date` date DEFAULT NULL,`Description` varchar(45) DEFAULT NULL,`Transaction` varchar(45) DEFAULT NULL,`Debt_Tk` decimal(30,2) DEFAULT NULL,`Credit_Tk` decimal(30,2) DEFAULT NULL,`Debt_Balance_Tk` decimal(30,2) DEFAULT NULL,`Credit_balance_Tk` decimal(30,2) DEFAULT NULL) ENGINE=MyISAM DEFAULT CHARSET=latin1;",
+           "CREATE TABLE IF NOT EXISTS `cash_ledger` (`Petunia_Date` date DEFAULT NULL,`Description` varchar(45) DEFAULT NULL,`Debt_Tk` decimal(30,2) DEFAULT NULL,`Credit_Tk` decimal(30,2) DEFAULT NULL,`Debt_Balance_Tk` decimal(30,2) DEFAULT NULL,`Credit_Balance_Tk` decimal(30,2) DEFAULT NULL) ENGINE=MyISAM DEFAULT CHARSET=latin1;",
+           "CREATE TABLE IF NOT EXISTS `company_and_person_history` (`Petunia_Date` date DEFAULT NULL,`User_ID` varchar(45) DEFAULT NULL,`Product_ID` varchar(45) DEFAULT NULL,`Description` varchar(45) DEFAULT NULL,`Debt_Tk` decimal(30,2) DEFAULT NULL,`Credit_Tk` decimal(30,2) DEFAULT NULL,`Debt_Balance_Tk` decimal(30,2) DEFAULT NULL,`Credit_Balance_Tk` decimal(30,2) DEFAULT NULL) ENGINE=MyISAM DEFAULT CHARSET=latin1;",
+           "CREATE TABLE IF NOT EXISTS `office_expanse_ledger` (`Petunia_Date` date DEFAULT NULL,`Description` varchar(45) DEFAULT NULL,`Transaction` varchar(45) DEFAULT NULL,`Debt_Tk` decimal(30,2) DEFAULT NULL,`Credit_Tk` decimal(30,2) DEFAULT NULL,`Debt_Balance_Tk` decimal(30,2) DEFAULT NULL,`Credit_BalanceTk` decimal(30,2) DEFAULT NULL) ENGINE=MyISAM DEFAULT CHARSET=latin1;",
+           "CREATE TABLE IF NOT EXISTS `expense_ledger` (`Petunia_Date` date DEFAULT NULL,`Description` varchar(45) DEFAULT NULL,`Transation` varchar(45) DEFAULT NULL,`Debt_Tk` decimal(30,2) DEFAULT NULL,`Credit_Tk` decimal(30,2) DEFAULT NULL,`Debt_Balance_Tk` decimal(30,2) DEFAULT NULL,`Credit_Balance_Tk` decimal(30,2) DEFAULT NULL) ENGINE=MyISAM DEFAULT CHARSET=latin1;",
+           "CREATE TABLE IF NOT EXISTS `company_and_personal_account` (`User_ID` varchar(45) DEFAULT NULL,`Debt_Tk` decimal(30,2) DEFAULT NULL,`Credit_Tk` decimal(30,2) DEFAULT NULL,`Debt_Balance_Tk` decimal(30,2) DEFAULT NULL,`Credit_Balance_Tk` decimal(30,2) DEFAULT NULL) ENGINE=MyISAM DEFAULT CHARSET=latin1;",
+           "CREATE TABLE IF NOT EXISTS `profit_and_lose_account` (`Petunia_Date` date DEFAULT NULL,`Description` varchar(45) DEFAULT NULL,`Debt_Tk` decimal(30,2) DEFAULT NULL,`credit_Tk` decimal(30,2) DEFAULT NULL,`Debt_Balance_Tk` decimal(30,2) DEFAULT NULL,`Credit_Balance_Tk` decimal(30,2) DEFAULT NULL) ENGINE=MyISAM DEFAULT CHARSET=latin1;",
+           "CREATE TABLE IF NOT EXISTS `salary_ledger` (`Petunia_Date` date DEFAULT NULL,`User_ID` varchar(45) DEFAULT NULL,`Description` varchar(45) DEFAULT NULL,`Transaction` varchar(45) DEFAULT NULL,`Debt_Tk` decimal(30,2) DEFAULT NULL,`Credit_Tk` decimal(30,2) DEFAULT NULL,`Debt_Balance_Tk` decimal(30,2) DEFAULT NULL,`Credit_Balance_Tk` decimal(30,2) DEFAULT NULL) ENGINE=MyISAM DEFAULT CHARSET=latin1;",
+           "CREATE TABLE IF NOT EXISTS `sales_ledger` (`Petunia_Date` date DEFAULT NULL,`Product_ID` varchar(45) DEFAULT NULL,`Description` varchar(45) DEFAULT NULL,`Transaction` varchar(45) DEFAULT NULL,`Quantity` decimal(30,0) DEFAULT NULL,`Rate` decimal(30,2) DEFAULT NULL,`Invoice_Number` decimal(30,2) DEFAULT NULL,`Debt_Tk` decimal(30,2) DEFAULT NULL,`Credit_Tk` decimal(30,2) DEFAULT NULL,`Debt_Balance_Tk` decimal(30,2) DEFAULT NULL,`Credit_balance_Tk` decimal(30,2) DEFAULT NULL) ENGINE=MyISAM DEFAULT CHARSET=latin1;",
+           "CREATE TABLE IF NOT EXISTS `income_statement` (`Petunia_Date` date DEFAULT NULL,`Description` varchar(45) DEFAULT NULL,`Transaction` varchar(45) DEFAULT NULL,`Debt_Tk` decimal(30,2) DEFAULT NULL,`Credit_Tk` decimal(30,2) DEFAULT NULL,`Debt_Banlance_Tk` decimal(30,2) DEFAULT NULL,`Credit_Balance_Tk` decimal(30,2) DEFAULT NULL) ENGINE=MyISAM DEFAULT CHARSET=latin1;",
+           "CREATE TABLE IF NOT EXISTS `stock` (`Product_ID` varchar(45) DEFAULT NULL,`Quantity` decimal(30,0) DEFAULT NULL,`Rate` decimal(30,2) DEFAULT NULL,`Average_Rate` decimal(30,2) DEFAULT NULL,`Remark` varchar(100) DEFAULT NULL) ENGINE=MyISAM DEFAULT CHARSET=latin1;",
+        };
+        #endregion
+    }
+}

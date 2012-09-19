@@ -1,0 +1,61 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:TitelBar="clr-namespace:TitelBar;assembly=TitelBar" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="Procesta_Petunia.WindowDataBaseSetting"
+        Title="Window DataBase Setting" Height="424" Width="370" Icon="Icon/petunai 2.0.ico" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="{x:Null}">
+    <Grid>
+    	<Rectangle RadiusY="19.5" RadiusX="19.5" Stroke="Black" StrokeThickness="4">
+    		<Rectangle.Fill>
+    			<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+    				<GradientStop Color="#FF003985" Offset="0"/>
+    				<GradientStop Color="#FF0A438F" Offset="1"/>
+    				<GradientStop Color="#FE83C1FF" Offset="0.152"/>
+    				<GradientStop Color="#FE83C1FF" Offset="0.857"/>
+    			</LinearGradientBrush>
+    		</Rectangle.Fill>
+    	</Rectangle>
+    	<TextBlock x:Name="labelPassword" HorizontalAlignment="Left" Height="21" Margin="73,87,0,0" TextWrapping="Wrap" Text="Password :" VerticalAlignment="Top" Width="70" RenderTransformOrigin="0.75,0.5" FontSize="14.667"/>
+    	<TextBlock x:Name="labelSIDName" HorizontalAlignment="Left" Height="16" Margin="29,0,0,138.753" TextWrapping="Wrap" Text="Database Name :" VerticalAlignment="Bottom" Width="114" FontSize="14.667"/>
+    	<TextBlock x:Name="labelConformPassword" HorizontalAlignment="Left" Height="16" Margin="9,120,0,0" TextWrapping="Wrap" Text="Conform Password :" VerticalAlignment="Top" Width="134" FontSize="14.667"/>
+    	<TextBlock x:Name="labelHostIP" HorizontalAlignment="Left" Margin="87.667,166,0,0" TextWrapping="Wrap" Text="Host IP :" Width="55.333" FontSize="14.667" Height="20" VerticalAlignment="Top"/>
+    	<TextBlock x:Name="labelPortNumber" HorizontalAlignment="Left" Margin="49.667,0,0,188.753" TextWrapping="Wrap" Text="Port Number :" Width="93.333" Height="16" VerticalAlignment="Bottom" RenderTransformOrigin="0.143,-2" FontSize="14.667"/>
+    	<PasswordBox x:Name="DatabaseSettingtextboxPassword" Height="26" Margin="155.5,87,63.5,0" VerticalAlignment="Top" FontSize="14.667" BorderBrush="#FF3381FF" PasswordChanged="passwordPasswordChage" Width="151">
+    		<PasswordBox.Background>
+    			<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+    				<GradientStop Color="White" Offset="1"/>
+    				<GradientStop Color="#FFD0DAEF"/>
+    			</LinearGradientBrush>
+    		</PasswordBox.Background>
+    	</PasswordBox>
+    	<PasswordBox x:Name="DatabaseSettingtextboxConformPassword" Height="26" Margin="156,120,63.5,0" VerticalAlignment="Top" FontSize="14.667" BorderBrush="#FF579EED" PasswordChanged="conformPasswordChange" KeyDown="DatabaseSettingtextboxConformPasswordKeyDown" Width="151">
+    		<PasswordBox.Background>
+    			<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+    				<GradientStop Color="#FFD0DAEF" Offset="0.004"/>
+    				<GradientStop Color="#FFF9FAFC" Offset="0.988"/>
+    			</LinearGradientBrush>
+    		</PasswordBox.Background>
+    	</PasswordBox>
+    	<TextBlock x:Name="labelIPExample" Margin="156,196,134,0" TextWrapping="Wrap" Text="Exp : 127.0.0.1" RenderTransformOrigin="0.429,2" Foreground="#FF393939" Height="16" VerticalAlignment="Top" Width="80"/>
+    	<TextBlock x:Name="labelPortExample" Margin="156,0,158,162" TextWrapping="Wrap" Text="Exp : 3306" Height="16" VerticalAlignment="Bottom" RenderTransformOrigin="0.429,2" Foreground="#FF434343" Width="56"/>
+    	<TextBlock x:Name="labelUserName" HorizontalAlignment="Left" Height="16" Margin="67,51,0,0" TextWrapping="Wrap" Text="Username :" VerticalAlignment="Top" Width="76" FontSize="14.667"/>
+    	<TextBlock Height="16" Margin="156,0,158,110.666" TextWrapping="Wrap" Text="Exp : test" VerticalAlignment="Bottom" Foreground="#FF3D3D3D" Width="56"/>
+    	<TextBlock x:Name="DatabaseSettingPasswordError" Margin="156,146,63,0" TextWrapping="Wrap" Height="16" VerticalAlignment="Top" RenderTransformOrigin="0.429,2" Foreground="#FFA1A1A1"/>
+        <telerik:RadButton Height="27" Margin="112.583,334,172.416,0" x:Name="DatabaseSettingConnectButton" VerticalAlignment="Top" FontSize="13.333" Click="DatabaseSettingConnectButtonClick" Width="85">
+        	      	<StackPanel Orientation="Horizontal">
+        	      		<Image Source="ButtonImages/DatabaseConnection.png"/>
+        	      		<TextBlock Text="Connect" Height="15.5" Margin="3,-1,0,3"/>   	      	
+					</StackPanel>
+		</telerik:RadButton>
+        <telerik:RadButton Height="28" Margin="0,333,91.833,0" x:Name="DatabaseSettingButtonExit" VerticalAlignment="Top" FontSize="13.333" Click="DatabaseSettingButtonExitClick" HorizontalAlignment="Right" Width="66">
+        		<StackPanel Orientation="Horizontal">
+        			<Image Source="ButtonImages/Close.png"/>
+        			<TextBlock Text="Exit" Margin="3,1,0,3"/>    		
+				</StackPanel>      
+		</telerik:RadButton>
+    	<dxe:TextEdit x:Name="DatabaseSettingtextboxUsername" VerticalAlignment="Top" Margin="155.5,51,64.5,0" FontSize="14.667" Text="root" EditValue="" Width="150" Height="26"/>
+    	<dxe:TextEdit x:Name="DatabaseSettingtextboxHostIP" VerticalAlignment="Top" Margin="155.5,166,64.5,0" FontSize="14.667" Text="127.0.0.1" EditValue="" Width="150" Height="26"/>
+    	<dxe:TextEdit x:Name="DatabaseSettingtextboxPortNumber" VerticalAlignment="Bottom" Margin="155.5,0,64.5,182" FontSize="14.667" Text="3306" EditValue="" Width="150" Height="26"/>
+    	<dxe:TextEdit x:Name="DatabaseSettingtextboxDatabaseName" VerticalAlignment="Bottom" Margin="156,0,64,132" FontSize="14.667" Text="test" KeyDown="DatabaseSettingtextboxDatabaseNameKeyDown" EditValue="" Width="150" Height="26"/>
+    	<TitelBar:ProcestaCustromTittleBar x:Name="databaseSettingTitel" Margin="18.878,3.75,16.381,0" VerticalAlignment="Top" FontSize="16" MaximizeButton="Hidden" MinimizeVisibility="Hidden" WindowIcon="Icon/petunai 2.0.ico" WindowTitle="Database Setting" SoftwareName="Petunia 2.0" Height="21.5" Width="Auto"/>
+    </Grid>
+</Window>

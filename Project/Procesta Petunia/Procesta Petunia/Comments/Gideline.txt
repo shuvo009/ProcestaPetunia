@@ -1,0 +1,6 @@
+﻿Here i use Product Name Fast. then Company Name and Model Number .
+
+ComboBox Named Company Name Worked as Product Name
+comboBox Named Product Name Worked as Company Name
+Same work in DataBase. Company Name --->>> Product Name
+					   Product Name ---->> Company Name

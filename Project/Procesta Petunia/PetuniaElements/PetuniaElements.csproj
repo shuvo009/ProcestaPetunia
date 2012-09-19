@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{224EAFA8-3103-4682-95FF-90DA2D9DEBAD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PetuniaElements</RootNamespace>
+    <AssemblyName>PetuniaElements</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Xpf.Core.v10.1, Version=10.1.5.0, Culture=neutral, PublicKeyToken=940cfcde86f32efd, processorArchitecture=MSIL" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ComboBoxDataLoader.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\..\MyC#Class`s\MysqlClass\MysqlClass.csproj">
+      <Project>{8844A727-B6AA-4DE3-940B-944B4CC4C76A}</Project>
+      <Name>MysqlClass</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OtherClasses\ProcestaVariables\ProcestaVariables\ProcestaVariables.csproj">
+      <Project>{B70620B2-400B-4605-A6A4-7EA495550874}</Project>
+      <Name>ProcestaVariables</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Debug\ResolveAssemblyReference.cache" />
+    <None Include="obj\Release\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Release\ResolveAssemblyReference.cache" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\PetuniaElements.dll" />
+    <Content Include="bin\Debug\PetuniaElements.pdb" />
+    <Content Include="bin\Release\MysqlClass.dll" />
+    <Content Include="bin\Release\MysqlClass.pdb" />
+    <Content Include="bin\Release\PetuniaElements.dll" />
+    <Content Include="bin\Release\PetuniaElements.pdb" />
+    <Content Include="bin\Release\ProcestaVariables.dll" />
+    <Content Include="bin\Release\ProcestaVariables.pdb" />
+    <Content Include="obj\Debug\PetuniaElements.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\PetuniaElements.dll" />
+    <Content Include="obj\Debug\PetuniaElements.pdb" />
+    <Content Include="obj\Release\PetuniaElements.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Release\PetuniaElements.dll" />
+    <Content Include="obj\Release\PetuniaElements.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="obj\Debug\TempPE\" />
+    <Folder Include="obj\Release\TempPE\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

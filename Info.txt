@@ -1,0 +1,23 @@
+Product Name : Procesta Petunia
+version : 2.0
+Dot Net Framwork : 4.0
+Languages: C# with WPF
+Database : Mysql 5.5.12
+Degine : MS Blend
+
+HD Free Spaces : 500Mb
+
+Ram : 100 MB + OS 
+
+
+-------------------------
+Product Information.
+
+This Software was made for Sikder Telecom.
+Woner : Moshiure Rahman NewTown
+Mobile :01712038344
+
+---------------------------
+Database information
+
+Database Name : Petunia2.0
